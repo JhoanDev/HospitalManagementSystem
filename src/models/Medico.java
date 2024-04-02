@@ -41,6 +41,12 @@ public class Medico extends Funcionario {
         return plantao;
     }
 
+    public String getPlantao() {
+        if (plantao) 
+            return "Está de plantão";
+        return "Não está de plantão";
+    }
+
     public void setPlantao(boolean plantao) {
         this.plantao = plantao;
     }
@@ -51,6 +57,16 @@ public class Medico extends Funcionario {
 
     public void setConsultasRealizadas(ArrayList<Consulta> consultasRealizadas) {
         this.consultasRealizadas = consultasRealizadas;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Médico: " + getNome() + "\n";
+        s += "CRM: " + crm + "\n";
+        s += "Especialidade: " + especialidade + "\n";
+        s += "Plantão: " + getPlantao() + "\n";
+        return s;
     }
 
 }

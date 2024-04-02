@@ -68,6 +68,12 @@ public class Consulta {
         return precisaInternar;
     }
 
+    public String getPrecisaInternar() {
+        if (precisaInternar)
+            return "Sim";
+        return "Não";
+    }
+
     public void setPrecisaInternar(boolean precisaInternar) {
         this.precisaInternar = precisaInternar;
     }
@@ -78,6 +84,22 @@ public class Consulta {
 
     public void setEncaminhamento(String encaminhamento) {
         this.encaminhamento = encaminhamento;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Código da consulta: " + codConsulta + "\n";
+        s += "Data da consulta: " + dataConsulta + "\n";
+        s += "Horário da consulta: " + horarioConsulta + "\n";
+        s += "Diagnóstico: " + diagnostico + "\n";
+        s += "Sintomas: ";
+        for (String sintoma : sintomas) 
+            s += sintoma + ", ";
+        s += "\n";
+        s += "Precisa internar: " + getPrecisaInternar() + "\n";
+        s += "Encaminhamento: " + encaminhamento + "\n";
+        return s;
     }
 
 }

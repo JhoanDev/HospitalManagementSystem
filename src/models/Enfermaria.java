@@ -35,4 +35,10 @@ public class Enfermaria {
         this.qtdeLeitos = qtdeLeitos;
     }
 
+    @Override
+    public String toString() {
+        return "Enfermaria [codEnfermaria=" + codEnfermaria + ", leitosDisponiveis=" + leitosDisponiveis + ", qtdeLeitos="
+                + qtdeLeitos + "]\n";
+    }
+
 }

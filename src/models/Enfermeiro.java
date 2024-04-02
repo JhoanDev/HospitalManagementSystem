@@ -22,4 +22,16 @@ public class Enfermeiro extends Funcionario {
         this.coren = coren;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Enfermeiro: " + getNome() + "\n";
+        s += "CPF: " + getCpf() + "\n";
+        s += "Telefone: " + getTelefone() + "\n";
+        s += "Salário: " + getSalario() + "\n";
+        s += "Data de admissão: " + getDataDeAdmissao() + "\n";
+        s += "Horário de trabalho: " + getHorarioDeTrabalhoInicio() + " às " + getHorarioDeTrabalhoFinal() + "\n";
+        s += "COREN: " + coren + "\n";
+        return s;
+    }
 }

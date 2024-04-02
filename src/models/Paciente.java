@@ -54,5 +54,17 @@ public class Paciente extends Pessoa {
             return "Não possui plano de saúde";
         }
     }
-    
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Nome: " + getNome() + "\n";
+        s += "CPF: " + getCpf() + "\n";
+        s += "Telefone: " + getTelefone() + "\n";
+        s += "Data de nascimento: " + getDataNasc() + "\n";
+        s += "Sexo: " + getSexo() + "\n";
+        s += "Internado: " + getInterado() + "\n";
+        s += "Plano de saúde: " + getPlanoDeSaude() + "\n";
+        return s;
+    }
 }

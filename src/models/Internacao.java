@@ -58,4 +58,10 @@ public class Internacao {
         this.enfermariaInternacao = enfermariaInternacao;
     }
 
+    @Override
+    public String toString() {
+        return "Internacao [codInternacao=" + codInternacao + ", dataAlta=" + dataAlta + ", dataInternacao="
+                + dataInternacao + ", enfermariaInternacao=" + enfermariaInternacao.getCodEnfermaria() + ", pacienteInternado="
+                + pacienteInternado.getNome() + "]\n";
+    }
 }

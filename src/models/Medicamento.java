@@ -20,4 +20,8 @@ public class Medicamento {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "Medicamento [codMedicamento=" + codMedicamento + ", nome=" + nome + "]\n";
+    }
 }

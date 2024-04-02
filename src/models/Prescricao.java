@@ -45,4 +45,9 @@ public class Prescricao {
         this.posologia = posologia;
     }
 
+    @Override
+    public String toString() {
+        return "Prescricao [codPrescricao=" + codPrescricao + ", dosagem=" + dosagem + ", medicamento=" + medicamento
+                + ", posologia=" + posologia + "]\n";
+    }
 }
