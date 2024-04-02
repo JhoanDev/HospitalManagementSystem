@@ -2,12 +2,7 @@ package src.models;
 
 public class Medicamento {
     private String codMedicamento;
-    private String nomeMedicamento;
-
-    public Medicamento(String codMedicamento, String nomeMedicamento) {
-        this.codMedicamento = codMedicamento;
-        this.nomeMedicamento = nomeMedicamento;
-    }
+    private String nome;
 
     public String getCodMedicamento() {
         return codMedicamento;
@@ -17,12 +12,12 @@ public class Medicamento {
         this.codMedicamento = codMedicamento;
     }
 
-    public String getNomeMedicamento() {
-        return nomeMedicamento;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeMedicamento(String nomeMedicamento) {
-        this.nomeMedicamento = nomeMedicamento;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    
+
 }

@@ -3,10 +3,20 @@ package src.models;
 public class Enfermaria {
     private String codEnfermaria;
     private int qtdeLeitos;
-    
+    private int leitosDisponiveis;
+
     public Enfermaria(String codEnfermaria, int qtdeLeitos) {
         this.codEnfermaria = codEnfermaria;
         this.qtdeLeitos = qtdeLeitos;
+        this.leitosDisponiveis = qtdeLeitos;
+    }
+
+    public int getLeitosDisponiveis() {
+        return leitosDisponiveis;
+    }
+
+    public void setLeitosDisponiveis(int leitosDisponiveis) {
+        this.leitosDisponiveis = leitosDisponiveis;
     }
 
     public String getCodEnfermaria() {
@@ -24,5 +34,5 @@ public class Enfermaria {
     public void setQtdeLeitos(int qtdeLeitos) {
         this.qtdeLeitos = qtdeLeitos;
     }
-    
+
 }

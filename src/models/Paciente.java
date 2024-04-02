@@ -1,11 +1,14 @@
 package src.models;
 
-public class Paciente extends Pessoa{
+import java.util.Date;
+
+public class Paciente extends Pessoa {
     private String codPaciente;
     private boolean interado;
     private boolean planoDeSaude;
 
-    public Paciente(String nome, String cpf, String telefone, String dataNasc, boolean sexo, String codPaciente, boolean interado, boolean planoDeSaude) {
+    public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codPaciente,
+            boolean interado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
         this.codPaciente = codPaciente;
         this.interado = interado;
@@ -35,4 +38,21 @@ public class Paciente extends Pessoa{
     public void setPlanoDeSaude(boolean planoDeSaude) {
         this.planoDeSaude = planoDeSaude;
     }
+
+    public String getInterado() {
+        if (interado) {
+            return "Internado";
+        } else {
+            return "Não internado";
+        }
+    }
+
+    public String getPlanoDeSaude() {
+        if (planoDeSaude) {
+            return "Possui plano de saúde";
+        } else {
+            return "Não possui plano de saúde";
+        }
+    }
+    
 }

@@ -1,15 +1,29 @@
 package src.models;
 
+import java.util.Date;
+
 public class Internacao {
+    private String codInternacao;
     private String dataInternacao;
-    private String dataAlta = null;
+    private Date dataAlta;
     private Paciente pacienteInternado;
     private Enfermaria enfermariaInternacao;
 
-    public Internacao(String dataInternacao, Paciente pacienteInternado, Enfermaria enfermariaInternacao) {
+    public Internacao(String codInternacao, String dataInternacao, Date dataAlta, Paciente pacienteInternado,
+            Enfermaria enfermariaInternacao) {
+        this.codInternacao = codInternacao;
         this.dataInternacao = dataInternacao;
+        this.dataAlta = dataAlta;
         this.pacienteInternado = pacienteInternado;
         this.enfermariaInternacao = enfermariaInternacao;
+    }
+
+    public String getCodInternacao() {
+        return codInternacao;
+    }
+
+    public void setCodInternacao(String codInternacao) {
+        this.codInternacao = codInternacao;
     }
 
     public String getDataInternacao() {
@@ -20,11 +34,11 @@ public class Internacao {
         this.dataInternacao = dataInternacao;
     }
 
-    public String getDataAlta() {
+    public Date getDataAlta() {
         return dataAlta;
     }
 
-    public void setDataAlta(String dataAlta) {
+    public void setDataAlta(Date dataAlta) {
         this.dataAlta = dataAlta;
     }
 
@@ -43,4 +57,5 @@ public class Internacao {
     public void setEnfermariaInternacao(Enfermaria enfermariaInternacao) {
         this.enfermariaInternacao = enfermariaInternacao;
     }
+
 }

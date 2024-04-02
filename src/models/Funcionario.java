@@ -1,13 +1,17 @@
 package src.models;
 
+import java.util.Date;
+import java.sql.Time;
+
 public abstract class Funcionario extends Pessoa {
     private String codFunc;
     private double salario;
-    private String dataDeAdmissao;
-    private String horarioDeTrabalhoInicio;
-    private String horarioDeTrabalhoFinal;
+    private Date dataDeAdmissao;
+    private Time horarioDeTrabalhoInicio;
+    private Time horarioDeTrabalhoFinal;
 
-    public Funcionario(String nome, String cpf, String telefone, String dataNasc, boolean sexo, String codFunc, double salario, String dataDeAdmissao, String horarioDeTrabalhoInicio, String horarioDeTrabalhoFinal) {
+    public Funcionario(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc,
+            double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal) {
         super(nome, cpf, telefone, dataNasc, sexo);
         this.codFunc = codFunc;
         this.salario = salario;
@@ -32,27 +36,27 @@ public abstract class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
-    public String getDataDeAdmissao() {
+    public Date getDataDeAdmissao() {
         return dataDeAdmissao;
     }
 
-    public void setDataDeAdmissao(String dataDeAdmissao) {
+    public void setDataDeAdmissao(Date dataDeAdmissao) {
         this.dataDeAdmissao = dataDeAdmissao;
     }
 
-    public String getHorarioDeTrabalhoInicio() {
+    public Time getHorarioDeTrabalhoInicio() {
         return horarioDeTrabalhoInicio;
     }
 
-    public void setHorarioDeTrabalhoInicio(String horarioDeTrabalhoInicio) {
+    public void setHorarioDeTrabalhoInicio(Time horarioDeTrabalhoInicio) {
         this.horarioDeTrabalhoInicio = horarioDeTrabalhoInicio;
     }
 
-    public String getHorarioDeTrabalhoFinal() {
+    public Time getHorarioDeTrabalhoFinal() {
         return horarioDeTrabalhoFinal;
     }
 
-    public void setHorarioDeTrabalhoFinal(String horarioDeTrabalhoFinal) {
+    public void setHorarioDeTrabalhoFinal(Time horarioDeTrabalhoFinal) {
         this.horarioDeTrabalhoFinal = horarioDeTrabalhoFinal;
     }
 }

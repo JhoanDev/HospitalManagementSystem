@@ -1,14 +1,24 @@
 package src.models;
 
 public class Prescricao {
+    private String codPrescricao;
     private String medicamento;
-    private String dosagem; //pode ser em ml, mg e etc
+    private String dosagem; // pode ser em ml, mg e etc
     private String posologia;
 
-    public Prescricao(String medicamento, String dosagem, String posologia) {
+    public Prescricao(String codPrescricao, String medicamento, String dosagem, String posologia) {
+        this.codPrescricao = codPrescricao;
         this.medicamento = medicamento;
         this.dosagem = dosagem;
         this.posologia = posologia;
+    }
+
+    public String getCodPrescricao() {
+        return codPrescricao;
+    }
+
+    public void setCodPrescricao(String codPrescricao) {
+        this.codPrescricao = codPrescricao;
     }
 
     public String getMedicamento() {
@@ -34,4 +44,5 @@ public class Prescricao {
     public void setPosologia(String posologia) {
         this.posologia = posologia;
     }
-}   
+
+}
