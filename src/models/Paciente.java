@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Paciente extends Pessoa {
     private String codPaciente;
-    private boolean interado;
+    private boolean internado;
     private boolean planoDeSaude;
 
     public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codPaciente,
-            boolean interado, boolean planoDeSaude) {
+            boolean internado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
         this.codPaciente = codPaciente;
-        this.interado = interado;
+        this.internado = internado;
         this.planoDeSaude = planoDeSaude;
     }
 
@@ -24,11 +24,11 @@ public class Paciente extends Pessoa {
     }
 
     public boolean isInterado() {
-        return interado;
+        return internado;
     }
 
-    public void setInterado(boolean interado) {
-        this.interado = interado;
+    public void setInterado(boolean internado) {
+        this.internado = internado;
     }
 
     public boolean isPlanoDeSaude() {
@@ -40,7 +40,7 @@ public class Paciente extends Pessoa {
     }
 
     public String getInterado() {
-        if (interado) {
+        if (internado) {
             return "Internado";
         } else {
             return "Não internado";
