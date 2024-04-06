@@ -9,7 +9,22 @@ public abstract class Funcionario extends Pessoa {
     private Date dataDeAdmissao;
     private Time horarioDeTrabalhoInicio;
     private Time horarioDeTrabalhoFinal;
+    private double bonus;
 
+    // Construtor com bunus
+    public Funcionario(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc,
+            double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal,
+            double bonus) {
+        super(nome, cpf, telefone, dataNasc, sexo);
+        this.codFunc = codFunc;
+        this.salario = salario;
+        this.dataDeAdmissao = dataDeAdmissao;
+        this.horarioDeTrabalhoInicio = horarioDeTrabalhoInicio;
+        this.horarioDeTrabalhoFinal = horarioDeTrabalhoFinal;
+        this.bonus = bonus;
+    }
+
+    // Construtor sem bonus
     public Funcionario(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc,
             double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal) {
         super(nome, cpf, telefone, dataNasc, sexo);
@@ -18,6 +33,7 @@ public abstract class Funcionario extends Pessoa {
         this.dataDeAdmissao = dataDeAdmissao;
         this.horarioDeTrabalhoInicio = horarioDeTrabalhoInicio;
         this.horarioDeTrabalhoFinal = horarioDeTrabalhoFinal;
+        this.bonus = 1.0;
     }
 
     public String getCodFunc() {
@@ -58,5 +74,9 @@ public abstract class Funcionario extends Pessoa {
 
     public void setHorarioDeTrabalhoFinal(Time horarioDeTrabalhoFinal) {
         this.horarioDeTrabalhoFinal = horarioDeTrabalhoFinal;
+    }
+
+    public double gerarSalarioAnual() {
+        return (this.salario * this.bonus) * 12;
     }
 }
