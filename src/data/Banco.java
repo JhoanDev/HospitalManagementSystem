@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Banco { //nao funciona ainda
+public class Banco { //nao funciona ainda, mas vai
     public Connection db = null;
     public Statement statement = null;
     
     public Banco(){
         try{
             this.db = DriverManager.getConnection("jdbc:sqlite:data.db");
-            this.statement = db.createStatement();
+            this.statement = this.db.createStatement();
             statement.setQueryTimeout(30);  // Espera só por 30 segundos para conectar     
         }catch (SQLException e){
             System.out.println("Erro na conexão");
@@ -45,7 +45,7 @@ public class Banco { //nao funciona ainda
     public ResultSet querry_busca(String querry_busca){
         ResultSet rs = null;
         try{
-            rs = statement.executeQuery(querry_busca);
+            rs = this.statement.executeQuery(querry_busca);
             return rs;
         }catch (SQLException e){
             System.out.println("Erro na querry");
