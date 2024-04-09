@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Sistema de Gerenciamento de Hospital");
         Banco bd = new Banco();
-        System.out.println(bd);
-        bd.querry_insup("INSERT INTO Paciente(cpf,telefone,data_nascimento,sexo,internado,plano_saude) VALUES (213821,18234701,2002-08-06,1,0,1)");
-        bd.desconect();
+    
+        bd.querry_insup("INSERT INTO Administrador (cpf,telefone, data_nascimento, sexo, salario, inicio_expediente, fim_expediente, login,senha) VALUES ('cpf_value', 'telefone_value', 'data_nascimento_value', 1,  1234, 'inicio_expediente_value', 'fim_expediente_value', 'login_value', 'senha_value')", bd.statement);
     }
 }
+
