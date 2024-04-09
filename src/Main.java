@@ -1,12 +1,18 @@
 package src;
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import src.data.Banco;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         System.out.println("Sistema de Gerenciamento de Hospital");
         Banco bd = new Banco();
-    
-        bd.querry_insup("INSERT INTO Administrador (cpf,telefone, data_nascimento, sexo, salario, inicio_expediente, fim_expediente, login,senha) VALUES ('cpf_value', 'telefone_value', 'data_nascimento_value', 1,  1234, 'inicio_expediente_value', 'fim_expediente_value', 'login_value', 'senha_value')", bd.statement);
+        ResultSet rs = bd.querry_busca("SELECT * FROM Administrador WHERE id_adm = 3");
+        System.out.println(rs.getString("cpf"));
+        
     }
 }
 

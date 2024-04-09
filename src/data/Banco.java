@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Banco { 
-    public Connection db = null;
-    public Statement statement = null;
+    private Connection db = null; //criando a conexao e o statemente
+    private Statement statement = null;
     
-    public Banco(){
+    public Banco(){ 
         try{
-            this.db = DriverManager.getConnection("jdbc:sqlite:src\\data\\data.db");
-            this.statement = this.db.createStatement();
+            this.db = DriverManager.getConnection("jdbc:sqlite:src/data/data.db"); //carregando o driver e iniciando a conexao so quando inicia a classe
+            this.statement = this.db.createStatement(); //iniciando o statement
             statement.setQueryTimeout(30);  // Espera só por 30 segundos para conectar     
         }catch (SQLException e){
             System.out.println("Erro na conexão");
@@ -21,7 +21,7 @@ public class Banco {
         }
     }
 
-    public void desconect(Connection db){
+    public void desconect(Connection db){ //funcao desconect
         try {
             if(db != null){
               db.close();
@@ -33,7 +33,7 @@ public class Banco {
     }
 
 
-    public void querry_insup(String querry, Statement statement){
+    public void querry_insup(String querry){ //funcao para querrys de insert e update
         try{
             statement.executeUpdate(querry);
         }catch(SQLException e){
@@ -42,7 +42,7 @@ public class Banco {
         }
     }
 
-    public ResultSet querry_busca(String querry_busca,Statement statement){
+    public ResultSet querry_busca(String querry_busca){ //funcoes para querry select 
         ResultSet rs = null;
         try{
             rs = statement.executeQuery(querry_busca);
@@ -54,7 +54,7 @@ public class Banco {
         }
     }
 
-    public void testConnection(Statement statement) {
+    public void testConnection(Statement statement) { //teste de conexao
         try {
             ResultSet rs = statement.executeQuery("SELECT 1");
             if (rs.next()) {
