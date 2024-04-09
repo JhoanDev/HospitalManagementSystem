@@ -23,11 +23,11 @@ public class Paciente extends Pessoa {
         this.codPaciente = codPaciente;
     }
 
-    public boolean isInterado() {
+    public boolean isInternado() {
         return internado;
     }
 
-    public void setInterado(boolean internado) {
+    public void setInternado(boolean internado) {
         this.internado = internado;
     }
 
