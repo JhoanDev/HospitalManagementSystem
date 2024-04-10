@@ -1,18 +1,21 @@
 package src;
 
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import src.data.Banco;
+import src.controllers.PacienteDao;
+import src.models.Paciente;
+
 
 public class Main {
     public static void main(String[] args) throws SQLException {
         System.out.println("Sistema de Gerenciamento de Hospital");
-        Banco bd = new Banco();
-        ResultSet rs = bd.querry_busca("SELECT * FROM Administrador WHERE id_adm = 3");
-        System.out.println(rs.getString("cpf"));
-        
+
+        //testes----
+        PacienteDao pacienteDao = new PacienteDao();
+        Paciente paciente = new Paciente("Aujjkusto","132490854","0129312930","2022-08-06",true,false,true);
+        pacienteDao.cadastrarPaciente(paciente);
     }
+
+
 }
 

@@ -1,25 +1,28 @@
 package src.models;
 
-import java.util.Date;
+//import java.util.Date;
 
 public class Paciente extends Pessoa {
-    private String codPaciente;
+    private int codPaciente;
     private boolean internado;
     private boolean planoDeSaude;
 
-    public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codPaciente,
+    public Paciente(String nome, String cpf, String telefone, String dataNasc, boolean sexo,
             boolean internado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
-        this.codPaciente = codPaciente;
         this.internado = internado;
         this.planoDeSaude = planoDeSaude;
     }
+    
+    public Paciente(){
 
-    public String getCodPaciente() {
+    }
+
+    public int getCodPaciente() {
         return codPaciente;
     }
 
-    public void setCodPaciente(String codPaciente) {
+    public void setCodPaciente(int codPaciente) {
         this.codPaciente = codPaciente;
     }
 

@@ -1,5 +1,6 @@
 CREATE TABLE Administrador (
   id_adm INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nome VARCHAR NOT NULL,
   cpf TEXT NOT NULL,
   telefone TEXT NOT NULL,
   data_nascimento DATE NOT NULL,
@@ -13,6 +14,7 @@ CREATE TABLE Administrador (
 
 CREATE TABLE Medico (
   id_medico INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nome VARCHAR NOT NULL,
   cpf TEXT NOT NULL,
   telefone TEXT NOT NULL,
   data_nascimento DATE NOT NULL,
@@ -28,6 +30,7 @@ CREATE TABLE Medico (
 
 CREATE TABLE Enfermeiro (
   id_enfermeiro INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nome VARCHAR NOT NULL,
   cpf TEXT NOT NULL,
   telefone TEXT NOT NULL,
   data_nascimento DATE NOT NULL,
@@ -40,6 +43,7 @@ CREATE TABLE Enfermeiro (
 
 CREATE TABLE Paciente (
   id_paciente INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  nome TEXT NOT NULL,
   cpf TEXT NOT NULL,
   telefone TEXT NOT NULL,
   data_nascimento DATE NOT NULL,

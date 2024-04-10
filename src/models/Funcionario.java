@@ -10,7 +10,7 @@ public abstract class Funcionario extends Pessoa {
     private Time horarioDeTrabalhoInicio;
     private Time horarioDeTrabalhoFinal;
 
-    public Funcionario(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc,
+    public Funcionario(String nome, String cpf, String telefone, String dataNasc, boolean sexo, String codFunc,
             double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal) {
         super(nome, cpf, telefone, dataNasc, sexo);
         this.codFunc = codFunc;
