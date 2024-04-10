@@ -14,7 +14,7 @@ public class Banco {
         try{
             this.db = DriverManager.getConnection("jdbc:sqlite:src/data/data.db"); //carregando o driver e iniciando a conexao so quando inicia a classe
             this.statement = this.db.createStatement(); //iniciando o statement
-            statement.setQueryTimeout(30);  // Espera só por 30 segundos para conectar     
+            statement.setQueryTimeout(5);  // Espera só por 5 segundos para conectar     
         }catch (SQLException e){
             System.out.println("Erro na conexão");
             System.out.println(e);
