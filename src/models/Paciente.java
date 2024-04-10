@@ -7,6 +7,13 @@ public class Paciente extends Pessoa {
     private boolean internado;
     private boolean planoDeSaude;
 
+    public Paciente(){
+        super("", "", "", new Date(), true);
+        this.codPaciente = "";
+        this.internado = false;
+        this.planoDeSaude = false;
+    }
+    
     public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codPaciente,
             boolean internado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
