@@ -74,4 +74,53 @@ public class Paciente extends Pessoa {
         s += "Plano de saúde: " + getPlanoDeSaude() + "\n";
         return s;
     }
+
+    public void editarPaciente(){
+        System.out.println(this.toString());
+        System.out.println("O que deseja editar?");
+        System.out.println("[1] - Nome");
+        System.out.println("[2] - CPF");
+        System.out.println("[3] - Telefone");
+        System.out.println("[4] - Data de nascimento");
+        System.out.println("[5] - Sexo");
+        System.out.println("[6] - Internado");
+        System.out.println("[7] - Plano de saúde");
+        System.out.println("[8] - Cancelar");
+        int opcao = FuncUtils.readInt();
+        switch (opcao) {
+            case 1:
+                System.out.println("Digite o novo nome: ");
+                this.setNome(FuncUtils.readOnlyLettersAndSpaces());
+                break;
+            case 2:
+                System.out.println("Digite o novo CPF: ");
+                this.setCpf(FuncUtils.readCPF());
+                break;
+            case 3:
+                System.out.println("Digite o novo telefone: ");
+                this.setTelefone(FuncUtils.readPhoneNumber());
+                break;
+            case 4:
+                System.out.println("Digite a nova data de nascimento: ");
+                this.setDataNasc(FuncUtils.readDate());
+                break;
+            case 5:
+                System.out.println("Digite o novo sexo: ");
+                this.setSexo(FuncUtils.readSex());
+                break;
+            case 6:
+                System.out.println("Digite se está internado: ");
+                this.setInternado(FuncUtils.readHospitalized());
+                break;
+            case 7:
+                System.out.println("Digite se possui plano de saúde: ");
+                this.setPlanoDeSaude(FuncUtils.readHealthPlan());
+                break;
+            case 8:
+                break;
+            default:
+                System.out.println("Opção inválida");
+                break;
+        }
+    }
 }

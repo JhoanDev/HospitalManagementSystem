@@ -91,4 +91,88 @@ public class FuncUtils {
             }
         }
     }
+
+    public static String readPhoneNumber() {
+        while (true) {
+            System.out.println("Digite um número de telefone (apenas números):");
+            String phoneNumber = input.nextLine().trim();
+
+            // Remover caracteres que não sejam números do telefone
+            phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+
+            // Verificar se o número de telefone tem pelo menos 10 dígitos (formato brasileiro)
+            if (phoneNumber.length() < 10) {
+                System.out.println("Número de telefone inválido. Por favor, digite pelo menos 10 números.");
+                continue;
+            }
+
+            // Verificar se o número de telefone contém apenas dígitos
+            if (phoneNumber.matches("[0-9]+")) {
+                return phoneNumber;
+            } else {
+                System.out.println("Número de telefone inválido. Por favor, digite apenas números.");
+            }
+        }
+    }
+
+    public static Date readDate() {
+        while (true) {
+            System.out.println("Digite uma data no formato YYYY-MM-DD:");
+            String dateInput = input.nextLine().trim();
+
+            // Verifica se a entrada tem o formato correto
+            if (dateInput.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                // Convertendo a string para java.sql.Date
+                Date sqlDate = Date.valueOf(dateInput);
+                return sqlDate;
+            } else {
+                System.out.println("Formato de data inválido. Por favor, digite no formato YYYY-MM-DD.");
+            }
+        }
+    }
+
+    public static boolean readSex(){
+        while (true) {
+            System.out.println("Digite o sexo (M/F):");
+            String sexo = input.nextLine().trim().toUpperCase();
+
+            if (sexo.equals("M")) 
+                return true;
+            else if (sexo.equals("F")) {
+                return false;
+            } else {
+                System.out.println("Sexo inválido. Por favor, digite M para masculino ou F para feminino.");
+            }
+        }
+    }
+
+    public static boolean readHospitalized(){
+        while (true) {
+            System.out.println("O paciente está internado? (S/N):");
+            String internado = input.nextLine().trim().toUpperCase();
+
+            if (internado.equals("S")) 
+                return true;
+            else if (internado.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
+            }
+        }
+    }   
+
+    public static boolean readHealthPlan(){
+        while (true) {
+            System.out.println("O paciente possui plano de saúde? (S/N):");
+            String planoDeSaude = input.nextLine().trim().toUpperCase();
+
+            if (planoDeSaude.equals("S")) 
+                return true;
+            else if (planoDeSaude.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
+            }
+        }
+    }
 }
