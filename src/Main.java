@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         System.out.println("Sistema de Gerenciamento de Hospital");
         FuncUtils.clearScreen();
-        ResultSet rs = bd.querry_busca("SELECT * FROM Administrador WHERE id_adm = 2");
-        System.out.println(rs.getString("cpf"));
+        Paciente paciente = new Paciente("12345678910", "123456789", "01/01/2000", true, true, true);
     }
 }

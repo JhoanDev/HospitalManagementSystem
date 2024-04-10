@@ -2,7 +2,7 @@ package src.models;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class Medico extends Funcionario {
     private String crm;

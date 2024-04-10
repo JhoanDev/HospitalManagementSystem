@@ -6,30 +6,23 @@ import src.data.Banco;
 import src.models.Paciente;
 
 public class PacienteDao {
-    private Banco db;
 
-    public PacienteDao(){
-        this.db = new Banco();
-    }
-
-
-    public void cadastrarPaciente(Paciente paciente){
-        
+    public static void cadastrarPaciente(Paciente paciente, Banco db){
         String querry = String.format("INSERT INTO Paciente (cpf,telefone,data_nascimento,sexo,internado,plano_saude VALUES (%s,%s,%tD,%b,%b,%b);",
         paciente.getCpf(),paciente.getTelefone(),paciente.getDataNasc(),paciente.getSexo(),paciente.isInternado(),paciente.isPlanoDeSaude());
-        this.db.querry_insup(querry);
-        
+        db.querry_insup(querry);
     }
+    
 
-    public void atualizaPaciente(Paciente paciente, int id){
+    public void atualizaPaciente(Paciente paciente, int id, Banco db){
         String querry = String.format("UPDATE Paciente SET cpf = %s ,telefone = %s ,data_nascimento = %tD ,sexo = %b,internado = %b, plano_saude = %b);",
         paciente.getCpf(),paciente.getTelefone(),paciente.getDataNasc(),paciente.getSexo(),paciente.isInternado(),paciente.isPlanoDeSaude());
-        this.db.querry_insup(querry);
+        db.querry_insup(querry);
     }
 
-    public Paciente buscaPaciente(int id) throws SQLException{
+    public Paciente buscaPaciente(int id, Banco db) throws SQLException{
         String querry = "SELECT * FROM Paciente WHERE id_paciente = " + id + ";";
-        ResultSet rs = this.db.querry_busca(querry);
+        ResultSet rs = db.querry_busca(querry);
         Paciente paciente = new Paciente();
 
         paciente.setCpf(rs.getString("cpf"));

@@ -1,6 +1,8 @@
 package src.models;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class FuncUtils {
 
@@ -23,5 +25,12 @@ public class FuncUtils {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String dateToString(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        // Convertendo a data em uma string formatada
+        String strDate = formatter.format(date);
+        return strDate;
     }
 }

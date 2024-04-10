@@ -1,6 +1,6 @@
 package src.models;
 
-import java.util.Date;
+import java.sql.Date;
 import java.sql.Time;
 
 public abstract class Funcionario extends Pessoa {

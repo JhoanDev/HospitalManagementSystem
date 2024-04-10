@@ -1,6 +1,6 @@
 package src.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Paciente extends Pessoa {
     private String codPaciente;
@@ -8,7 +8,7 @@ public class Paciente extends Pessoa {
     private boolean planoDeSaude;
 
     public Paciente(){
-        super("", "", "", new Date(), true);
+        super("", "", "", new Date(System.currentTimeMillis()), true);
         this.codPaciente = "";
         this.internado = false;
         this.planoDeSaude = false;
