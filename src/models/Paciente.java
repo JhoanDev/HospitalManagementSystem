@@ -122,4 +122,14 @@ public class Paciente extends Pessoa {
         }
         return edit;
     }
+
+    public void preenchePaciente() {
+        System.out.print("Digite o nome do paciente: ");
+        this.setNome(FuncUtils.readOnlyLettersAndSpaces());
+        this.setCpf(FuncUtils.readCPF());
+        this.setTelefone(FuncUtils.readPhoneNumber());
+        this.setDataNasc(FuncUtils.readDate());
+        this.setSexo(FuncUtils.readSex());
+    }
+
 }

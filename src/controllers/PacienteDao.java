@@ -9,7 +9,10 @@ import java.sql.Date;
 
 public class PacienteDao {
 
-    public static void cadastrarPaciente(Paciente paciente, Banco db) {
+    public static void cadastrarPaciente(Banco db) {
+        FuncUtils.clearScreen();
+        Paciente paciente = new Paciente();
+        paciente.preenchePaciente();
         String querry = String.format(
                 "INSERT INTO Paciente (nome, cpf, telefone, data_nascimento, sexo, internado, plano_saude)VALUES ('%s', '%s', '%s', '%tF', %b, %b, %b);",
                 paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getDataNasc(),
@@ -42,6 +45,7 @@ public class PacienteDao {
     }
 
     public static void atualizarPaciente(Paciente paciente, Banco db) {
+        FuncUtils.clearScreen();
         if (!paciente.editarPaciente())
             return;
         String querry = String.format(
@@ -52,7 +56,14 @@ public class PacienteDao {
         db.querry_insup(querry);
     }
 
-    public static void deletarPaciente(String codPaciente, Banco db) {
+    public static void deletarPaciente(Banco db) throws SQLException {
+        FuncUtils.clearScreen();
+        listarPacientes(db);
+        System.out.println("\nInsira o codigo do paciente que deseja deletar: ");
+
+        String codPaciente = FuncUtils.readOnlyLettersAndSpaces();
+        codPaciente = codPaciente.replace(" ", "");
+
         String querry = "DELETE FROM Paciente WHERE id_paciente = '" + codPaciente + "';";
         db.querry_insup(querry);
     }
@@ -61,11 +72,13 @@ public class PacienteDao {
         String query = "SELECT * FROM Paciente;";
         ResultSet rs = db.querry_busca(query);
 
-        // Imprimindo o cabeçalho
-        System.out.printf("Nome%s CPF%s Telefone%s Nascimento%s Sexo%s Internado%s Plano de Saúde\n",
-        FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9), FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8), FuncUtils.spacesGenerator(6));
-        // Imprimindo os registros
+        System.out.printf("Cod%s Nome%s CPF%s Telefone%s Nascimento%s Sexo%s Internado%s Plano de Saúde\n",
+                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                FuncUtils.spacesGenerator(4),
+                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8), FuncUtils.spacesGenerator(6));
+
         while (rs.next()) {
+            String cod = rs.getString("id_paciente");
             String nome = rs.getString("nome");
             String cpf = rs.getString("cpf");
             String telefone = rs.getString("telefone");
@@ -78,9 +91,38 @@ public class PacienteDao {
             String internadoStr = internado ? "Internado" : "Não internado";
             String planoSaudeStr = planoSaude ? "Possui plano de saúde" : "Não possui plano de saúde";
 
-            // Imprimindo os registros com espaçamento fixo
-            System.out.printf("%-30s %-12s %-12s %-12s %-12s %-15s %s\n", nome, cpf, telefone, dataNascimento, sexoStr,
+            System.out.printf("%-7s %-30s %-12s %-12s %-12s %-12s %-15s %s\n", cod, nome, cpf, telefone, dataNascimento,
+                    sexoStr,
                     internadoStr, planoSaudeStr);
         }
+    }
+
+    public void internar(Banco db) throws SQLException {
+        System.out.println("Digite o código do paciente que deseja internar: ");
+        String codPaciente = FuncUtils.readOnlyLettersAndSpaces();
+        codPaciente = codPaciente.replace(" ", "");
+
+        Paciente aux = buscaPaciente(codPaciente, db);
+        if (aux == null)
+            System.out.println("Paciente não encontrado.");
+
+        String querry = "UPDATE Paciente SET internado = 1 WHERE id_paciente = '" + codPaciente + "';";
+        db.querry_insup(querry);
+        System.out.println("\n" + aux.getNome() + " foi internado.");
+    }
+
+    public void alta(Banco db) throws SQLException {
+        System.out.println("Digite o código do paciente que deseja dar alta: ");
+        String codPaciente = FuncUtils.readOnlyLettersAndSpaces();
+        codPaciente = codPaciente.replace(" ", "");
+
+        Paciente aux = buscaPaciente(codPaciente, db);
+        if (aux == null)
+            System.out.println("Paciente não encontrado.");
+
+        
+        String querry = "UPDATE Paciente SET internado = 0 WHERE id_paciente = '" + codPaciente + "';";
+        db.querry_insup(querry);
+        System.out.println("\n" + aux.getNome() + " recebeu alta.");
     }
 }

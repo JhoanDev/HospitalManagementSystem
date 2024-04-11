@@ -115,7 +115,7 @@ public class FuncUtils {
 
     public static Date readDate() {
         while (true) {
-            System.out.print("Digite uma data no formato YYYY-MM-DD:");
+            System.out.print("Digite uma data no formato YYYY-MM-DD: ");
             String dateInput = input.nextLine().trim();
 
             // Verifica se a entrada tem o formato correto
