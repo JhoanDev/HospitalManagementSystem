@@ -3,6 +3,7 @@ package src.controllers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import src.data.Banco;
+import src.models.FuncUtils;
 import src.models.Paciente;
 import java.sql.Date;
 
@@ -41,6 +42,7 @@ public class PacienteDao {
     }
 
     public static void atualizarPaciente(Paciente paciente, Banco db) {
+        if (!paciente.editarPaciente()) return;
         String querry = String.format(
                 "UPDATE Paciente SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, internado = %b, plano_saude = %b WHERE id_paciente = '%s';",
                 paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getDataNasc(), paciente.getSexo(),

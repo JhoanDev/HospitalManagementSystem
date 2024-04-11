@@ -3,7 +3,6 @@ package src.models;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FuncUtils {
@@ -40,18 +39,17 @@ public class FuncUtils {
     public static int readInt() {
         while (true) {
             try {
-                System.out.println("Digite um número inteiro:");
-                return input.nextInt();
-            } catch (InputMismatchException e) {
+                System.out.print("Digite um número inteiro:");
+                String inputStr = input.nextLine().trim();
+                return Integer.parseInt(inputStr);
+            } catch (NumberFormatException e) {
                 System.out.println("Por favor, digite um número inteiro válido.");
-                input.nextLine(); // Limpa o buffer do scanner
             }
         }
     }
 
     public static String readOnlyLettersAndSpaces() {
         while (true) {
-            System.out.println("Digite uma string:");
             String entrada = input.nextLine().trim(); // Remover espaços em branco no início e no final
 
             // Verificar se a entrada é vazia
@@ -71,7 +69,7 @@ public class FuncUtils {
 
     public static String readCPF() {
         while (true) {
-            System.out.println("Digite um CPF (apenas números):");
+            System.out.print("Digite um CPF (apenas números): ");
             String cpf = input.nextLine().trim();
 
             // Remover caracteres de pontuação do CPF, se houver
@@ -94,7 +92,7 @@ public class FuncUtils {
 
     public static String readPhoneNumber() {
         while (true) {
-            System.out.println("Digite um número de telefone (apenas números):");
+            System.out.print("Digite um número de telefone (apenas números): ");
             String phoneNumber = input.nextLine().trim();
 
             // Remover caracteres que não sejam números do telefone
@@ -117,7 +115,7 @@ public class FuncUtils {
 
     public static Date readDate() {
         while (true) {
-            System.out.println("Digite uma data no formato YYYY-MM-DD:");
+            System.out.print("Digite uma data no formato YYYY-MM-DD:");
             String dateInput = input.nextLine().trim();
 
             // Verifica se a entrada tem o formato correto
@@ -133,7 +131,7 @@ public class FuncUtils {
 
     public static boolean readSex(){
         while (true) {
-            System.out.println("Digite o sexo (M/F):");
+            System.out.print("Digite o sexo (M/F): ");
             String sexo = input.nextLine().trim().toUpperCase();
 
             if (sexo.equals("M")) 
@@ -148,7 +146,7 @@ public class FuncUtils {
 
     public static boolean readHospitalized(){
         while (true) {
-            System.out.println("O paciente está internado? (S/N):");
+            System.out.print("O paciente está internado? (S/N): ");
             String internado = input.nextLine().trim().toUpperCase();
 
             if (internado.equals("S")) 
@@ -163,7 +161,7 @@ public class FuncUtils {
 
     public static boolean readHealthPlan(){
         while (true) {
-            System.out.println("O paciente possui plano de saúde? (S/N):");
+            System.out.print("O paciente possui plano de saúde? (S/N): ");
             String planoDeSaude = input.nextLine().trim().toUpperCase();
 
             if (planoDeSaude.equals("S")) 
@@ -175,4 +173,5 @@ public class FuncUtils {
             }
         }
     }
+
 }

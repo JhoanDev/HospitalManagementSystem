@@ -12,10 +12,9 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         System.out.println("Sistema de Gerenciamento de Hospital");
         FuncUtils.clearScreen();
-        Paciente paciente = new Paciente("João", "123456789", "123456789", new java.sql.Date(System.currentTimeMillis()), true, "123", true, true);
-        PacienteDao.cadastrarPaciente(paciente, bd);
-        Paciente paciente2 = PacienteDao.buscaPaciente("1", bd);
-        System.out.println(paciente2);
-        FuncUtils.input.close();
+        Paciente aux = PacienteDao.buscaPaciente("1", bd);
+        PacienteDao.atualizarPaciente(aux, bd);
+        aux = PacienteDao.buscaPaciente("1", bd);
+        System.out.println(aux + "\n");
     }
 }

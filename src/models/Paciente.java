@@ -75,7 +75,8 @@ public class Paciente extends Pessoa {
         return s;
     }
 
-    public void editarPaciente(){
+    public boolean editarPaciente(){
+        boolean edit = true;
         System.out.println(this.toString());
         System.out.println("O que deseja editar?");
         System.out.println("[1] - Nome");
@@ -89,38 +90,36 @@ public class Paciente extends Pessoa {
         int opcao = FuncUtils.readInt();
         switch (opcao) {
             case 1:
-                System.out.println("Digite o novo nome: ");
+                System.out.print("Digite o novo nome: ");
                 this.setNome(FuncUtils.readOnlyLettersAndSpaces());
                 break;
             case 2:
-                System.out.println("Digite o novo CPF: ");
                 this.setCpf(FuncUtils.readCPF());
                 break;
             case 3:
-                System.out.println("Digite o novo telefone: ");
                 this.setTelefone(FuncUtils.readPhoneNumber());
                 break;
             case 4:
-                System.out.println("Digite a nova data de nascimento: ");
                 this.setDataNasc(FuncUtils.readDate());
                 break;
             case 5:
-                System.out.println("Digite o novo sexo: ");
                 this.setSexo(FuncUtils.readSex());
                 break;
             case 6:
-                System.out.println("Digite se está internado: ");
                 this.setInternado(FuncUtils.readHospitalized());
                 break;
             case 7:
-                System.out.println("Digite se possui plano de saúde: ");
                 this.setPlanoDeSaude(FuncUtils.readHealthPlan());
                 break;
             case 8:
+                System.out.println("Operação cancelada");
+                edit = false;
                 break;
             default:
                 System.out.println("Opção inválida");
+                edit = false;
                 break;
         }
+        return edit;
     }
 }
