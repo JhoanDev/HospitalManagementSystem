@@ -40,7 +40,10 @@ public class PacienteDao {
             paciente.setPlanoDeSaude(rs.getBoolean("plano_saude"));
             paciente.setInternado(rs.getBoolean("internado"));
         }
-
+        if (paciente.getNome().length() < 3) {
+            System.out.println("Paciente não encontrado.");
+            return null;
+        }
         return paciente;
     }
 
@@ -48,7 +51,7 @@ public class PacienteDao {
         listarPacientes(db);
         String codPaciente = FuncUtils.readCod();
         Paciente paciente = buscaPaciente(codPaciente, db);
-        if (paciente == null) {
+        if (paciente.getNome().length() < 3) {
             System.out.println("Paciente não encontrado.");
             return;
         }
@@ -104,10 +107,11 @@ public class PacienteDao {
     }
 
     public static void internar(Banco db) throws SQLException {
+        listarPacientes(db);
         String codPaciente = FuncUtils.readCod();
 
         Paciente aux = buscaPaciente(codPaciente, db);
-        if (aux == null) {
+        if (aux.getNome().length() < 3) {
             System.out.println("Paciente não encontrado.");
             return;
         }
@@ -117,10 +121,11 @@ public class PacienteDao {
     }
 
     public static void alta(Banco db) throws SQLException {
+        listarPacientes(db);
         String codPaciente = FuncUtils.readCod();
 
         Paciente aux = buscaPaciente(codPaciente, db);
-        if (aux == null) {
+        if (aux.getNome().length() < 3) {
             System.out.println("Paciente não encontrado.");
             return;
         }

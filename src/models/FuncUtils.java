@@ -8,6 +8,10 @@ import java.util.Scanner;
 public class FuncUtils {
     public static Scanner input = new Scanner(System.in);
 
+    public static void fechaScanner() {
+        input.close();
+    }
+
     public static void clearScreen() {
         String os = System.getProperty("os.name").toLowerCase();
         try {
@@ -39,7 +43,7 @@ public class FuncUtils {
     public static int readInt() {
         while (true) {
             try {
-                System.out.print("Digite um número inteiro:");
+                System.out.print("Digite um número inteiro: ");
                 String inputStr = input.nextLine().trim();
                 return Integer.parseInt(inputStr);
             } catch (NumberFormatException e) {
