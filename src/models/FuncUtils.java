@@ -174,4 +174,7 @@ public class FuncUtils {
         }
     }
 
+    public static String spacesGenerator(int n){
+        return " ".repeat(n);
+    }
 }
