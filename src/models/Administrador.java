@@ -1,7 +1,7 @@
 package src.models;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Administrador extends Funcionario {
     private String login;

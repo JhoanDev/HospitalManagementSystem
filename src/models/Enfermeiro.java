@@ -1,7 +1,7 @@
 package src.models;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Enfermeiro extends Funcionario {
     private String coren;

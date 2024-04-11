@@ -1,6 +1,6 @@
 package src.models;
 
-//import java.util.Date;
+import java.sql.Date;
 
 public abstract class Pessoa {
     private String nome;
