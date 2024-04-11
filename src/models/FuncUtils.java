@@ -174,6 +174,19 @@ public class FuncUtils {
         }
     }
 
+    public static String readCod(){
+        while (true) {
+            System.out.print("\nDigite o código do paciente: ");
+            String cod = input.nextLine().trim();
+
+            if (cod.matches("[0-9]+")) {
+                return cod;
+            } else {
+                System.out.println("Código inválido. Por favor, digite apenas números.");
+            }
+        }
+    }
+
     public static String spacesGenerator(int n){
         return " ".repeat(n);
     }

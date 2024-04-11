@@ -12,6 +12,5 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         System.out.println("Sistema de Gerenciamento de Hospital");
         FuncUtils.clearScreen();
-        PacienteDao.listarPacientes(bd);
     }
 }

@@ -75,7 +75,7 @@ public class Paciente extends Pessoa {
         return s;
     }
 
-    public boolean editarPaciente(){
+    public boolean editaPaciente(){
         boolean edit = true;
         System.out.println(this.toString());
         System.out.println("O que deseja editar?");

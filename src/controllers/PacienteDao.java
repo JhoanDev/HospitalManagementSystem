@@ -44,9 +44,17 @@ public class PacienteDao {
         return paciente;
     }
 
-    public static void atualizarPaciente(Paciente paciente, Banco db) {
+    public static void editarPaciente(Banco db) throws SQLException {
+        listarPacientes(db);
+        String codPaciente = FuncUtils.readCod();
+        Paciente paciente = buscaPaciente(codPaciente, db);
+        if (paciente == null) {
+            System.out.println("Paciente não encontrado.");
+            return;
+        }
+
         FuncUtils.clearScreen();
-        if (!paciente.editarPaciente())
+        if (!paciente.editaPaciente())
             return;
         String querry = String.format(
                 "UPDATE Paciente SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, internado = %b, plano_saude = %b WHERE id_paciente = '%s';",
@@ -56,13 +64,11 @@ public class PacienteDao {
         db.querry_insup(querry);
     }
 
-    public static void deletarPaciente(Banco db) throws SQLException {
+    public static void excluirPaciente(Banco db) throws SQLException {
         FuncUtils.clearScreen();
         listarPacientes(db);
-        System.out.println("\nInsira o codigo do paciente que deseja deletar: ");
 
-        String codPaciente = FuncUtils.readOnlyLettersAndSpaces();
-        codPaciente = codPaciente.replace(" ", "");
+        String codPaciente = FuncUtils.readCod();
 
         String querry = "DELETE FROM Paciente WHERE id_paciente = '" + codPaciente + "';";
         db.querry_insup(querry);
@@ -97,30 +103,28 @@ public class PacienteDao {
         }
     }
 
-    public void internar(Banco db) throws SQLException {
-        System.out.println("Digite o código do paciente que deseja internar: ");
-        String codPaciente = FuncUtils.readOnlyLettersAndSpaces();
-        codPaciente = codPaciente.replace(" ", "");
+    public static void internar(Banco db) throws SQLException {
+        String codPaciente = FuncUtils.readCod();
 
         Paciente aux = buscaPaciente(codPaciente, db);
-        if (aux == null)
+        if (aux == null) {
             System.out.println("Paciente não encontrado.");
-
+            return;
+        }
         String querry = "UPDATE Paciente SET internado = 1 WHERE id_paciente = '" + codPaciente + "';";
         db.querry_insup(querry);
         System.out.println("\n" + aux.getNome() + " foi internado.");
     }
 
-    public void alta(Banco db) throws SQLException {
-        System.out.println("Digite o código do paciente que deseja dar alta: ");
-        String codPaciente = FuncUtils.readOnlyLettersAndSpaces();
-        codPaciente = codPaciente.replace(" ", "");
+    public static void alta(Banco db) throws SQLException {
+        String codPaciente = FuncUtils.readCod();
 
         Paciente aux = buscaPaciente(codPaciente, db);
-        if (aux == null)
+        if (aux == null) {
             System.out.println("Paciente não encontrado.");
+            return;
+        }
 
-        
         String querry = "UPDATE Paciente SET internado = 0 WHERE id_paciente = '" + codPaciente + "';";
         db.querry_insup(querry);
         System.out.println("\n" + aux.getNome() + " recebeu alta.");
