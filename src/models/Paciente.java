@@ -9,7 +9,6 @@ public class Paciente extends Pessoa {
 
     public Paciente(){
         super("", "", "", new Date(System.currentTimeMillis()), true);
-        this.codPaciente = "";
         this.internado = false;
         this.planoDeSaude = false;
     }
@@ -17,20 +16,16 @@ public class Paciente extends Pessoa {
     public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codPaciente,
             boolean internado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
-        this.codPaciente = codPaciente;
         this.internado = internado;
         this.planoDeSaude = planoDeSaude;
     }
     
-    public Paciente(){
 
-    }
-
-    public int getCodPaciente() {
+    public String getCodPaciente() {
         return codPaciente;
     }
 
-    public void setCodPaciente(int codPaciente) {
+    public void setCodPaciente(String codPaciente) {
         this.codPaciente = codPaciente;
     }
 
@@ -78,8 +73,9 @@ public class Paciente extends Pessoa {
         s += "Plano de saúde: " + getPlanoDeSaude() + "\n";
         return s;
     }
+}
 
-    public boolean editaPaciente(){
+    /*public boolean editaPaciente(){
         boolean edit = true;
         System.out.println(this.toString());
         System.out.println("O que deseja editar?");
@@ -135,5 +131,4 @@ public class Paciente extends Pessoa {
         this.setDataNasc(FuncUtils.readDate());
         this.setSexo(FuncUtils.readSex());
     }
-
-}
+        */

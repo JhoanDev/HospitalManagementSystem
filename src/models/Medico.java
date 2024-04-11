@@ -10,7 +10,7 @@ public class Medico extends Funcionario {
     private boolean plantao;
     private ArrayList<Consulta> consultasRealizadas;
 
-    public Medico(String nome, String cpf, String telefone, String dataNasc, boolean sexo, String codFunc, double salario,
+    public Medico(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc, double salario,
             Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal, String crm,
             String especialidade, boolean plantao, ArrayList<Consulta> consultasRealizadas) {
         super(nome, cpf, telefone, dataNasc, sexo, codFunc, salario, dataDeAdmissao, horarioDeTrabalhoInicio,

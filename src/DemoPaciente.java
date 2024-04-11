@@ -1,17 +1,19 @@
 package src;
 
+//Não mudei muita coisa aqui, só o básico para nao apresentar erro!
+
 import java.sql.SQLException;
 
-import src.data.Banco;
 import src.models.*;
+import src.utils.FuncUtils;
 import src.controllers.*;
 
 public class DemoPaciente {
-    public static Banco bd = new Banco();
 
     public static void main(String[] args) throws SQLException {
         FuncUtils.clearScreen();
         System.out.println("Sistema de Gerenciamento de Hospital");
+        Paciente paciente= new Paciente(); //so para parar erros
         int opcao = 0;
         while (opcao != 8) {
             exibirMenu();
@@ -19,29 +21,29 @@ public class DemoPaciente {
 
             switch (opcao) {
                 case 1:
-                    PacienteDao.cadastrarPaciente(bd);
+                    PacienteDao.cadastrarPaciente(paciente);
                     break;
                 case 2:
-                    PacienteDao.editarPaciente(bd);
+                    PacienteDao.editarPaciente("182");
                     break;
                 case 3:
-                    PacienteDao.excluirPaciente(bd);
+                    PacienteDao.excluirPaciente("13821");
                     break;
                 case 4:
                     String codPaciente = FuncUtils.readCod();
-                    Paciente aux = PacienteDao.buscaPaciente(codPaciente, bd);
+                    Paciente aux = PacienteDao.buscaPaciente(codPaciente);
                     if (aux != null) {
                         System.out.println(aux);
                     }
                     break;
                 case 5:
-                    PacienteDao.listarPacientes(bd);
+                    PacienteDao.listarPacientes();
                     break;
                 case 6:
-                    PacienteDao.alta(bd);
+                    PacienteDao.alta("12312");
                     break;
                 case 7:
-                    PacienteDao.internar(bd);
+                    PacienteDao.internar("12312");
                     break;
                 case 8:
                     System.out.println("Saindo do programa...");
