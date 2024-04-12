@@ -19,6 +19,7 @@ public class MedicoDao {
                 medico.getCrm(), medico.getEspecialidade(), medico.isPlantao());
         db.querry_insup(query);
     }
+    
 
     public void fech() {
         db.desconect();
