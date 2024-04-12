@@ -6,10 +6,10 @@ public abstract class Pessoa {
     private String nome;
     private String cpf;
     private String telefone;
-    private String dataNasc;
+    private Date dataNasc;
     private boolean sexo; // true = masculino, false = feminino
 
-    public Pessoa(String nome, String cpf, String telefone, String dataNasc, boolean sexo) {
+    public Pessoa(String nome, String cpf, String telefone, Date dataNasc, boolean sexo) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -44,11 +44,11 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
-    public String getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
 

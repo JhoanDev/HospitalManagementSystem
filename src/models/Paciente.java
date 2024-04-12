@@ -13,7 +13,7 @@ public class Paciente extends Pessoa {
         this.planoDeSaude = false;
     }
     
-    public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codPaciente,
+    public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
             boolean internado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
         this.internado = internado;

@@ -15,7 +15,7 @@ public class PacienteDao {
         db = new Banco();
     }
 
-    public static void cadastrarPaciente(Paciente paciente) {
+    public void cadastrarPaciente(Paciente paciente) {
       
         String querry = String.format(
                 "INSERT INTO Paciente (nome, cpf, telefone, data_nascimento, sexo, internado, plano_saude)VALUES ('%s', '%s', '%s', '%tF', %b, %b, %b);",
@@ -25,7 +25,7 @@ public class PacienteDao {
                 db.querry_insup(querry);
     }
 
-    public static Paciente buscaPaciente(String codPaciente) throws SQLException {
+    public Paciente buscaPaciente(String codPaciente) throws SQLException {
         String query = "SELECT * FROM Paciente WHERE id_paciente = '" + codPaciente + "';";
         ResultSet rs = db.querry_busca(query);
         Paciente paciente = new Paciente();
@@ -51,7 +51,7 @@ public class PacienteDao {
         return paciente;
     }
 
-    public static void editarPaciente(String codPaciente) throws SQLException {
+    public void editarPaciente(String codPaciente) throws SQLException {
         Paciente paciente = buscaPaciente(codPaciente);
         if (paciente!= null) {
             String querry = String.format(
@@ -64,7 +64,7 @@ public class PacienteDao {
         
     }
 
-    public static void excluirPaciente(String codPaciente) throws SQLException {
+    public void excluirPaciente(String codPaciente) throws SQLException {
         FuncUtils.clearScreen();
         Paciente control = buscaPaciente(codPaciente);
         if (control != null) {
@@ -102,7 +102,7 @@ public class PacienteDao {
         }
     }
 
-    public static void internar(String codPaciente) throws SQLException {
+    public  void internar(String codPaciente) throws SQLException {
 
         Paciente aux = buscaPaciente(codPaciente);
         if (aux != null) {
@@ -113,7 +113,7 @@ public class PacienteDao {
         
     }
 
-    public static void alta(String codPaciente) throws SQLException {
+    public void alta(String codPaciente) throws SQLException {
         listarPacientes();
         Paciente aux = buscaPaciente(codPaciente);
         if (aux.getNome().length() < 3) {
@@ -124,5 +124,9 @@ public class PacienteDao {
         String querry = "UPDATE Paciente SET internado = 0 WHERE id_paciente = '" + codPaciente + "';";
         db.querry_insup(querry);
         System.out.println("\n" + aux.getNome() + " recebeu alta.");
+    }
+
+    public void fech(){
+        db.desconect();
     }
 }

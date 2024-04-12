@@ -23,7 +23,7 @@ public class Banco {
         }
     }
 
-    public void desconect(Connection db){ //funcao desconect
+    public void desconect(){ //funcao desconect
         try {
             if(db != null){
               db.close();
