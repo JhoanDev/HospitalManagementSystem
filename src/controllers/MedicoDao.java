@@ -61,6 +61,7 @@ public class MedicoDao {
             System.out.println("Médico não encontrado.");
             return null;
         }
+        rs.close();
         return medico;
     }
 
@@ -105,7 +106,40 @@ public class MedicoDao {
             System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", cod, nome, sexoStr, salario, crm,
                     especialidade, plantaoStr);
         }
+        rs.close();
     }
+    
+    public void verificarMedicosDisponiveisEmAlgumHorario(Time horario) throws SQLException {
+        String query = "SELECT * FROM Medico";
+        ResultSet rs = db.querry_busca(query);
+        System.out.printf("|Cod%s|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+        FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+        FuncUtils.spacesGenerator(3),
+        FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+        while (rs.next()) {
+            Time horarioDeTrabalhoInicio = Time.valueOf(rs.getString("horarioDeTrabalhoInicio"));
+            Time horarioDeTrabalhoFinal = Time.valueOf(rs.getString("horarioDeTrabalhoFinal"));
+            
+            // Verifica se o horário fornecido está dentro do horário de trabalho do médico
+            if (horarioDeTrabalhoInicio.before(horario) && horarioDeTrabalhoFinal.after(horario)) {
+                String cod = rs.getString("id_medico");
+                String nome = rs.getString("nome");
+                boolean sexo = rs.getBoolean("sexo");
+                double salario = rs.getDouble("salario");
+                String crm = rs.getString("crm");
+                String especialidade = rs.getString("especialidade");
+                boolean plantao = rs.getBoolean("plantao");
+        
+                String sexoStr = sexo ? "Masculino" : "Feminino";
+                String plantaoStr = plantao ? "Sim" : "Não";
+        
+                System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", cod, nome, sexoStr, salario, crm,
+                        especialidade, plantaoStr);
+            }
+        }
+        rs.close();
+    }
+    
     
 
     public void fech() {

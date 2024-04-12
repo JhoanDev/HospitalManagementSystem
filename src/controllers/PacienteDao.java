@@ -69,10 +69,10 @@ public class PacienteDao {
         String query = "SELECT * FROM Paciente;";
         ResultSet rs = db.querry_busca(query);
 
-        System.out.printf("Cod%s Nome%s CPF%s Telefone%s Nascimento%s Sexo%s Internado%s Plano de Saúde\n",
+        System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
                 FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
                 FuncUtils.spacesGenerator(4),
-                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8), FuncUtils.spacesGenerator(6));
+                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8), FuncUtils.spacesGenerator(1));
 
         while (rs.next()) {
             String cod = rs.getString("id_paciente");
@@ -85,10 +85,10 @@ public class PacienteDao {
             boolean planoSaude = rs.getBoolean("plano_saude");
 
             String sexoStr = sexo ? "Masculino" : "Feminino";
-            String internadoStr = internado ? "Internado" : "Não internado";
-            String planoSaudeStr = planoSaude ? "Possui plano de saúde" : "Não possui plano de saúde";
+            String internadoStr = internado ? "Sim" : "Não";
+            String planoSaudeStr = planoSaude ? "Possui" : "Não possui";
 
-            System.out.printf("%-7s %-30s %-12s %-12s %-12s %-12s %-15s %s\n", cod, nome, cpf, telefone, dataNascimento,
+            System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n", cod, nome, cpf, telefone, dataNascimento,
                     sexoStr,
                     internadoStr, planoSaudeStr);
         }
