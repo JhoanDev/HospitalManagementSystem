@@ -8,10 +8,10 @@ public class Medico extends Funcionario {
     private String especialidade;
     private boolean plantao;
 
-    public Medico(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc, double salario,
+    public Medico(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, double salario,
             Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal, String crm,
             String especialidade, boolean plantao) {
-        super(nome, cpf, telefone, dataNasc, sexo, codFunc, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
+        super(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
                 horarioDeTrabalhoFinal);
         this.crm = crm;
         this.especialidade = especialidade;

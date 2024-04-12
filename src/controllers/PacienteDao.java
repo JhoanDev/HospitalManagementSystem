@@ -16,7 +16,6 @@ public class PacienteDao {
     }
 
     public void cadastrarPaciente(Paciente paciente) {
-
         String querry = String.format(
                 "INSERT INTO Paciente (nome, cpf, telefone, data_nascimento, sexo, internado, plano_saude)VALUES ('%s', '%s', '%s', '%tF', %b, %b, %b);",
                 paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getDataNasc(),
