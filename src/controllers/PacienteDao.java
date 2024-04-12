@@ -58,11 +58,9 @@ public class PacienteDao {
         db.querry_insup(querry);
     }
 
-    public void excluirPaciente(String codPaciente) throws SQLException {
-        FuncUtils.clearScreen();
-        Paciente control = buscaPaciente(codPaciente);
-        if (control != null) {
-            String querry = "DELETE FROM Paciente WHERE id_paciente = '" + codPaciente + "';";
+    public void excluirPaciente(Paciente paciente) throws SQLException {
+        if (paciente != null) {
+            String querry = "DELETE FROM Paciente WHERE id_paciente = '" + paciente.getCodPaciente() + "';";
             db.querry_insup(querry);
         }
     }

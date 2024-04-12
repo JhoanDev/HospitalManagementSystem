@@ -87,10 +87,16 @@ public class DemoPaciente {
                         }
                     }
                     break;
-                case 3: 
+                case 3:
                     System.out.println("Digite o codigo do paciente que deseja excluir: ");
                     cod = FuncUtils.readCod();
-                    pacienteDao.excluirPaciente(cod);
+                    paciente = pacienteDao.buscaPaciente(cod);
+                    if (paciente != null) {
+                        pacienteDao.excluirPaciente(paciente);
+                    }
+                    else{
+                        System.out.println("Paciente não encontrado.");
+                    }
                     break;
                 case 4:
                     System.out.println("Digite o código do paciente que deseja buscar: ");
@@ -104,7 +110,7 @@ public class DemoPaciente {
                     pacienteDao.listarPacientes();
                     break;
                 case 6:
-                    System.out.println("Digite o código do paciente que deseja dar alta: "); //obs vai ter outre
+                    System.out.println("Digite o código do paciente que deseja dar alta: "); // obs vai ter outre
                     cod = FuncUtils.readCod();
                     paciente = pacienteDao.buscaPaciente(cod);
                     if (paciente != null) {
@@ -112,7 +118,8 @@ public class DemoPaciente {
                     }
                     break;
                 case 7:
-                    System.out.println("Digite o código do paciente que deseja Internar: "); //obs ele vai sair da enfermaria que ele está
+                    System.out.println("Digite o código do paciente que deseja Internar: "); // obs ele vai sair da
+                                                                                             // enfermaria que ele está
                     cod = FuncUtils.readCod();
                     paciente = pacienteDao.buscaPaciente(cod);
                     if (paciente != null) {
@@ -121,7 +128,7 @@ public class DemoPaciente {
                     break;
                 case 8:
                     System.out.println("Saindo do programa...");
-                            pacienteDao.fech();
+                    pacienteDao.fech();
 
                     return;
                 default:
