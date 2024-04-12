@@ -10,6 +10,10 @@ public abstract class Funcionario extends Pessoa {
     private Time horarioDeTrabalhoFinal;
     private double bonus;
 
+    public Funcionario() {
+        super();
+    }
+
     // Construtor com bunus
     public Funcionario(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
             double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal,

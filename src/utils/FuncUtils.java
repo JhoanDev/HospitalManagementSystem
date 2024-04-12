@@ -2,6 +2,7 @@ package src.utils;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
@@ -102,7 +103,8 @@ public class FuncUtils {
             // Remover caracteres que não sejam números do telefone
             phoneNumber = phoneNumber.replaceAll("[^0-9]", "");
 
-            // Verificar se o número de telefone tem pelo menos 10 dígitos (formato brasileiro)
+            // Verificar se o número de telefone tem pelo menos 10 dígitos (formato
+            // brasileiro)
             if (phoneNumber.length() < 10) {
                 System.out.println("Número de telefone inválido. Por favor, digite pelo menos 10 números.");
                 continue;
@@ -133,12 +135,12 @@ public class FuncUtils {
         }
     }
 
-    public static boolean readSex(){
+    public static boolean readSex() {
         while (true) {
             System.out.print("Digite o sexo (M/F): ");
             String sexo = input.nextLine().trim().toUpperCase();
 
-            if (sexo.equals("M")) 
+            if (sexo.equals("M"))
                 return true;
             else if (sexo.equals("F")) {
                 return false;
@@ -148,12 +150,12 @@ public class FuncUtils {
         }
     }
 
-    public static boolean readHospitalized(){
+    public static boolean readHospitalized() {
         while (true) {
             System.out.print("O paciente está internado? (S/N): ");
             String internado = input.nextLine().trim().toUpperCase();
 
-            if (internado.equals("S")) 
+            if (internado.equals("S"))
                 return true;
             else if (internado.equals("N")) {
                 return false;
@@ -161,14 +163,14 @@ public class FuncUtils {
                 System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
             }
         }
-    }   
+    }
 
-    public static boolean readHealthPlan(){
+    public static boolean readHealthPlan() {
         while (true) {
             System.out.print("O paciente possui plano de saúde? (S/N): ");
             String planoDeSaude = input.nextLine().trim().toUpperCase();
 
-            if (planoDeSaude.equals("S")) 
+            if (planoDeSaude.equals("S"))
                 return true;
             else if (planoDeSaude.equals("N")) {
                 return false;
@@ -178,7 +180,7 @@ public class FuncUtils {
         }
     }
 
-    public static String readCod(){
+    public static String readCod() {
         while (true) {
             String cod = input.nextLine().trim();
 
@@ -190,7 +192,97 @@ public class FuncUtils {
         }
     }
 
-    public static String spacesGenerator(int n){
+    public static String readCrm() {
+        while (true) {
+            System.out.print("Digite o CRM (no formato 'CRM/UF 123456'): ");
+            String crm = input.nextLine().trim();
+
+            // Verificar se o CRM está no formato correto
+            if (crm.matches("CRM/[A-Z]{2} \\d{6}")) {
+                return crm;
+            } else {
+                System.out.println("Formato de CRM inválido. Por favor, digite no formato 'CRM/UF 123456'.");
+            }
+        }
+    }
+
+    public static double readSalary() {
+        while (true) {
+            try {
+                System.out.print("Digite o salário: ");
+                double salary = Double.parseDouble(input.nextLine().trim());
+                if (salary >= 0) {
+                    return salary;
+                } else {
+                    System.out.println("O salário não pode ser negativo. Por favor, digite um valor válido.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, digite um valor numérico para o salário.");
+            }
+        }
+    }
+
+    public static Time readTime() {
+        while (true) {
+            try {
+                System.out.print("Digite o horário (no formato HH:MM:SS): ");
+                String timeInput = input.nextLine().trim();
+
+                // Verificar se o horário está no formato correto
+                if (timeInput.matches("\\d{2}:\\d{2}:\\d{2}")) {
+                    // Convertendo a string para java.sql.Time
+                    Time sqlTime = Time.valueOf(timeInput);
+                    return sqlTime;
+                } else {
+                    System.out.println("Formato de horário inválido. Por favor, digite no formato HH:MM:SS.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Horário inválido. Por favor, digite um horário válido.");
+            }
+        }
+    }
+
+    public static Double readBonus() {
+        while (true) {
+            try {
+                System.out.print("Ele recebe bônus salarial? (S/N): ");
+                String resposta = input.nextLine().trim().toUpperCase();
+
+                if (resposta.equals("S")) {
+                    System.out.print("Digite a porcentagem do bônus: ");
+                    double bonusPercent = Double.parseDouble(input.nextLine().trim());
+
+                    // Convertendo a porcentagem para o formato decimal
+                    double bonusDecimal = bonusPercent / 100.0;
+
+                    return 1.0 + bonusDecimal; // Adicionando 1.0 para que o bônus seja multiplicado pelo salário base
+                } else if (resposta.equals("N")) {
+                    return 1.0;
+                } else {
+                    System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, digite apenas números para a porcentagem do bônus.");
+            }
+        }
+    }
+
+    public static boolean readShift() {
+        while (true) {
+            System.out.print("O médico está de plantão? (S/N): ");
+            String resposta = input.nextLine().trim().toUpperCase();
+
+            if (resposta.equals("S")) {
+                return true;
+            } else if (resposta.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
+            }
+        }
+    }
+
+    public static String spacesGenerator(int n) {
         return " ".repeat(n);
     }
 }
