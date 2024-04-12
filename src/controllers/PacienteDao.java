@@ -9,20 +9,20 @@ import src.utils.FuncUtils;
 import java.sql.Date;
 
 public class PacienteDao {
-    static Banco db;
+    Banco db;
 
-    public PacienteDao(){
+    public PacienteDao() {
         db = new Banco();
     }
 
     public void cadastrarPaciente(Paciente paciente) {
-      
+
         String querry = String.format(
                 "INSERT INTO Paciente (nome, cpf, telefone, data_nascimento, sexo, internado, plano_saude)VALUES ('%s', '%s', '%s', '%tF', %b, %b, %b);",
                 paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getDataNasc(),
-                paciente.getSexo(),
+                paciente.isSexo(),
                 paciente.isInternado(), paciente.isPlanoDeSaude());
-                db.querry_insup(querry);
+        db.querry_insup(querry);
     }
 
     public Paciente buscaPaciente(String codPaciente) throws SQLException {
@@ -43,25 +43,20 @@ public class PacienteDao {
             paciente.setSexo(rs.getBoolean("sexo"));
             paciente.setPlanoDeSaude(rs.getBoolean("plano_saude"));
             paciente.setInternado(rs.getBoolean("internado"));
-        }
-        else{
+        } else {
             System.out.println("Paciente não encontrado.");
             return null;
         }
         return paciente;
     }
 
-    public void editarPaciente(String codPaciente) throws SQLException {
-        Paciente paciente = buscaPaciente(codPaciente);
-        if (paciente!= null) {
-            String querry = String.format(
+    public void editarPaciente(Paciente paciente) throws SQLException {
+        String querry = String.format(
                 "UPDATE Paciente SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, internado = %b, plano_saude = %b WHERE id_paciente = '%s';",
                 paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getDataNasc(),
-                paciente.getSexo(),
+                paciente.isSexo(),
                 paciente.isInternado(), paciente.isPlanoDeSaude(), paciente.getCodPaciente());
-                db.querry_insup(querry);
-        } 
-        
+        db.querry_insup(querry);
     }
 
     public void excluirPaciente(String codPaciente) throws SQLException {
@@ -69,11 +64,11 @@ public class PacienteDao {
         Paciente control = buscaPaciente(codPaciente);
         if (control != null) {
             String querry = "DELETE FROM Paciente WHERE id_paciente = '" + codPaciente + "';";
-            db.querry_insup(querry); 
+            db.querry_insup(querry);
         }
     }
 
-    public static void listarPacientes() throws SQLException {
+    public void listarPacientes() throws SQLException {
         String query = "SELECT * FROM Paciente;";
         ResultSet rs = db.querry_busca(query);
 
@@ -102,31 +97,24 @@ public class PacienteDao {
         }
     }
 
-    public  void internar(String codPaciente) throws SQLException {
-
-        Paciente aux = buscaPaciente(codPaciente);
+    public void internar(Paciente aux) throws SQLException {
         if (aux != null) {
-            String querry = "UPDATE Paciente SET internado = 1 WHERE id_paciente = '" + codPaciente + "';";
+            String querry = "UPDATE Paciente SET internado = 1 WHERE id_paciente = '" + aux.getCodPaciente() + "';";
             db.querry_insup(querry);
-             System.out.println("\n" + aux.getNome() + " foi internado.");
-        }
-        
-    }
-
-    public void alta(String codPaciente) throws SQLException {
-        listarPacientes();
-        Paciente aux = buscaPaciente(codPaciente);
-        if (aux.getNome().length() < 3) {
-            System.out.println("Paciente não encontrado.");
-            return;
+            System.out.println("\n" + aux.getNome() + " foi internado.");
         }
 
-        String querry = "UPDATE Paciente SET internado = 0 WHERE id_paciente = '" + codPaciente + "';";
-        db.querry_insup(querry);
-        System.out.println("\n" + aux.getNome() + " recebeu alta.");
     }
 
-    public void fech(){
+    public void alta(Paciente aux) throws SQLException {
+        if (aux != null) {
+            String querry = "UPDATE Paciente SET internado = 0 WHERE id_paciente = '" + aux.getCodPaciente() + "';";
+            db.querry_insup(querry);
+            System.out.println("\n" + aux.getNome() + " recebeu alta.");
+        }
+    }
+
+    public void fech() {
         db.desconect();
     }
 }

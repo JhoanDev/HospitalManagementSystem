@@ -180,7 +180,6 @@ public class FuncUtils {
 
     public static String readCod(){
         while (true) {
-            System.out.print("\nDigite o código do paciente: ");
             String cod = input.nextLine().trim();
 
             if (cod.matches("[0-9]+")) {
