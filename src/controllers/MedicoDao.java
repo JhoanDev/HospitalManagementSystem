@@ -17,10 +17,10 @@ public class MedicoDao {
 
     public void cadastrarMedico(Medico medico) {
         String query = String.format(
-                "INSERT INTO Medico (nome, cpf, telefone, data_nascimento, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, bonus, crm, especialidade, plantao) VALUES ('%s', '%s', '%s', '%tF', %b, '%.2f', '%tF', '%tT', '%tT', '%.2f', '%s', '%s', %b);",
+                "INSERT INTO Medico (nome, cpf, telefone, data_nascimento, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao) VALUES ('%s', '%s', '%s', '%tF', %b, '%.2f', '%tF', '%tT', '%tT', '%s', '%s', %b);",
                 medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getDataNasc(),
                 medico.isSexo(), medico.getSalario(), medico.getDataDeAdmissao(),
-                medico.getHorarioDeTrabalhoInicio(), medico.getHorarioDeTrabalhoFinal(), medico.getBonus(),
+                medico.getHorarioDeTrabalhoInicio(), medico.getHorarioDeTrabalhoFinal(),
                 medico.getCrm(), medico.getEspecialidade(), medico.isPlantao());
         db.querry_insup(query);
     }
@@ -40,8 +40,7 @@ public class MedicoDao {
             medico.setDataNasc(dataNasc);
 
             medico.setSalario(rs.getDouble("salario"));
-            System.out.println(medico.getSalario());
-
+            
             String dataAdmissaoStr = rs.getString("dataDeAdmissao");
             Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
             medico.setDataDeAdmissao(dataAdmissao);
@@ -53,10 +52,6 @@ public class MedicoDao {
             String horarioFinalStr = rs.getString("horarioDeTrabalhoFinal");
             Time horarioFinal = Time.valueOf(horarioFinalStr);
             medico.setHorarioDeTrabalhoFinal(horarioFinal);
-
-            medico.setBonus(rs.getDouble("bonus"));
-            System.out.println(medico.getBonus());
-           
 
             medico.setCrm(rs.getString("crm"));
             medico.setEspecialidade(rs.getString("especialidade"));
@@ -70,11 +65,10 @@ public class MedicoDao {
 
     public void editarMedico(Medico medico) throws SQLException {
         String query = String.format(
-                "UPDATE Medico SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', dataDeAdmissao = '%tF', horarioDeTrabalhoInicio = '%tT', horarioDeTrabalhoFinal = '%tT', bonus = '%.2f', crm = '%s', especialidade = '%s', plantao = %b WHERE crm = '%s';",
+                "UPDATE Medico SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', dataDeAdmissao = '%tF', horarioDeTrabalhoInicio = '%tT', horarioDeTrabalhoFinal = '%tT', crm = '%s', especialidade = '%s', plantao = %b WHERE crm = '%s';",
                 medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getDataNasc(),
                 medico.isSexo(), medico.getSalario(), medico.getDataDeAdmissao(),
                 medico.getHorarioDeTrabalhoInicio(), medico.getHorarioDeTrabalhoFinal(),
-                medico.getBonus(),
                 medico.getCrm(), medico.getEspecialidade(), medico.isPlantao(), medico.getCrm());
         db.querry_insup(query);
     }

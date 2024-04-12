@@ -22,18 +22,6 @@ public class Medico extends Funcionario {
         this.plantao = plantao;
     }
 
-    public Medico(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, double salario,
-            Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal, double bonus, String crm,
-            String especialidade, boolean plantao) {
-        super(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
-                horarioDeTrabalhoFinal, bonus);
-        this.crm = crm;
-        this.especialidade = especialidade;
-        this.plantao = plantao;
-    }
-
-
-
     public String getCrm() {
         return crm;
     }

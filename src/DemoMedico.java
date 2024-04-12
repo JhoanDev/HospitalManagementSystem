@@ -16,7 +16,7 @@ public class DemoMedico {
         Date dataNasc, dataDeAdmissao;
         Time horarioDeTrabalhoInicio, horarioDeTrabalhoFinal;
         boolean sexo, plantao;
-        double salario, bonus;
+        double salario;
         Medico medico;
         while (opcao != 7) {
             exibirMenu();
@@ -27,6 +27,7 @@ public class DemoMedico {
                     nome = FuncUtils.readOnlyLettersAndSpaces();
                     cpf = FuncUtils.readCPF();
                     telefone = FuncUtils.readPhoneNumber();
+                    System.out.print("Insira a data de nascimento, ");
                     dataNasc = FuncUtils.readDate();
                     sexo = FuncUtils.readSex();
                     salario = FuncUtils.readSalary();
@@ -37,12 +38,11 @@ public class DemoMedico {
                     horarioDeTrabalhoInicio = FuncUtils.readTime();
                     System.out.print("insira o final do expediente, ");
                     horarioDeTrabalhoFinal = FuncUtils.readTime();
-                    bonus = FuncUtils.readBonus();
                     System.out.print("Digite a especialidade do médico: ");
                     especialidade = FuncUtils.readOnlyLettersAndSpaces();
                     plantao = false;
                     medicoDao.cadastrarMedico(new Medico(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
-                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, bonus, crm, especialidade, plantao));
+                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao));
                     break;
                 case 2:
                 crm = FuncUtils.readCrm();
@@ -59,10 +59,9 @@ public class DemoMedico {
                     System.out.println("[7] - Data de admissão");
                     System.out.println("[8] - Horário de trabalho (início)");
                     System.out.println("[9] - Horário de trabalho (final)");
-                    System.out.println("[10] - Bônus");
-                    System.out.println("[11] - Especialidade");
-                    System.out.println("[12] - Plantão");
-                    System.out.println("[13] - Cancelar");
+                    System.out.println("[10] - Especialidade");
+                    System.out.println("[11] - Plantão");
+                    System.out.println("[12] - Cancelar");
                     opcao2 = FuncUtils.readInt();
                     switch (opcao2) {
                         case 1:
@@ -98,22 +97,19 @@ public class DemoMedico {
                             medico.setHorarioDeTrabalhoFinal(FuncUtils.readTime());
                             break;
                         case 10:
-                            medico.setBonus(FuncUtils.readBonus());
-                            break;
-                        case 11:
                             System.out.print("Digite a nova especialidade do médico: ");
                             medico.setEspecialidade(FuncUtils.readOnlyLettersAndSpaces());
                             break;
-                        case 12:
+                        case 11:
                             medico.setPlantao(FuncUtils.readShift());
                             break;
-                        case 13:
+                        case 12:
                             break;
                         default:
                             System.out.println("Opção inválida.");
                             break;
                     }
-                    if (opcao2 != 13) {
+                    if (opcao2 != 12) {
                         medicoDao.editarMedico(medico);
                     }
                 } else {
