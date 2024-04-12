@@ -1,7 +1,5 @@
 package src;
 
-//Não mudei muita coisa aqui, só o básico para nao apresentar erro!
-
 import java.sql.SQLException;
 import java.sql.Date;
 import src.controllers.PacienteDao;

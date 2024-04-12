@@ -3,8 +3,6 @@ package src;
 import java.sql.SQLException;
 
 import src.data.Banco;
-import src.models.*;
-import src.controllers.*;
 
 public class Main {
     public static Banco bd = new Banco();
