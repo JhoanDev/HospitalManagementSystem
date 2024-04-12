@@ -7,6 +7,7 @@ import java.sql.Time;
 
 import src.data.Banco;
 import src.models.Medico;
+import src.utils.FuncUtils;
 
 public class MedicoDao {
     Banco db;
@@ -72,6 +73,40 @@ public class MedicoDao {
                 medico.getCrm(), medico.getEspecialidade(), medico.isPlantao(), medico.getCrm());
         db.querry_insup(query);
     }
+
+    public void excluirMedico(Medico medico) throws SQLException {
+        if (medico != null) {
+            String querry = "DELETE FROM Medico WHERE crm = '" + medico.getCrm() + "';";
+            db.querry_insup(querry);
+        }
+    }
+
+    public void listarMedicos() throws SQLException {
+        String query = "SELECT * FROM Medico;";
+        ResultSet rs = db.querry_busca(query);
+    
+        System.out.printf("|Cod%s|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                FuncUtils.spacesGenerator(3),
+                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+    
+        while (rs.next()) {
+            String cod = rs.getString("id_medico");
+            String nome = rs.getString("nome");
+            boolean sexo = rs.getBoolean("sexo");
+            double salario = rs.getDouble("salario");
+            String crm = rs.getString("crm");
+            String especialidade = rs.getString("especialidade");
+            boolean plantao = rs.getBoolean("plantao");
+    
+            String sexoStr = sexo ? "Masculino" : "Feminino";
+            String plantaoStr = plantao ? "Sim" : "Não";
+    
+            System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", cod, nome, sexoStr, salario, crm,
+                    especialidade, plantaoStr);
+        }
+    }
+    
 
     public void fech() {
         db.desconect();
