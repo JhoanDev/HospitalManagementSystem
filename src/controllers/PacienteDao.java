@@ -16,7 +16,6 @@ public class PacienteDao {
     }
 
     public void cadastrarPaciente(Paciente paciente) {
-
         String querry = String.format(
                 "INSERT INTO Paciente (nome, cpf, telefone, data_nascimento, sexo, internado, plano_saude)VALUES ('%s', '%s', '%s', '%tF', %b, %b, %b);",
                 paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getDataNasc(),
@@ -59,11 +58,9 @@ public class PacienteDao {
         db.querry_insup(querry);
     }
 
-    public void excluirPaciente(String codPaciente) throws SQLException {
-        FuncUtils.clearScreen();
-        Paciente control = buscaPaciente(codPaciente);
-        if (control != null) {
-            String querry = "DELETE FROM Paciente WHERE id_paciente = '" + codPaciente + "';";
+    public void excluirPaciente(Paciente paciente) throws SQLException {
+        if (paciente != null) {
+            String querry = "DELETE FROM Paciente WHERE id_paciente = '" + paciente.getCodPaciente() + "';";
             db.querry_insup(querry);
         }
     }
@@ -72,10 +69,10 @@ public class PacienteDao {
         String query = "SELECT * FROM Paciente;";
         ResultSet rs = db.querry_busca(query);
 
-        System.out.printf("Cod%s Nome%s CPF%s Telefone%s Nascimento%s Sexo%s Internado%s Plano de Saúde\n",
+        System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
                 FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
                 FuncUtils.spacesGenerator(4),
-                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8), FuncUtils.spacesGenerator(6));
+                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8), FuncUtils.spacesGenerator(1));
 
         while (rs.next()) {
             String cod = rs.getString("id_paciente");
@@ -88,10 +85,10 @@ public class PacienteDao {
             boolean planoSaude = rs.getBoolean("plano_saude");
 
             String sexoStr = sexo ? "Masculino" : "Feminino";
-            String internadoStr = internado ? "Internado" : "Não internado";
-            String planoSaudeStr = planoSaude ? "Possui plano de saúde" : "Não possui plano de saúde";
+            String internadoStr = internado ? "Sim" : "Não";
+            String planoSaudeStr = planoSaude ? "Possui" : "Não possui";
 
-            System.out.printf("%-7s %-30s %-12s %-12s %-12s %-12s %-15s %s\n", cod, nome, cpf, telefone, dataNascimento,
+            System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n", cod, nome, cpf, telefone, dataNascimento,
                     sexoStr,
                     internadoStr, planoSaudeStr);
         }

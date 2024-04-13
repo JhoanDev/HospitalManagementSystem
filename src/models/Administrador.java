@@ -7,10 +7,10 @@ public class Administrador extends Funcionario {
     private String login;
     private String senha;
 
-    public Administrador(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc,
+    public Administrador(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
             double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal,
             String login, String senha) {
-        super(nome, cpf, telefone, dataNasc, sexo, codFunc, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
+        super(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
                 horarioDeTrabalhoFinal);
         this.login = login;
         this.senha = senha;
