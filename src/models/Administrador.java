@@ -1,19 +1,23 @@
 package src.models;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Administrador extends Funcionario {
     private String login;
     private String senha;
 
-    public Administrador(String nome, String cpf, String telefone, Date dataNasc, boolean sexo, String codFunc,
+    public Administrador(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
             double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal,
             String login, String senha) {
-        super(nome, cpf, telefone, dataNasc, sexo, codFunc, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
+        super(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
                 horarioDeTrabalhoFinal);
         this.login = login;
         this.senha = senha;
+    }
+
+    public Administrador(){
+        
     }
 
     public String getLogin() {
@@ -32,4 +36,15 @@ public class Administrador extends Funcionario {
         this.senha = senha;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Administrador: " + getNome() + "\n";
+        s += "CPF: " + getCpf() + "\n";
+        s += "Telefone: " + getTelefone() + "\n";
+        s += "Salário: " + getSalario() + "\n";
+        s += "Data de admissão: " + getDataDeAdmissao() + "\n";
+        s += "Horário de trabalho: " + getHorarioDeTrabalhoInicio() + " às " + getHorarioDeTrabalhoFinal() + "\n";
+        return s;
+    }
 }

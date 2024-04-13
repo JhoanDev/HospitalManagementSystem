@@ -1,6 +1,6 @@
 package src.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public abstract class Pessoa {
     private String nome;
@@ -15,6 +15,9 @@ public abstract class Pessoa {
         this.telefone = telefone;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
+    }
+    public Pessoa(){
+        
     }
 
     public String getNome() {

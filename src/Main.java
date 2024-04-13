@@ -1,7 +1,13 @@
 package src;
 
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Sistema de Gerenciamento de Hospital");
+
+
+    public static void main(String[] args) throws SQLException {
+        
     }
+
+
 }
