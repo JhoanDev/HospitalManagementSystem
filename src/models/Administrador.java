@@ -16,6 +16,10 @@ public class Administrador extends Funcionario {
         this.senha = senha;
     }
 
+    public Administrador(){
+        
+    }
+
     public String getLogin() {
         return login;
     }
@@ -32,4 +36,15 @@ public class Administrador extends Funcionario {
         this.senha = senha;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Administrador: " + getNome() + "\n";
+        s += "CPF: " + getCpf() + "\n";
+        s += "Telefone: " + getTelefone() + "\n";
+        s += "Salário: " + getSalario() + "\n";
+        s += "Data de admissão: " + getDataDeAdmissao() + "\n";
+        s += "Horário de trabalho: " + getHorarioDeTrabalhoInicio() + " às " + getHorarioDeTrabalhoFinal() + "\n";
+        return s;
+    }
 }
