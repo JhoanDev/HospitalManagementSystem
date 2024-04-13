@@ -41,10 +41,15 @@ public class DemoMedicamento {
                     }
                     break;
                 case 4:
-
+                    System.out.print("Digite o nome do medicamento que deseja excluir: ");
+                    nome = FuncUtils.readOnlyLettersAndSpaces();
+                    medicamento = medicamentoDao.buscaMedicamento(nome);
+                    if (medicamento != null) {
+                        medicamentoDao.excluirMedicamento(medicamento);
+                    }
                     break;
                 case 5:
-
+                    medicamentoDao.listarMedicamentos();
                     break;
                 case 6:
                     System.out.println("Saindo...");
