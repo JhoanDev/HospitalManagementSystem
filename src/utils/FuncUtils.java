@@ -291,31 +291,6 @@ public class FuncUtils {
         }
     }
 
-    public static Double readBonus() {
-        while (true) {
-            try {
-                System.out.print("Ele recebe bônus salarial? (S/N): ");
-                String resposta = input.nextLine().trim().toUpperCase();
-
-                if (resposta.equals("S")) {
-                    System.out.print("Digite a porcentagem do bônus: ");
-                    double bonusPercent = Double.parseDouble(input.nextLine().trim());
-
-                    // Convertendo a porcentagem para o formato decimal
-                    double bonusDecimal = bonusPercent / 100.0;
-
-                    return 1.0 + bonusDecimal; // Adicionando 1.0 para que o bônus seja multiplicado pelo salário base
-                } else if (resposta.equals("N")) {
-                    return 1.0;
-                } else {
-                    System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Por favor, digite apenas números para a porcentagem do bônus.");
-            }
-        }
-    }
-
     public static boolean readShift() {
         while (true) {
             System.out.print("O médico está de plantão? (S/N): ");
