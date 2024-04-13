@@ -8,7 +8,6 @@ import java.sql.Time;
 import src.data.Banco;
 import src.models.Medico;
 import src.utils.FuncUtils;
-
 public class MedicoDao {
     Banco db;
 
@@ -18,7 +17,7 @@ public class MedicoDao {
 
     public void cadastrarMedico(Medico medico) {
         String query = String.format(
-                "INSERT INTO Medico (nome, cpf, telefone, data_nascimento, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao) VALUES ('%s', '%s', '%s', '%tF', %b, '%.2f', '%tF', '%tT', '%tT', '%s', '%s', %b);",
+                "INSERT INTO Medico (nome, cpf, telefone, data_nascimento, sexo, salario, data_admissao, horario_trabalho_inicio, horario_trabalho_final, crm, especialidade, plantao) VALUES ('%s', '%s', '%s', '%tF', %b, '%.2f', '%tF', '%tT', '%tT', '%s', '%s', %b);",
                 medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getDataNasc(),
                 medico.isSexo(), medico.getSalario(), medico.getDataDeAdmissao(),
                 medico.getHorarioDeTrabalhoInicio(), medico.getHorarioDeTrabalhoFinal(),
@@ -42,15 +41,15 @@ public class MedicoDao {
 
             medico.setSalario(rs.getDouble("salario"));
             
-            String dataAdmissaoStr = rs.getString("dataDeAdmissao");
+            String dataAdmissaoStr = rs.getString("data_admissao");
             Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
             medico.setDataDeAdmissao(dataAdmissao);
 
-            String horarioInicioStr = rs.getString("horarioDeTrabalhoInicio");
+            String horarioInicioStr = rs.getString("horario_trabalho_inicio");
             Time horarioInicio = Time.valueOf(horarioInicioStr);
             medico.setHorarioDeTrabalhoInicio(horarioInicio);
 
-            String horarioFinalStr = rs.getString("horarioDeTrabalhoFinal");
+            String horarioFinalStr = rs.getString("horario_trabalho_final");
             Time horarioFinal = Time.valueOf(horarioFinalStr);
             medico.setHorarioDeTrabalhoFinal(horarioFinal);
 
@@ -67,7 +66,7 @@ public class MedicoDao {
 
     public void editarMedico(Medico medico) throws SQLException {
         String query = String.format(
-                "UPDATE Medico SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', dataDeAdmissao = '%tF', horarioDeTrabalhoInicio = '%tT', horarioDeTrabalhoFinal = '%tT', crm = '%s', especialidade = '%s', plantao = %b WHERE crm = '%s';",
+                "UPDATE Medico SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', data_admissao = '%tF', horario_trabalho_inicio = '%tT', horario_trabalho_final = '%tT', crm = '%s', especialidade = '%s', plantao = %b WHERE crm = '%s';",
                 medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getDataNasc(),
                 medico.isSexo(), medico.getSalario(), medico.getDataDeAdmissao(),
                 medico.getHorarioDeTrabalhoInicio(), medico.getHorarioDeTrabalhoFinal(),
@@ -117,8 +116,8 @@ public class MedicoDao {
         FuncUtils.spacesGenerator(3),
         FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
         while (rs.next()) {
-            Time horarioDeTrabalhoInicio = Time.valueOf(rs.getString("horarioDeTrabalhoInicio"));
-            Time horarioDeTrabalhoFinal = Time.valueOf(rs.getString("horarioDeTrabalhoFinal"));
+            Time horarioDeTrabalhoInicio = Time.valueOf(rs.getString("horario_trabalho_inicio"));
+            Time horarioDeTrabalhoFinal = Time.valueOf(rs.getString("horario_trabalho_final"));
             
             // Verifica se o horário fornecido está dentro do horário de trabalho do médico
             if (horarioDeTrabalhoInicio.before(horario) && horarioDeTrabalhoFinal.after(horario)) {

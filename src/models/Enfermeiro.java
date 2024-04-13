@@ -14,6 +14,10 @@ public class Enfermeiro extends Funcionario {
         this.coren = coren;
     }
 
+    public Enfermeiro(){
+        super();
+    }
+
     public String getCoren() {
         return coren;
     }
