@@ -15,12 +15,30 @@ public class FuncUtils {
     public static void fechaScanner() {
         input.close();
     }
-
-    public static String readPassword(){
-        String pass = input.nextLine();
+        public static String readLogin() {
+            String login;
+            do {
+                login = input.nextLine().trim(); // Remove espaços em branco no início e no final
+                if (login.contains(" ")) {
+                    System.out.println("O login não pode conter espaços em branco.");
+                }
+            } while (login.contains(" "));
+            return login;
+        }
+    
+    public static String readPassword() {
+        String pass;
+        do {
+            pass = input.nextLine().trim(); // Remover espaços em branco no início e no final
+            if (pass.length() < 6) {
+                System.out.println("A senha deve ter pelo menos 6 caracteres.");
+            } else if (pass.contains(" ")) {
+                System.out.println("A senha não pode conter espaços em branco.");
+            }
+        } while (pass.length() < 6 || pass.contains(" "));
         return pass;
     }
-    
+
     public static void clearScreen() {
         String os = System.getProperty("os.name").toLowerCase();
         try {
@@ -52,7 +70,6 @@ public class FuncUtils {
     public static int readInt() {
         while (true) {
             try {
-                System.out.print("Digite um número inteiro: ");
                 String inputStr = input.nextLine().trim();
                 return Integer.parseInt(inputStr);
             } catch (NumberFormatException e) {
@@ -230,20 +247,20 @@ public class FuncUtils {
                 int op = input.nextInt();
                 switch (op) {
                     case 1:
-                        coren = coren+"-ENF";
+                        coren = coren + "-ENF";
                         break;
                     case 2:
-                        coren = coren+"-OBST";
+                        coren = coren + "-OBST";
                         break;
                     case 3:
-                        coren = coren+"-TE";
+                        coren = coren + "-TE";
                         break;
                     case 4:
-                        coren = coren+"-AE";
+                        coren = coren + "-AE";
                         break;
                     case 5:
-                        coren = coren+"-PAR";
-                        
+                        coren = coren + "-PAR";
+
                         break;
                     default:
                         break;
@@ -306,14 +323,14 @@ public class FuncUtils {
         }
     }
 
-    public static String encryptMD5(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        
+    public static String encryptMD5(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
         byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
-    
+
         StringBuilder texto = new StringBuilder();
         for (byte b : hash) {
-          texto.append(String.format("%02X", 0xFF & b));
+            texto.append(String.format("%02X", 0xFF & b));
         }
         return texto.toString();
     }

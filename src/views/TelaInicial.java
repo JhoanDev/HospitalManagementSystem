@@ -1,14 +1,12 @@
 package src.views;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-
 import src.data.Banco;
 import src.utils.FuncUtils;
 
 public class TelaInicial {
-    public static void homeScreen(Banco db) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public static void homeScreen(Banco db) throws SQLException{
+        FuncUtils.clearScreen();
         while (true) {
             System.out.println("\n[1] - Logar");
             System.out.println("[2] - Sair");
