@@ -244,7 +244,8 @@ public class FuncUtils {
                 System.out.println("[3] - Tecnico(a)");
                 System.out.println("[4] - Auxiliar");
                 System.out.println("[5] - Parteiro(a)");
-                int op = input.nextInt();
+                System.out.print("Digite a opção: ");
+                int op = readInt();
                 switch (op) {
                     case 1:
                         coren = coren + "-ENF";
@@ -260,9 +261,9 @@ public class FuncUtils {
                         break;
                     case 5:
                         coren = coren + "-PAR";
-
                         break;
                     default:
+                        System.out.println("Opção inválida.");
                         break;
                 }
                 return coren;

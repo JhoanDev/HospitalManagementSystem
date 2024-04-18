@@ -25,25 +25,20 @@ public class MenuInicial {
                     initialMenu(db);
                     break;
                 case 2:
-                    // Call the method for Menu Paciente
                     break;
                 case 3:
-                    // Call the method for Menu Médico
                     break;
                 case 4:
-                    // Call the method for Menu Consulta
+                    MenuEnfermeiro.nurseMenu(db);
+                    initialMenu(db);
                     break;
                 case 5:
-                    // Call the method for Menu Enfermeiro
                     break;
                 case 6:
-                    // Call the method for Menu Medicamentos
                     break;
                 case 7:
-                    // Call the method for Menu Enfermaria
                     break;
                 case 8:
-                    // Call the method for Menu Internação
                     break;
                 case 9:
                     System.out.println("Saindo...");
