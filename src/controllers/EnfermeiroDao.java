@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import src.data.Banco;
 import src.models.Enfermeiro;
@@ -50,7 +51,6 @@ public class EnfermeiroDao {
 
             enfermeiro.setCoren(rs.getString("coren"));
         } else {
-            System.out.println("Enfermeiro não encontrado.");
             return null;
         }
 
@@ -74,24 +74,40 @@ public class EnfermeiroDao {
         }
     }
 
-/*     public static void listarEnfermeiros(Banco db) throws SQLException {
+    public static ArrayList<Enfermeiro> listarEnfermeiros(Banco db) throws SQLException {
         String query = "SELECT * FROM Enfermeiro;";
         ResultSet rs = db.queryBusca(query);
-
-        System.out.printf("|Cod%s|Nome%s|Sexo%s|Salário%s|Coren%s|\n",
-                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
-                FuncUtils.spacesGenerator(3),
-                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+        ArrayList<Enfermeiro> enfermeiros = new ArrayList<Enfermeiro>();
 
         while (rs.next()) {
-            String cod = rs.getString("id_enfermeiro");
-            String nome = rs.getString("nome");
-            boolean sexo = rs.getBoolean("sexo");
-            double salario = rs.getDouble("salario");
-            String coren = rs.getString("coren");
-            String sexoStr = sexo ? "Masculino" : "Feminino";
+            Enfermeiro enfermeiro = new Enfermeiro();
+            enfermeiro.setNome(rs.getString("nome"));
+            enfermeiro.setCpf(rs.getString("cpf"));
+            enfermeiro.setTelefone(rs.getString("telefone"));
+            enfermeiro.setSexo(rs.getBoolean("sexo"));
 
-            System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%s\n", cod, nome, sexoStr, salario, coren);
+            String dataNascStr = rs.getString("data_nascimento");
+            Date dataNasc = Date.valueOf(dataNascStr);
+            enfermeiro.setDataNasc(dataNasc);
+
+            enfermeiro.setSalario(rs.getDouble("salario"));
+
+            String dataAdmissaoStr = rs.getString("data_admissao");
+            Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
+            enfermeiro.setDataDeAdmissao(dataAdmissao);
+
+            String horarioInicioStr = rs.getString("horario_trabalho_inicio");
+            Time horarioInicio = Time.valueOf(horarioInicioStr);
+            enfermeiro.setHorarioDeTrabalhoInicio(horarioInicio);
+
+            String horarioFinalStr = rs.getString("horario_trabalho_final");
+            Time horarioFinal = Time.valueOf(horarioFinalStr);
+            enfermeiro.setHorarioDeTrabalhoFinal(horarioFinal);
+
+            enfermeiro.setCoren(rs.getString("coren"));
+            enfermeiros.add(enfermeiro);
+
         }
-    } */
+        return enfermeiros;
+    }
 }

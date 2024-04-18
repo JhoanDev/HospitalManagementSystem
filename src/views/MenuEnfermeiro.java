@@ -3,6 +3,7 @@ package src.views;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import src.controllers.EnfermeiroDao;
 import src.data.Banco;
@@ -18,6 +19,7 @@ public class MenuEnfermeiro {
         boolean sexo;
         double salario;
         Enfermeiro enfermeiro;
+        ArrayList<Enfermeiro> enfermeiros;
         while (opcao != 6) {
             displayMenu();
             opcao = FuncUtils.readInt();
@@ -108,6 +110,8 @@ public class MenuEnfermeiro {
                         if (opcao2 != 9) {
                             EnfermeiroDao.editarEnfermeiro(enfermeiro, db);
                         }
+                    } else {
+                        System.out.println("Enfermeiro não encontrado.");
                     }
                     break;
                 case 3:
@@ -115,16 +119,33 @@ public class MenuEnfermeiro {
                     enfermeiro = EnfermeiroDao.buscaEnfermeiro(coren, db);
                     if (enfermeiro != null) {
                         EnfermeiroDao.excluirEnfermeiro(enfermeiro, db);
+                    } else {
+                        System.out.println("Enfermeiro não encontrado.");
                     }
                     break;
                 case 4:
-                    // Listar enfermeiros
+                    enfermeiros = EnfermeiroDao.listarEnfermeiros(db);
+                    if (enfermeiros.isEmpty()) {
+                        System.out.println("Nenhum enfermeiro cadastrado.");
+                        break;
+                    }
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Coren\n",
+                            FuncUtils.spacesGenerator(26),
+                            FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12));
+                    for (Enfermeiro e : enfermeiros) {
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", e.getNome(), e.getSexo(),
+                                e.getSalario(), e.getCoren());
+                    }
                     break;
                 case 5:
                     coren = FuncUtils.readCoren();
                     enfermeiro = EnfermeiroDao.buscaEnfermeiro(coren, db);
                     if (enfermeiro != null) {
                         System.out.println("\n" + enfermeiro);
+                    } else {
+                        System.out.println("Enfermeiro não encontrado.");
                     }
                     break;
                 case 6:
