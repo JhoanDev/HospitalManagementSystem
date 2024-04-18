@@ -138,6 +138,7 @@ public class MenuEnfermeiro {
                         System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", e.getNome(), e.getSexo(),
                                 e.getSalario(), e.getCoren());
                     }
+                    System.out.println();
                     break;
                 case 5:
                     coren = FuncUtils.readCoren();

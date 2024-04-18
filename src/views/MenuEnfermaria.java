@@ -70,6 +70,7 @@ public class MenuEnfermaria {
                         System.out.printf("|%-7s|%-13d|%-18d\n", e.getCodEnfermaria(), e.getQtdeLeitos(),
                         e.getLeitosDisponiveis());
                     }
+                    System.out.println();
                     break;
                 case 6:
                     System.out.println("Saindo...");
