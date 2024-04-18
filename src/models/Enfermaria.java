@@ -11,6 +11,20 @@ public class Enfermaria {
         this.leitosDisponiveis = qtdeLeitos;
     }
 
+    public Enfermaria(String codEnfermaria, int qtdeLeitos, int qtdeLeitosDisponiveis) {
+        this.codEnfermaria = codEnfermaria;
+        this.qtdeLeitos = qtdeLeitos;
+        this.leitosDisponiveis = qtdeLeitosDisponiveis;
+    }
+
+    public Enfermaria(int qtdeLeitos) {
+        this.qtdeLeitos = qtdeLeitos;
+        this.leitosDisponiveis = qtdeLeitos;
+    }
+
+    public Enfermaria() {
+    }
+
     public int getLeitosDisponiveis() {
         return leitosDisponiveis;
     }
@@ -37,7 +51,8 @@ public class Enfermaria {
 
     @Override
     public String toString() {
-        return "Enfermaria [codEnfermaria=" + codEnfermaria + ", leitosDisponiveis=" + leitosDisponiveis + ", qtdeLeitos="
+        return "Enfermaria [codEnfermaria=" + codEnfermaria + ", leitosDisponiveis=" + leitosDisponiveis
+                + ", qtdeLeitos="
                 + qtdeLeitos + "]\n";
     }
 

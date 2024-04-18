@@ -16,9 +16,9 @@ public class MenuInicial {
         System.out.println("[3] - Menu Médico");
         System.out.println("[4] - Menu Enfermeiro");
         System.out.println("[5] - Menu Medicamentos");
-        System.out.println("[6] - Menu Consulta");
-        System.out.println("[7] - Menu Enfermaria");
-        System.out.println("[8] - Menu Internação");
+        System.out.println("[6] - Menu Enfermaria");
+        System.out.println("[7] - Menu Internação");
+        System.out.println("[8] - Menu Consulta");
         System.out.println("[9] - Logout");
         System.out.print("Digite sua opção: ");
         int opcao = 0;
@@ -47,6 +47,8 @@ public class MenuInicial {
                     initialMenu(db);
                     break;
                 case 6:
+                    MenuEnfermaria.wardMenu(db);
+                    initialMenu(db);
                     break;
                 case 7:
                     break;
