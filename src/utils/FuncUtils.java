@@ -15,17 +15,18 @@ public class FuncUtils {
     public static void fechaScanner() {
         input.close();
     }
-        public static String readLogin() {
-            String login;
-            do {
-                login = input.nextLine().trim(); // Remove espaços em branco no início e no final
-                if (login.contains(" ")) {
-                    System.out.println("O login não pode conter espaços em branco.");
-                }
-            } while (login.contains(" "));
-            return login;
-        }
-    
+
+    public static String readLogin() {
+        String login;
+        do {
+            login = input.nextLine().trim(); // Remove espaços em branco no início e no final
+            if (login.contains(" ")) {
+                System.out.println("O login não pode conter espaços em branco.");
+            }
+        } while (login.contains(" "));
+        return login;
+    }
+
     public static String readPassword() {
         String pass;
         do {

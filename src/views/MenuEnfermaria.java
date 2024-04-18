@@ -1,6 +1,7 @@
 package src.views;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import src.controllers.EnfermariaDao;
 import src.data.Banco;
@@ -12,9 +13,11 @@ public class MenuEnfermaria {
         int option = 0, leitos = 0, leitosDisponiveis = 0;
         String codEnfermaria;
         Enfermaria enfermaria;
+        ArrayList <Enfermaria> enfermarias;
         while (option != 6) {
             displayMenu();
             option = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (option) {
                 case 1:
                     System.out.print("Insira a quantidade de leitos da enfermaria: ");
@@ -27,6 +30,8 @@ public class MenuEnfermaria {
                     enfermaria = EnfermariaDao.buscaEnfermaria(cod, db);
                     if (enfermaria != null) {
                         System.out.println(enfermaria);
+                    } else {
+                        System.out.println("Enfermaria não encontrada.");
                     }
                     break;
                 case 3:
@@ -40,6 +45,8 @@ public class MenuEnfermaria {
                         enfermaria.setQtdeLeitos(leitos);
                         enfermaria.setLeitosDisponiveis(leitosDisponiveis);
                         EnfermariaDao.editaEnfermaria(enfermaria, db);
+                    } else {
+                        System.out.println("Enfermaria não encontrada.");
                     }
                     break;
                 case 4:
@@ -48,10 +55,21 @@ public class MenuEnfermaria {
                     enfermaria = EnfermariaDao.buscaEnfermaria(codEnfermaria, db);
                     if (enfermaria != null) {
                         EnfermariaDao.excluirEnfermaria(enfermaria, db);
+                    } else {
+                        System.out.println("Enfermaria não encontrada.");
                     }
                     break;
                 case 5:
-                    System.out.println("Listar enfermarias");
+                    enfermarias = EnfermariaDao.listarEnfermarias(db);
+                    if (enfermarias.isEmpty()) {
+                        System.out.println("Nenhuma enfermaria cadastrada.");
+                        break;
+                    }
+                    System.out.printf("|Cod%s|Leitos Totais|Leitos disponiveís\n", FuncUtils.spacesGenerator(4));
+                    for (Enfermaria e : enfermarias) {
+                        System.out.printf("|%-7s|%-13d|%-18d\n", e.getCodEnfermaria(), e.getQtdeLeitos(),
+                        e.getLeitosDisponiveis());
+                    }
                     break;
                 case 6:
                     System.out.println("Saindo...");

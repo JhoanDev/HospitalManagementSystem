@@ -2,6 +2,8 @@ package src.controllers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import src.data.Banco;
 import src.models.Enfermaria;
 
@@ -38,16 +40,20 @@ public class EnfermariaDao {
     }
     
 
-/*     public static void listarEnfermarias(Banco db) throws SQLException {
+    public static ArrayList<Enfermaria> listarEnfermarias(Banco db) throws SQLException {
         String query = "SELECT * FROM Enfermaria;";
         ResultSet rs = db.queryBusca(query);
-
-        System.out.printf("|Cod%s|Nome\n", FuncUtils.spacesGenerator(4));
-
+        ArrayList<Enfermaria> enfermarias = new ArrayList<Enfermaria>();
         while (rs.next()) {
+            Enfermaria enfermaria = new Enfermaria();
             String codEnfermaria = rs.getString("id_enfermaria");
-            String nome = rs.getString("nome");
-            System.out.printf("|%-7s|%-30s\n", codEnfermaria, nome);
+            int qnt_leitos = rs.getInt("qnt_leitos");
+            int leitos_disponiveis = rs.getInt("leitos_disponiveis");
+            enfermaria.setCodEnfermaria(codEnfermaria);
+            enfermaria.setQtdeLeitos(qnt_leitos);
+            enfermaria.setLeitosDisponiveis(leitos_disponiveis);
+            enfermarias.add(enfermaria);
         }
-    } */
+        return enfermarias;
+    } 
 }
