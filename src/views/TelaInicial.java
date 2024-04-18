@@ -17,6 +17,7 @@ public class TelaInicial {
             int opcao = 0;
             try {
                 opcao = FuncUtils.readInt();
+                FuncUtils.clearScreen();
                 if (opcao == 1) {
                     TelaLogin.loginScreen(db);
                     break;

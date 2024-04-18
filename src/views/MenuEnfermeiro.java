@@ -21,6 +21,7 @@ public class MenuEnfermeiro {
         while (opcao != 6) {
             displayMenu();
             opcao = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o nome: ");
@@ -137,7 +138,6 @@ public class MenuEnfermeiro {
     }
 
     public static void displayMenu() {
-        FuncUtils.clearScreen();
         System.out.println("[1] - Cadastrar enfermeiro");
         System.out.println("[2] - Editar enfermeiro");
         System.out.println("[3] - Excluir enfermeiro");

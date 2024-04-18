@@ -24,6 +24,7 @@ public class MenuInicial {
         int opcao = 0;
         try {
             opcao = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
                     MenuAdministrador.adminMenu(db);
@@ -34,6 +35,8 @@ public class MenuInicial {
                     initialMenu(db);
                     break;
                 case 3:
+                    MenuMedico.doctorMenu(db);
+                    initialMenu(db);
                     break;
                 case 4:
                     MenuEnfermeiro.nurseMenu(db);

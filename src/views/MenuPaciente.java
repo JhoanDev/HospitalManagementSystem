@@ -18,6 +18,7 @@ public class MenuPaciente {
         while (opcao != 6) {
             displayMenu();
             opcao = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o nome do paciente: ");
@@ -110,7 +111,6 @@ public class MenuPaciente {
     }
 
     public static void displayMenu() {
-        FuncUtils.clearScreen();
         System.out.println("[1] Cadastrar Paciente");
         System.out.println("[2] Editar Paciente");
         System.out.println("[3] Excluir Paciente");
