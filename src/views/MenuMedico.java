@@ -126,7 +126,7 @@ public class MenuMedico {
                     break;
                 case 4:
                     medicos = MedicoDao.listarMedicos(db);
-                    if (medicos.size() == 0) {
+                    if (medicos.isEmpty()) {
                         System.out.println("Não há médicos cadastrados.");
                         break;
                     }
@@ -158,7 +158,7 @@ public class MenuMedico {
                     System.out.print("Insira o horário que deseja verificar, ");
                     Time horario = FuncUtils.readTime();
                     medicos = MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario, db);
-                    if (medicos.size() == 0) {
+                    if (medicos.isEmpty()) {
                         System.out.println("Não há médicos disponíveis neste horário.");
                     } else {
                         System.out.println("Médicos disponíveis neste horário:");

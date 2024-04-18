@@ -107,6 +107,10 @@ public class MenuPaciente {
                     break;
                 case 5:
                     pacientes = PacienteDao.listarPacientes(db);
+                    if (pacientes.isEmpty()) {
+                        System.out.println("Nenhum paciente cadastrado.");
+                        break;
+                    }
                     System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
                             FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26),
                             FuncUtils.spacesGenerator(9),
