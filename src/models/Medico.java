@@ -44,8 +44,8 @@ public class Medico extends Funcionario {
 
     public String getPlantao() {
         if (plantao) 
-            return "Está de plantão";
-        return "Não está de plantão";
+            return "Sim";
+        return "Não";
     }
 
     public void setPlantao(boolean plantao) {

@@ -37,7 +37,6 @@ public class PacienteDao {
             paciente.setPlanoDeSaude(rs.getBoolean("plano_saude"));
             paciente.setInternado(rs.getBoolean("internado"));
         } else {
-            System.out.println("Paciente não encontrado.");
             return null;
         }
         return paciente;

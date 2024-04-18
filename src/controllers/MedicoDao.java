@@ -4,10 +4,10 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import src.data.Banco;
 import src.models.Medico;
-import src.utils.FuncUtils;
 public class MedicoDao {
 
     public static void cadastrarMedico(Medico medico, Banco db) {
@@ -52,7 +52,6 @@ public class MedicoDao {
             medico.setEspecialidade(rs.getString("especialidade"));
             medico.setPlantao(rs.getBoolean("plantao"));
         } else {
-            System.out.println("Médico não encontrado.");
             return null;
         }
         
@@ -76,61 +75,84 @@ public class MedicoDao {
         }
     }
 
-/*     public static void listarMedicos(Banco db) throws SQLException {
+     public static ArrayList<Medico> listarMedicos(Banco db) throws SQLException {
         String query = "SELECT * FROM Medico;";
         ResultSet rs = db.queryBusca(query);
-    
-        System.out.printf("|Cod%s|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
-                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
-                FuncUtils.spacesGenerator(3),
-                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
-    
+        ArrayList<Medico> medicos = new ArrayList<Medico>();
+
         while (rs.next()) {
-            String cod = rs.getString("id_medico");
-            String nome = rs.getString("nome");
-            boolean sexo = rs.getBoolean("sexo");
-            double salario = rs.getDouble("salario");
-            String crm = rs.getString("crm");
-            String especialidade = rs.getString("especialidade");
-            boolean plantao = rs.getBoolean("plantao");
-    
-            String sexoStr = sexo ? "Masculino" : "Feminino";
-            String plantaoStr = plantao ? "Sim" : "Não";
-    
-            System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", cod, nome, sexoStr, salario, crm,
-                    especialidade, plantaoStr);
+            Medico medico = new Medico();
+
+            medico.setNome(rs.getString("nome"));
+            medico.setCpf(rs.getString("cpf"));
+            medico.setTelefone(rs.getString("telefone"));
+            medico.setCrm(rs.getString("crm"));
+            medico.setEspecialidade(rs.getString("especialidade"));
+            medico.setSalario(rs.getDouble("salario"));
+            medico.setPlantao(rs.getBoolean("plantao"));
+            medico.setSexo(rs.getBoolean("sexo"));
+
+            String dataNascStr = rs.getString("data_nascimento");
+            Date dataNasc = Date.valueOf(dataNascStr);
+            medico.setDataNasc(dataNasc);
+
+            String dataAdmissaoStr = rs.getString("data_admissao");
+            Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
+            medico.setDataDeAdmissao(dataAdmissao);
+
+            String horarioInicioStr = rs.getString("horario_trabalho_inicio");
+            Time horarioInicio = Time.valueOf(horarioInicioStr);
+            medico.setHorarioDeTrabalhoInicio(horarioInicio);
+
+            String horarioFinalStr = rs.getString("horario_trabalho_final");
+            Time horarioFinal = Time.valueOf(horarioFinalStr);
+            medico.setHorarioDeTrabalhoFinal(horarioFinal);
+
+            medicos.add(medico);
         }
-        
-    } */
+        return medicos;
+    } 
     
-    public static void verificarMedicosDisponiveisEmAlgumHorario(Time horario, Banco db) throws SQLException {
+    public static ArrayList<Medico> verificarMedicosDisponiveisEmAlgumHorario(Time horario, Banco db) throws SQLException {
         String query = "SELECT * FROM Medico";
         ResultSet rs = db.queryBusca(query);
-        System.out.printf("|Cod%s|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
-        FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
-        FuncUtils.spacesGenerator(3),
-        FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+        ArrayList <Medico> medicos = new ArrayList<Medico>();
         while (rs.next()) {
             Time horarioDeTrabalhoInicio = Time.valueOf(rs.getString("horario_trabalho_inicio"));
             Time horarioDeTrabalhoFinal = Time.valueOf(rs.getString("horario_trabalho_final"));
             
             // Verifica se o horário fornecido está dentro do horário de trabalho do médico
             if (horarioDeTrabalhoInicio.before(horario) && horarioDeTrabalhoFinal.after(horario)) {
-                String cod = rs.getString("id_medico");
-                String nome = rs.getString("nome");
-                boolean sexo = rs.getBoolean("sexo");
-                double salario = rs.getDouble("salario");
-                String crm = rs.getString("crm");
-                String especialidade = rs.getString("especialidade");
-                boolean plantao = rs.getBoolean("plantao");
-        
-                String sexoStr = sexo ? "Masculino" : "Feminino";
-                String plantaoStr = plantao ? "Sim" : "Não";
-        
-                System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", cod, nome, sexoStr, salario, crm,
-                        especialidade, plantaoStr);
+                Medico medico = new Medico();
+
+                medico.setNome(rs.getString("nome"));
+                medico.setCpf(rs.getString("cpf"));
+                medico.setTelefone(rs.getString("telefone"));
+                medico.setCrm(rs.getString("crm"));
+                medico.setEspecialidade(rs.getString("especialidade"));
+                medico.setSalario(rs.getDouble("salario"));
+                medico.setPlantao(rs.getBoolean("plantao"));
+                medico.setSexo(rs.getBoolean("sexo"));
+    
+                String dataNascStr = rs.getString("data_nascimento");
+                Date dataNasc = Date.valueOf(dataNascStr);
+                medico.setDataNasc(dataNasc);
+    
+                String dataAdmissaoStr = rs.getString("data_admissao");
+                Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
+                medico.setDataDeAdmissao(dataAdmissao);
+    
+                String horarioInicioStr = rs.getString("horario_trabalho_inicio");
+                Time horarioInicio = Time.valueOf(horarioInicioStr);
+                medico.setHorarioDeTrabalhoInicio(horarioInicio);
+    
+                String horarioFinalStr = rs.getString("horario_trabalho_final");
+                Time horarioFinal = Time.valueOf(horarioFinalStr);
+                medico.setHorarioDeTrabalhoFinal(horarioFinal);
+    
+                medicos.add(medico);
             }
         }
-        
+        return medicos;
     }
 }

@@ -81,6 +81,8 @@ public class MenuPaciente {
                         if (edit) {
                             PacienteDao.editarPaciente(paciente, db);
                         }
+                    } else {
+                        System.out.println("Paciente não encontrado.");
                     }
                     break;
                 case 3:
@@ -99,6 +101,8 @@ public class MenuPaciente {
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     if (paciente != null) {
                         System.out.println(paciente);
+                    } else {
+                        System.out.println("Paciente não encontrado.");
                     }
                     break;
                 case 5:
@@ -110,15 +114,15 @@ public class MenuPaciente {
                             FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8),
                             FuncUtils.spacesGenerator(1));
                     for (Paciente p : pacientes) {
-                        System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n", 
-                            p.getCodPaciente(),
-                            p.getNome(), 
-                            p.getCpf(), 
-                            p.getTelefone(), 
-                            p.getDataNasc(),
-                            p.getSexo(),
-                            p.getInternado(), 
-                            p.getPlanoDeSaude());
+                        System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n",
+                                p.getCodPaciente(),
+                                p.getNome(),
+                                p.getCpf(),
+                                p.getTelefone(),
+                                p.getDataNasc(),
+                                p.getSexo(),
+                                p.getInternado(),
+                                p.getPlanoDeSaude());
                     }
                     System.out.println();
                     break;
