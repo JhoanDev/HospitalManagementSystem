@@ -1,5 +1,7 @@
 package src.views;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import src.controllers.AdministradorDao;
 import src.data.Banco;
@@ -8,7 +10,8 @@ import src.utils.FuncUtils;
 
 public class TelaLogin {
 
-    public static void loginScreen(Banco db) throws SQLException {
+    public static void loginScreen(Banco db)
+            throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         FuncUtils.clearScreen();
         while (true) {
             System.out.print("\nDigite seu login: ");

@@ -1,10 +1,15 @@
 package src.views;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+
 import src.data.Banco;
 import src.utils.FuncUtils;
 
 public class MenuInicial {
-    public static void initialMenu(Banco db) {
+    public static void initialMenu(Banco db)
+            throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         FuncUtils.clearScreen();
         System.out.println("[1] - Menu Administrador");
         System.out.println("[2] - Menu Paciente");
@@ -25,6 +30,8 @@ public class MenuInicial {
                     initialMenu(db);
                     break;
                 case 2:
+                    MenuPaciente.patientMenu(db);
+                    initialMenu(db);
                     break;
                 case 3:
                     break;
