@@ -3,6 +3,7 @@ package src.views;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import src.controllers.MedicoDao;
 import src.data.Banco;
@@ -19,6 +20,7 @@ public class MenuMedico {
         boolean sexo, plantao;
         double salario;
         Medico medico;
+        ArrayList<Medico> medicos;
         while (opcao != 7) {
             exibirMenu();
             opcao = FuncUtils.readInt();
@@ -109,6 +111,8 @@ public class MenuMedico {
                         if (opcao2 != 12) {
                             MedicoDao.editarMedico(medico, db);
                         }
+                    } else {
+                        System.out.println("Médico não encontrado.");
                     }
                     break;
                 case 3:
@@ -116,22 +120,59 @@ public class MenuMedico {
                     medico = MedicoDao.buscaMedico(crm, db);
                     if (medico != null) {
                         MedicoDao.excluirMedico(medico, db);
+                    } else {
+                        System.out.println("Médico não encontrado.");
                     }
                     break;
                 case 4:
-                    //MedicoDao.listarMedicos();
+                    medicos = MedicoDao.listarMedicos(db);
+                    if (medicos.isEmpty()) {
+                        System.out.println("Não há médicos cadastrados.");
+                        break;
+                    }
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                    for (Medico m : medicos) {
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", m.getNome(), m.getSexo(),
+                                m.getSalario(), m.getCrm(),
+                                m.getEspecialidade(), m.getPlantao());
+                    }
+                    System.out.println();
                     break;
                 case 5:
                     crm = FuncUtils.readCrm();
                     medico = MedicoDao.buscaMedico(crm, db);
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
                     if (medico != null) {
                         System.out.println("\n" + medico);
+                    } else {
+                        System.out.println("Médico não encontrado.");
                     }
                     break;
                 case 6:
                     System.out.print("Insira o horário que deseja verificar, ");
                     Time horario = FuncUtils.readTime();
-                    MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario, db);
+                    medicos = MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario, db);
+                    if (medicos.isEmpty()) {
+                        System.out.println("Não há médicos disponíveis neste horário.");
+                    } else {
+                        System.out.println("Médicos disponíveis neste horário:");
+                        System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                                FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                                FuncUtils.spacesGenerator(3),
+                                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                    }
+                    for (Medico m : medicos) {
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", m.getNome(), m.getSexo(),
+                                m.getSalario(), m.getCrm(),
+                                m.getEspecialidade(), m.getPlantao());
+                    }
+                    System.out.println();
                     break;
                 case 7:
                     System.out.println("Saindo...");

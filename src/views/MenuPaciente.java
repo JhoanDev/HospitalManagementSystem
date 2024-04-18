@@ -2,6 +2,7 @@ package src.views;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import src.controllers.PacienteDao;
 import src.models.Paciente;
@@ -15,6 +16,7 @@ public class MenuPaciente {
         Date data;
         boolean sexo, planoSaude, edit = false;
         Paciente paciente;
+        ArrayList<Paciente> pacientes;
         while (opcao != 6) {
             displayMenu();
             opcao = FuncUtils.readInt();
@@ -79,6 +81,8 @@ public class MenuPaciente {
                         if (edit) {
                             PacienteDao.editarPaciente(paciente, db);
                         }
+                    } else {
+                        System.out.println("Paciente não encontrado.");
                     }
                     break;
                 case 3:
@@ -97,9 +101,34 @@ public class MenuPaciente {
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     if (paciente != null) {
                         System.out.println(paciente);
+                    } else {
+                        System.out.println("Paciente não encontrado.");
                     }
                     break;
                 case 5:
+                    pacientes = PacienteDao.listarPacientes(db);
+                    if (pacientes.isEmpty()) {
+                        System.out.println("Nenhum paciente cadastrado.");
+                        break;
+                    }
+                    System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
+                            FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26),
+                            FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(4),
+                            FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8),
+                            FuncUtils.spacesGenerator(1));
+                    for (Paciente p : pacientes) {
+                        System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n",
+                                p.getCodPaciente(),
+                                p.getNome(),
+                                p.getCpf(),
+                                p.getTelefone(),
+                                p.getDataNasc(),
+                                p.getSexo(),
+                                p.getInternado(),
+                                p.getPlanoDeSaude());
+                    }
+                    System.out.println();
                     break;
                 case 6:
                     System.out.println("Saindo...");

@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import src.controllers.AdministradorDao;
 import src.data.Banco;
@@ -20,6 +21,7 @@ public class MenuAdministrador {
         boolean sexo;
         double salario;
         Administrador administrador;
+        ArrayList<Administrador> administradores;
 
         while (opcao != 6) {
             displayMenu();
@@ -119,16 +121,34 @@ public class MenuAdministrador {
                         if (opcao2 != 10) {
                             AdministradorDao.editarAdministrador(administrador, db);
                         }
+                    } else {
+                        System.out.println("Administrador não encontrado.");
                     }
                     break;
                 case 3:
                     System.out.println("Digite o login do adm: ");
                     login = FuncUtils.readLogin();
                     administrador = AdministradorDao.buscaAdministrador(login, db);
+                    if (administrador == null) {
+                        System.out.println("Administrador não encontrado.");
+                        break;
+                    }
                     AdministradorDao.excluirAdministrador(administrador, db);
                     break;
                 case 4:
-                    // Listar administradores
+                    administradores = AdministradorDao.listarAdministradores(db);
+                    if (administradores.isEmpty()) {
+                        System.out.println("Nenhum administrador cadastrado.");
+                        break;
+                    }
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Login%s|\n",
+                    FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                    FuncUtils.spacesGenerator(3),
+                    FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                    for (Administrador a : administradores) {
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", a.getNome(), a.getSexo(), a.getSalario(), a.getLogin());
+                    }
+                    System.out.println();
                     break;
                 case 5:
                     System.out.println("Digite o login do adm: ");
@@ -136,6 +156,8 @@ public class MenuAdministrador {
                     administrador = AdministradorDao.buscaAdministrador(login, db);
                     if (administrador != null) {
                         System.out.println("\n" + administrador);
+                    } else {
+                        System.out.println("Administrador não encontrado.");
                     }
                     break;
                 case 6:

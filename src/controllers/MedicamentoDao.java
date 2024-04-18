@@ -2,6 +2,7 @@ package src.controllers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import src.data.Banco;
 import src.models.Medicamento;
@@ -22,7 +23,6 @@ public class MedicamentoDao {
             Medicamento medicamento = new Medicamento(codMedicamento, nomeMed);
             return medicamento;
         }
-        System.out.println("Medicamento não encontrado.");
         return null;
     }
 
@@ -39,16 +39,15 @@ public class MedicamentoDao {
         }
     }
 
-/*     public static void listarMedicamentos(Banco db) throws SQLException {
+    public static ArrayList<Medicamento> listarMedicamentos(Banco db) throws SQLException {
         String query = "SELECT * FROM Medicamento;";
         ResultSet rs = db.queryBusca(query);
-
-        System.out.printf("|Cod%s|Nome\n", FuncUtils.spacesGenerator(4));
+        ArrayList<Medicamento> medicamentos = new ArrayList<Medicamento>();
 
         while (rs.next()) {
-            String codMedicamento = rs.getString("id_medicamento");
-            String nome = rs.getString("nome");
-            System.out.printf("|%-7s|%-30s\n", codMedicamento, nome);
+            Medicamento medicamento = new Medicamento(rs.getString("id_medicamento"), rs.getString("nome"));
+            medicamentos.add(medicamento);
         }
-    } */
+        return medicamentos;
+    }
 }
