@@ -46,7 +46,7 @@ public class DemoAdministrador {
                     horarioDeTrabalhoFinal = FuncUtils.readTime();
 
                     administradorDao.cadastrarAdministrador(new Administrador(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
-                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal,login,senha));
+                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal,login,senha), db);
                     break;
                 case 2:
                     System.out.println("Digite o login do adm");

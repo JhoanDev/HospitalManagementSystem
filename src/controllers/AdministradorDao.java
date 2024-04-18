@@ -26,7 +26,6 @@ public class AdministradorDao {
                 administrador.isSexo(), administrador.getSalario(), administrador.getDataDeAdmissao(),
                 administrador.getHorarioDeTrabalhoInicio(), administrador.getHorarioDeTrabalhoFinal(),
                 administrador.getLogin(), senha);
-        System.out.println(query);
         db.queryInsup(query);
     }
 
