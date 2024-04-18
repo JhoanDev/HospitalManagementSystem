@@ -1,58 +1,69 @@
-package src;
+package src.views;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+
 import src.controllers.AdministradorDao;
+import src.data.Banco;
 import src.models.Administrador;
 import src.utils.FuncUtils;
 
-
-public class DemoAdministrador {
-    public static void main(String[] args) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-
-        AdministradorDao administradorDao = new AdministradorDao();
+public class MenuAdministrador {
+    public static void adminMenu(Banco db) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         int opcao = 0, opcao2 = 0;
-        String nome, cpf, telefone, login,senha;
+        String nome, cpf, telefone, login, senha;
         Date dataNasc, dataDeAdmissao;
         Time horarioDeTrabalhoInicio, horarioDeTrabalhoFinal;
         boolean sexo;
         double salario;
         Administrador administrador;
+
         while (opcao != 6) {
-            exibirMenu();
+            displayMenu();
             opcao = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite o login do Administrador: ");
-                    login = FuncUtils.readOnlyLettersAndSpaces();
-                	System.out.println("Digite a senha do Administrador: ");
+                    System.out.print("Digite o login: ");
+                    login = FuncUtils.readLogin();
+
+                    System.out.print("Digite a senha: ");
                     senha = FuncUtils.readPassword();
-                    System.out.print("Digite o nome do administrador: ");
+
+                    System.out.print("Digite o nome: ");
                     nome = FuncUtils.readOnlyLettersAndSpaces();
+
                     cpf = FuncUtils.readCPF();
                     telefone = FuncUtils.readPhoneNumber();
+
                     System.out.print("Insira a data de nascimento, ");
                     dataNasc = FuncUtils.readDate();
+
                     sexo = FuncUtils.readSex();
                     salario = FuncUtils.readSalary();
+
                     System.out.print("Insira a data de admissão, ");
                     dataDeAdmissao = FuncUtils.readDate();
+
                     System.out.print("insira o inicio do expediente, ");
                     horarioDeTrabalhoInicio = FuncUtils.readTime();
+
                     System.out.print("insira o final do expediente, ");
                     horarioDeTrabalhoFinal = FuncUtils.readTime();
 
-                    administradorDao.cadastrarAdministrador(new Administrador(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
-                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal,login,senha));
+                    AdministradorDao.cadastrarAdministrador(
+                            new Administrador(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
+                                    horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, login, senha),
+                            db);
                     break;
                 case 2:
-                    System.out.println("Digite o login do adm");
-                    login = FuncUtils.readOnlyLettersAndSpaces();
-                    administrador = administradorDao.buscaAdministrador(login);
-                    if (administrador!= null) {
+                    System.out.print("Digite o login do adm: ");
+                    login = FuncUtils.readLogin();
+                    administrador = AdministradorDao.buscaAdministrador(login, db);
+                    if (administrador != null) {
                         System.out.println(administrador);
                         System.out.println("O que deseja editar?");
                         System.out.println("[1] - Nome");
@@ -105,48 +116,45 @@ public class DemoAdministrador {
                                 System.out.println("Opção inválida.");
                                 break;
                         }
-                        if (opcao2 != 12) {
-                            administradorDao.editarAdministrador(administrador);
+                        if (opcao2 != 10) {
+                            AdministradorDao.editarAdministrador(administrador, db);
                         }
                     }
                     break;
                 case 3:
-                    System.out.println("Digite o login do adm");
-                    login = FuncUtils.readOnlyLettersAndSpaces();
-                    administrador = administradorDao.buscaAdministrador(login);
-                    administradorDao.excluirAdministrador(administrador);
-                    
+                    System.out.println("Digite o login do adm: ");
+                    login = FuncUtils.readLogin();
+                    administrador = AdministradorDao.buscaAdministrador(login, db);
+                    AdministradorDao.excluirAdministrador(administrador, db);
                     break;
                 case 4:
-                    administradorDao.listarAdministradores();
+                    // Listar administradores
                     break;
                 case 5:
-                    System.out.println("Digite o login do adm");
-                    login = FuncUtils.readOnlyLettersAndSpaces();
-                    administrador = administradorDao.buscaAdministrador(login);
+                    System.out.println("Digite o login do adm: ");
+                    login = FuncUtils.readLogin();
+                    administrador = AdministradorDao.buscaAdministrador(login, db);
                     if (administrador != null) {
                         System.out.println("\n" + administrador);
                     }
                     break;
                 case 6:
                     System.out.println("Saindo...");
-                    administradorDao.administradorFech();
-                    break;
-            default:
+                    return;
+                default:
                     System.out.println("Opção inválida.");
                     break;
             }
         }
-        FuncUtils.fechaScanner();
     }
 
-    public static void exibirMenu() {
-        System.out.println("Menu de administradores");
+    public static void displayMenu() {
         System.out.println("[1] - Cadastrar administrador");
         System.out.println("[2] - Editar administrador");
         System.out.println("[3] - Excluir administrador");
         System.out.println("[4] - Listar administradores");
         System.out.println("[5] - Buscar administrador");
         System.out.println("[6] - Sair");
+        System.out.print("Digite sua opcao: ");
     }
 }

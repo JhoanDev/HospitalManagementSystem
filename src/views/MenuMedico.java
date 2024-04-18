@@ -1,16 +1,17 @@
-package src;
+package src.views;
 
-import src.utils.*;
-import src.models.Medico;
-import src.controllers.MedicoDao;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 
-public class DemoMedico {
+import src.controllers.MedicoDao;
+import src.data.Banco;
+import src.models.Medico;
+import src.utils.FuncUtils;
 
-    public static void main(String[] args) throws SQLException {
-        MedicoDao medicoDao = new MedicoDao();
+public class MenuMedico {
+
+    public static void doctorMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         String nome, cpf, telefone, crm, especialidade;
         Date dataNasc, dataDeAdmissao;
@@ -21,6 +22,7 @@ public class DemoMedico {
         while (opcao != 7) {
             exibirMenu();
             opcao = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o nome do médico: ");
@@ -41,12 +43,12 @@ public class DemoMedico {
                     System.out.print("Digite a especialidade do médico: ");
                     especialidade = FuncUtils.readOnlyLettersAndSpaces();
                     plantao = false;
-                    medicoDao.cadastrarMedico(new Medico(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
-                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao));
+                    MedicoDao.cadastrarMedico(new Medico(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
+                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao), db);
                     break;
                 case 2:
                     crm = FuncUtils.readCrm();
-                    medico = medicoDao.buscaMedico(crm);
+                    medico = MedicoDao.buscaMedico(crm, db);
                     if (medico != null) {
                         System.out.println(medico);
                         System.out.println("O que deseja editar?");
@@ -103,30 +105,25 @@ public class DemoMedico {
                             case 11:
                                 medico.setPlantao(FuncUtils.readShift());
                                 break;
-                            case 12:
-                                break;
-                            default:
-                                System.out.println("Opção inválida.");
-                                break;
                         }
                         if (opcao2 != 12) {
-                            medicoDao.editarMedico(medico);
+                            MedicoDao.editarMedico(medico, db);
                         }
                     }
                     break;
                 case 3:
                     crm = FuncUtils.readCrm();
-                    medico = medicoDao.buscaMedico(crm);
+                    medico = MedicoDao.buscaMedico(crm, db);
                     if (medico != null) {
-                        medicoDao.excluirMedico(medico);
+                        MedicoDao.excluirMedico(medico, db);
                     }
                     break;
                 case 4:
-                    medicoDao.listarMedicos();
+                    //MedicoDao.listarMedicos();
                     break;
                 case 5:
                     crm = FuncUtils.readCrm();
-                    medico = medicoDao.buscaMedico(crm);
+                    medico = MedicoDao.buscaMedico(crm, db);
                     if (medico != null) {
                         System.out.println("\n" + medico);
                     }
@@ -134,22 +131,19 @@ public class DemoMedico {
                 case 6:
                     System.out.print("Insira o horário que deseja verificar, ");
                     Time horario = FuncUtils.readTime();
-                    medicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario);
+                    MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario, db);
                     break;
                 case 7:
                     System.out.println("Saindo...");
-                    medicoDao.fech();
                     break;
                 default:
                     System.out.println("Opção inválida.");
                     break;
             }
         }
-        FuncUtils.fechaScanner();
     }
 
     public static void exibirMenu() {
-        System.out.println("Menu de Médicos");
         System.out.println("[1] - Cadastrar Médico");
         System.out.println("[2] - Editar Médico");
         System.out.println("[3] - Excluir Médico");
@@ -157,5 +151,6 @@ public class DemoMedico {
         System.out.println("[5] - Buscar Médico");
         System.out.println("[6] - Verificar se há Médicos no horário");
         System.out.println("[7] - Sair");
+        System.out.print("Digite sua opção: ");
     }
 }
