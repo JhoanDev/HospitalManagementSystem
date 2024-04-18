@@ -43,6 +43,8 @@ public class MenuInicial {
                     initialMenu(db);
                     break;
                 case 5:
+                    MenuMedicamento.medicamentMenu(db);
+                    initialMenu(db);
                     break;
                 case 6:
                     break;
