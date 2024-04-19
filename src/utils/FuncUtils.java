@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FuncUtils {
@@ -191,6 +192,21 @@ public class FuncUtils {
         }
     }
 
+    public static boolean readNeedToHospitalize() {
+        while (true) {
+            System.out.print("O paciente precisa ser internado? (S/N): ");
+            String resposta = input.nextLine().trim().toUpperCase();
+
+            if (resposta.equals("S")) {
+                return true;
+            } else if (resposta.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
+            }
+        }
+    }
+
     public static boolean readHealthPlan() {
         while (true) {
             System.out.print("O paciente possui plano de saúde? (S/N): ");
@@ -335,6 +351,21 @@ public class FuncUtils {
             texto.append(String.format("%02X", 0xFF & b));
         }
         return texto.toString();
+    }
+
+    public static ArrayList<String> readSymptoms() {
+        ArrayList<String> sintomas = new ArrayList<String>();
+        while (true) {
+            System.out.print("Digite um sintoma (ou 'sair' para encerrar): ");
+            String sintoma = readOnlyLettersAndSpaces();
+
+            if (sintoma.equalsIgnoreCase("sair")) {
+                break;
+            } else {
+                sintomas.add(sintoma);
+            }
+        }
+        return sintomas;
     }
 
     public static String spacesGenerator(int n) {

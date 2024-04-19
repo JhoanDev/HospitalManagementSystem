@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class Consulta {
     private String codConsulta;
+    private String idMedico;
+    private String idPaciente;
     private Date dataConsulta;
     private Time horarioConsulta;
     private String diagnostico;
@@ -14,7 +16,7 @@ public class Consulta {
     private String encaminhamento;
 
     public Consulta(String codConsulta, Date dataConsulta, Time horarioConsulta, String diagnostico,
-            ArrayList<String> sintomas, boolean precisaInternar, String encaminhamento) {
+            ArrayList<String> sintomas, boolean precisaInternar, String encaminhamento, String idMedico, String idPaciente) {
         this.codConsulta = codConsulta;
         this.dataConsulta = dataConsulta;
         this.horarioConsulta = horarioConsulta;
@@ -22,6 +24,20 @@ public class Consulta {
         this.sintomas = sintomas;
         this.precisaInternar = precisaInternar;
         this.encaminhamento = encaminhamento;
+    }
+
+    public Consulta (Date dataConsulta, Time horarioConsulta, String diagnostico,
+            ArrayList<String> sintomas, boolean precisaInternar, String encaminhamento, String idMedico, String idPaciente) {
+        this.dataConsulta = dataConsulta;
+        this.horarioConsulta = horarioConsulta;
+        this.diagnostico = diagnostico;
+        this.sintomas = sintomas;
+        this.precisaInternar = precisaInternar;
+        this.encaminhamento = encaminhamento;
+    }
+
+    public Consulta(){
+
     }
 
     public String getCodConsulta() {

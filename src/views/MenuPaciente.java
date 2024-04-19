@@ -107,28 +107,7 @@ public class MenuPaciente {
                     break;
                 case 5:
                     pacientes = PacienteDao.listarPacientes(db);
-                    if (pacientes.isEmpty()) {
-                        System.out.println("Nenhum paciente cadastrado.");
-                        break;
-                    }
-                    System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
-                            FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26),
-                            FuncUtils.spacesGenerator(9),
-                            FuncUtils.spacesGenerator(4),
-                            FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8),
-                            FuncUtils.spacesGenerator(1));
-                    for (Paciente p : pacientes) {
-                        System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n",
-                                p.getCodPaciente(),
-                                p.getNome(),
-                                p.getCpf(),
-                                p.getTelefone(),
-                                p.getDataNasc(),
-                                p.getSexo(),
-                                p.getInternado(),
-                                p.getPlanoDeSaude());
-                    }
-                    System.out.println();
+                    listPatients(pacientes);
                     break;
                 case 6:
                     System.out.println("Saindo...");
@@ -137,6 +116,31 @@ public class MenuPaciente {
                     System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
             }
         }
+    }
+
+    public static void listPatients(ArrayList<Paciente> pacientes) {
+        if (pacientes.isEmpty()) {
+            System.out.println("Nenhum paciente cadastrado.");
+            return;
+        }
+        System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
+                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26),
+                FuncUtils.spacesGenerator(9),
+                FuncUtils.spacesGenerator(4),
+                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8),
+                FuncUtils.spacesGenerator(1));
+        for (Paciente p : pacientes) {
+            System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n",
+                    p.getCodPaciente(),
+                    p.getNome(),
+                    p.getCpf(),
+                    p.getTelefone(),
+                    p.getDataNasc(),
+                    p.getSexo(),
+                    p.getInternado(),
+                    p.getPlanoDeSaude());
+        }
+        System.out.println();
     }
 
     public static void displayMenu() {

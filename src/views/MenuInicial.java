@@ -53,6 +53,8 @@ public class MenuInicial {
                 case 7:
                     break;
                 case 8:
+                    MenuConsulta.appointmentMenu(db);
+                    initialMenu(db);
                     break;
                 case 9:
                     System.out.println("Saindo...");
