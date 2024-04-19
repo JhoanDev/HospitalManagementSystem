@@ -126,7 +126,7 @@ public class MenuAdministrador {
                     }
                     break;
                 case 3:
-                    System.out.println("Digite o login do adm: ");
+                    System.out.print("Digite o login do adm: ");
                     login = FuncUtils.readLogin();
                     administrador = AdministradorDao.buscaAdministrador(login, db);
                     if (administrador == null) {
@@ -141,7 +141,7 @@ public class MenuAdministrador {
                         System.out.println("Nenhum administrador cadastrado.");
                         break;
                     }
-                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Login%s|\n",
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Login%s\n",
                     FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
                     FuncUtils.spacesGenerator(3),
                     FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
@@ -151,7 +151,7 @@ public class MenuAdministrador {
                     System.out.println();
                     break;
                 case 5:
-                    System.out.println("Digite o login do adm: ");
+                    System.out.print("Digite o login do adm: ");
                     login = FuncUtils.readLogin();
                     administrador = AdministradorDao.buscaAdministrador(login, db);
                     if (administrador != null) {
