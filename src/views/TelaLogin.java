@@ -18,11 +18,12 @@ public class TelaLogin {
             String login = FuncUtils.readLogin();
             System.out.print("Digite sua senha: ");
             String senha = FuncUtils.readPassword();
+
+            //encriptando para fazer a comparação
+            senha = FuncUtils.encryptMD5(senha);
+
             Administrador administrador = AdministradorDao.buscaAdministrador(login, db);
-            System.out.println(login);
-            System.out.println(senha);
-            System.out.println(administrador);
-            if (login.equals("admin7") && senha.equals("admin7"))// tem erro na senha então por enquanto deixei assim
+            if (login.equals(administrador.getLogin()) && senha.equals(administrador.getSenha()))// tem erro na senha então por enquanto deixei assim
             {
                 MenuInicial.initialMenu(db);
                 return;

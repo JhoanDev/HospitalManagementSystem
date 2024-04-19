@@ -60,7 +60,6 @@ public class AdministradorDao {
             administrador.setLogin(rs.getString("login"));
 
             String senha = rs.getString("senha");
-            senha = FuncUtils.decryptMD5(senha);
             administrador.setSenha(senha);
         } else {
             return null;
@@ -100,7 +99,7 @@ public class AdministradorDao {
             administrador.setCpf(rs.getString("cpf"));
             administrador.setTelefone(rs.getString("telefone"));
             administrador.setLogin(rs.getString("login"));
-            administrador.setSenha(FuncUtils.decryptMD5(rs.getString("senha")));
+            administrador.setSenha(rs.getString("senha"));
             administrador.setSexo(rs.getBoolean("sexo"));
             administrador.setSalario(rs.getDouble("salario"));
 

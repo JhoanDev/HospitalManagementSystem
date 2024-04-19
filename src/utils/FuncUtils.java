@@ -337,22 +337,6 @@ public class FuncUtils {
         return texto.toString();
     }
 
-    public static String decryptMD5(String encryptedPassword) {
-        try {
-            MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-            byte[] hash = algorithm.digest(encryptedPassword.getBytes("UTF-8"));
-
-            StringBuilder decryptedPassword = new StringBuilder();
-            for (byte b : hash) {
-                decryptedPassword.append(String.format("%02X", 0xFF & b));
-            }
-            return decryptedPassword.toString();
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static String spacesGenerator(int n) {
         return " ".repeat(n);
     }
