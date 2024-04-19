@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import src.data.Banco;
 import src.models.Administrador;
@@ -26,7 +27,6 @@ public class AdministradorDao {
                 administrador.isSexo(), administrador.getSalario(), administrador.getDataDeAdmissao(),
                 administrador.getHorarioDeTrabalhoInicio(), administrador.getHorarioDeTrabalhoFinal(),
                 administrador.getLogin(), senha);
-        System.out.println(query);
         db.queryInsup(query);
     }
 
@@ -60,10 +60,8 @@ public class AdministradorDao {
             administrador.setLogin(rs.getString("login"));
 
             String senha = rs.getString("senha");
-            senha = FuncUtils.decryptMD5(senha);
             administrador.setSenha(senha);
         } else {
-            System.out.println("Administrador não encontrado.");
             return null;
         }
         return administrador;
@@ -90,25 +88,39 @@ public class AdministradorDao {
         }
     }
 
-/*     public static void listarAdministradores(Banco db) throws SQLException {
+    public static ArrayList<Administrador> listarAdministradores(Banco db) throws SQLException {
         String query = "SELECT * FROM Administrador;";
         ResultSet rs = db.queryBusca(query);
-
-        System.out.printf("|Cod%s|Nome%s|Sexo%s|Salário%s|CPF%s|\n",
-                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
-                FuncUtils.spacesGenerator(3),
-                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+        ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 
         while (rs.next()) {
-            String cod = rs.getString("id_adm");
-            String nome = rs.getString("nome");
-            boolean sexo = rs.getBoolean("sexo");
-            double salario = rs.getDouble("salario");
-            String cpf = rs.getString("cpf");
-            String sexoStr = sexo ? "Masculino" : "Feminino";
+            Administrador administrador = new Administrador();
+            administrador.setNome(rs.getString("nome"));
+            administrador.setCpf(rs.getString("cpf"));
+            administrador.setTelefone(rs.getString("telefone"));
+            administrador.setLogin(rs.getString("login"));
+            administrador.setSenha(rs.getString("senha"));
+            administrador.setSexo(rs.getBoolean("sexo"));
+            administrador.setSalario(rs.getDouble("salario"));
 
-            System.out.printf("|%-7s|%-30s|%-13s|%-10.2f|%s\n", cod, nome, sexoStr, salario, cpf);
+            String dataNascStr = rs.getString("data_nascimento");
+            Date dataNasc = Date.valueOf(dataNascStr);
+            administrador.setDataNasc(dataNasc);
+
+            String dataAdmissaoStr = rs.getString("data_admissao");
+            Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
+            administrador.setDataDeAdmissao(dataAdmissao);
+
+            String horarioInicioStr = rs.getString("horario_trabalho_inicio");
+            Time horarioInicio = Time.valueOf(horarioInicioStr);
+            administrador.setHorarioDeTrabalhoInicio(horarioInicio);
+
+            String horarioFinalStr = rs.getString("horario_trabalho_final");
+            Time horarioFinal = Time.valueOf(horarioFinalStr);
+            administrador.setHorarioDeTrabalhoFinal(horarioFinal);
+
+            administradores.add(administrador);
         }
-
-    } */
+        return administradores;
+    }
 }

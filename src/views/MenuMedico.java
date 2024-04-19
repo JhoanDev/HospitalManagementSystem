@@ -1,16 +1,18 @@
-package src;
+package src.views;
 
-import src.utils.*;
-import src.models.Medico;
-import src.controllers.MedicoDao;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
-public class DemoMedico {
+import src.controllers.MedicoDao;
+import src.data.Banco;
+import src.models.Medico;
+import src.utils.FuncUtils;
 
-    public static void main(String[] args) throws SQLException {
-        MedicoDao medicoDao = new MedicoDao();
+public class MenuMedico {
+
+    public static void doctorMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         String nome, cpf, telefone, crm, especialidade;
         Date dataNasc, dataDeAdmissao;
@@ -18,9 +20,11 @@ public class DemoMedico {
         boolean sexo, plantao;
         double salario;
         Medico medico;
+        ArrayList<Medico> medicos;
         while (opcao != 7) {
             exibirMenu();
             opcao = FuncUtils.readInt();
+            FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o nome do médico: ");
@@ -41,12 +45,12 @@ public class DemoMedico {
                     System.out.print("Digite a especialidade do médico: ");
                     especialidade = FuncUtils.readOnlyLettersAndSpaces();
                     plantao = false;
-                    medicoDao.cadastrarMedico(new Medico(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
-                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao));
+                    MedicoDao.cadastrarMedico(new Medico(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao,
+                            horarioDeTrabalhoInicio, horarioDeTrabalhoFinal, crm, especialidade, plantao), db);
                     break;
                 case 2:
                     crm = FuncUtils.readCrm();
-                    medico = medicoDao.buscaMedico(crm);
+                    medico = MedicoDao.buscaMedico(crm, db);
                     if (medico != null) {
                         System.out.println(medico);
                         System.out.println("O que deseja editar?");
@@ -103,53 +107,84 @@ public class DemoMedico {
                             case 11:
                                 medico.setPlantao(FuncUtils.readShift());
                                 break;
-                            case 12:
-                                break;
-                            default:
-                                System.out.println("Opção inválida.");
-                                break;
                         }
                         if (opcao2 != 12) {
-                            medicoDao.editarMedico(medico);
+                            MedicoDao.editarMedico(medico, db);
                         }
+                    } else {
+                        System.out.println("Médico não encontrado.");
                     }
                     break;
                 case 3:
                     crm = FuncUtils.readCrm();
-                    medico = medicoDao.buscaMedico(crm);
+                    medico = MedicoDao.buscaMedico(crm, db);
                     if (medico != null) {
-                        medicoDao.excluirMedico(medico);
+                        MedicoDao.excluirMedico(medico, db);
+                    } else {
+                        System.out.println("Médico não encontrado.");
                     }
                     break;
                 case 4:
-                    medicoDao.listarMedicos();
+                    medicos = MedicoDao.listarMedicos(db);
+                    if (medicos.isEmpty()) {
+                        System.out.println("Não há médicos cadastrados.");
+                        break;
+                    }
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                    for (Medico m : medicos) {
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", m.getNome(), m.getSexo(),
+                                m.getSalario(), m.getCrm(),
+                                m.getEspecialidade(), m.getPlantao());
+                    }
+                    System.out.println();
                     break;
                 case 5:
                     crm = FuncUtils.readCrm();
-                    medico = medicoDao.buscaMedico(crm);
+                    medico = MedicoDao.buscaMedico(crm, db);
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
                     if (medico != null) {
                         System.out.println("\n" + medico);
+                    } else {
+                        System.out.println("Médico não encontrado.");
                     }
                     break;
                 case 6:
                     System.out.print("Insira o horário que deseja verificar, ");
                     Time horario = FuncUtils.readTime();
-                    medicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario);
+                    medicos = MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario, db);
+                    if (medicos.isEmpty()) {
+                        System.out.println("Não há médicos disponíveis neste horário.");
+                    } else {
+                        System.out.println("Médicos disponíveis neste horário:");
+                        System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
+                                FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                                FuncUtils.spacesGenerator(3),
+                                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                    }
+                    for (Medico m : medicos) {
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", m.getNome(), m.getSexo(),
+                                m.getSalario(), m.getCrm(),
+                                m.getEspecialidade(), m.getPlantao());
+                    }
+                    System.out.println();
                     break;
                 case 7:
                     System.out.println("Saindo...");
-                    medicoDao.fech();
                     break;
                 default:
                     System.out.println("Opção inválida.");
                     break;
             }
         }
-        FuncUtils.fechaScanner();
     }
 
     public static void exibirMenu() {
-        System.out.println("Menu de Médicos");
         System.out.println("[1] - Cadastrar Médico");
         System.out.println("[2] - Editar Médico");
         System.out.println("[3] - Excluir Médico");
@@ -157,5 +192,6 @@ public class DemoMedico {
         System.out.println("[5] - Buscar Médico");
         System.out.println("[6] - Verificar se há Médicos no horário");
         System.out.println("[7] - Sair");
+        System.out.print("Digite sua opção: ");
     }
 }
