@@ -12,7 +12,6 @@ public class TelaLogin {
 
     public static void loginScreen(Banco db)
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-        FuncUtils.clearScreen();
         while (true) {
             System.out.print("\nDigite seu login: ");
             String login = FuncUtils.readLogin();
@@ -23,12 +22,19 @@ public class TelaLogin {
             senha = FuncUtils.encryptMD5(senha);
 
             Administrador administrador = AdministradorDao.buscaAdministrador(login, db);
-            if (login.equals(administrador.getLogin()) && senha.equals(administrador.getSenha()))// tem erro na senha então por enquanto deixei assim
+            if (administrador == null) {
+                FuncUtils.clearScreen();
+                System.out.println("Login ou senha inválidos. Tente novamente.");
+                loginScreen(db);
+            }
+            else if (login.equals(administrador.getLogin()) && senha.equals(administrador.getSenha()))// tem erro na senha então por enquanto deixei assim
             {
                 MenuInicial.initialMenu(db);
                 return;
             } else {
+                FuncUtils.clearScreen();
                 System.out.println("Login ou senha inválidos. Tente novamente.");
+                loginScreen(db);
             }
         }
     }
