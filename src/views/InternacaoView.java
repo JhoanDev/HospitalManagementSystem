@@ -15,10 +15,7 @@ import src.models.Paciente;
 import src.utils.FuncUtils;
 
 public class InternacaoView {
-    public static void main(String[] args) throws SQLException {
-        Banco db = new Banco();
-        hospitalizationMenu(db);
-    }
+
     public static void hospitalizationMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         Date dataInternacao;
@@ -48,10 +45,11 @@ public class InternacaoView {
                         break;
                     }
                     PacienteView.listPatients(pacientes);
-                    
+
                     System.out.print("Insira o código do paciente: ");
                     idPaciente = FuncUtils.readCod();
-                    if (PacienteDao.buscaPaciente(idPaciente, db) == null || PacienteDao.buscaPaciente(idPaciente, db).isInternado() == true ) {
+                    if (PacienteDao.buscaPaciente(idPaciente, db) == null
+                            || PacienteDao.buscaPaciente(idPaciente, db).isInternado() == true) {
                         System.out.println("Código não está nos pacientes cadastrados ou já se encontra Internado.");
                         System.out.println("Cadastro de internação cancelado.");
                         break;
@@ -68,7 +66,8 @@ public class InternacaoView {
 
                     System.out.print("Insira o codigo da enfemaria da Internação: ");
                     codEnfemaria = FuncUtils.readCod();
-                    if (EnfermariaDao.buscaEnfermaria(codEnfemaria, db)== null || EnfermariaDao.buscaEnfermaria(codEnfemaria, db).getLeitosDisponiveis()<=0) {
+                    if (EnfermariaDao.buscaEnfermaria(codEnfemaria, db) == null
+                            || EnfermariaDao.buscaEnfermaria(codEnfemaria, db).getLeitosDisponiveis() <= 0) {
                         System.out.println("Enfemaria não existe no sistema ou está lotada!.");
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
@@ -81,15 +80,13 @@ public class InternacaoView {
                     InternacaoDao.cadastrarInternacao(internacao, db);
 
                     enfermaria = EnfermariaDao.buscaEnfermaria(codEnfemaria, db);
-                    enfermaria.setLeitosDisponiveis(enfermaria.getLeitosDisponiveis()-1);
+                    enfermaria.setLeitosDisponiveis(enfermaria.getLeitosDisponiveis() - 1);
                     EnfermariaDao.editaEnfermaria(enfermaria, db);
 
                     paciente = PacienteDao.buscaPaciente(idPaciente, db);
                     paciente.setInternado(true);
                     PacienteDao.editarPaciente(paciente, db);
-                    
 
-                    
                     break;
                 case 2:
                     System.out.print("Insira o código da Internação: ");
@@ -113,13 +110,14 @@ public class InternacaoView {
                         System.out.println("Não há internações cadastradas.");
                         break;
                     }
-                    System.out.printf("|Cod%s|Data da Internação%s|Data da alta%s|Paciente%s|Cod Enfermaria\n", FuncUtils.spacesGenerator(4),
-                            FuncUtils.spacesGenerator(7), FuncUtils.spacesGenerator(7), FuncUtils.spacesGenerator(24));
+                    System.out.printf("|Cod%s|Data da Internação|Data da alta|Paciente%s|Cod Enfermaria\n",
+                            FuncUtils.spacesGenerator(4),
+                            FuncUtils.spacesGenerator(24));
                     for (Internacao i : internacoes) {
                         enfermaria = EnfermariaDao.buscaEnfermaria(i.getIdEnfermaria(), db);
                         paciente = PacienteDao.buscaPaciente(i.getIdPaciente(), db);
-                        System.out.printf("|%-7s|%-11s|%-9s|%-30s|%-30s\n", i.getCodInternacao(), i.getDataInternacao(), i.getDataAlta()
-                                ,paciente.getNome(), enfermaria.getCodEnfermaria());
+                        System.out.printf("|%-7s|%-18s|%-12s|%-30s|%-30s\n", i.getCodInternacao(), i.getDataInternacao(),
+                                i.getDataAlta(), paciente.getNome(), enfermaria.getCodEnfermaria());
                     }
                     System.out.println();
                     break;
@@ -132,7 +130,7 @@ public class InternacaoView {
                         break;
                     }
                     System.out.println(internacao);
-                    break;               
+                    break;
                 case 5:
                     InternacaoDao.listarInternacoesAtivas(db);
                     System.out.println("Digite qual internação deseja dar alta: ");
@@ -147,7 +145,7 @@ public class InternacaoView {
                     internacao.setDataAlta(dataAlta);
                     InternacaoDao.editarInternacao(internacao, db);
                     enfermaria = EnfermariaDao.buscaEnfermaria(internacao.getIdEnfermaria(), db);
-                    enfermaria.setLeitosDisponiveis(enfermaria.getLeitosDisponiveis()+1);
+                    enfermaria.setLeitosDisponiveis(enfermaria.getLeitosDisponiveis() + 1);
                     EnfermariaDao.editaEnfermaria(enfermaria, db);
                     paciente = PacienteDao.buscaPaciente(internacao.getIdPaciente(), db);
                     paciente.setInternado(false);
@@ -163,7 +161,8 @@ public class InternacaoView {
         }
     }
 
-    public static boolean appointmentHospitalization(Date dataInternação, String idPaciente, Banco db) throws SQLException {
+    public static boolean appointmentHospitalization(Date dataInternação, String idPaciente, Banco db)
+            throws SQLException {
         ArrayList<Enfermaria> enfermarias;
         String codEnfemaria;
 
@@ -172,7 +171,6 @@ public class InternacaoView {
         internacao.setDataAlta(null);
         internacao.setIdPaciente(idPaciente);
         InternacaoDao.cadastrarInternacao(internacao, db);
-        
 
         enfermarias = EnfermariaDao.listarEnfermariasDisponiveis(db);
         if (enfermarias.isEmpty()) {
@@ -184,7 +182,8 @@ public class InternacaoView {
 
         System.out.print("Insira o codigo da enfemaria da Internação: ");
         codEnfemaria = FuncUtils.readCod();
-        if (EnfermariaDao.buscaEnfermaria(codEnfemaria, db)== null || EnfermariaDao.buscaEnfermaria(codEnfemaria, db).getLeitosDisponiveis()<=0) {
+        if (EnfermariaDao.buscaEnfermaria(codEnfemaria, db) == null
+                || EnfermariaDao.buscaEnfermaria(codEnfemaria, db).getLeitosDisponiveis() <= 0) {
             System.out.println("Enfemaria não existe no sistema ou está lotada!.");
             System.out.println("Cadastro de consulta cancelado.");
             return false;
