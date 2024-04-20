@@ -52,6 +52,7 @@ public class ConsultaView {
                     sintomas = FuncUtils.readSymptoms();
                     precisaInternar = FuncUtils.readNeedToHospitalize();
 
+
                     System.out.println();
                     pacientes = PacienteDao.listarPacientes(db);
                     if (pacientes.isEmpty()) {
@@ -92,6 +93,12 @@ public class ConsultaView {
                         System.out.println("Já existe uma consulta com este médico nesta data e horário.");
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
+                    }
+
+                    if (precisaInternar) {
+                        if(!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db)))
+                            System.out.println("Cadastro de consulta cancelado, pois não foi possível realizar a internação.");
+                            break;
                     }
 
                     medicamentos = MedicamentoDao.listarMedicamentos(db);

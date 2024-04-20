@@ -50,6 +50,7 @@ public class EnfermeiroDao {
             enfermeiro.setHorarioDeTrabalhoFinal(horarioFinal);
 
             enfermeiro.setCoren(rs.getString("coren"));
+            enfermeiro.setCodEnfermaria(rs.getString("id_enfermaria"));
         } else {
             return null;
         }
@@ -59,7 +60,8 @@ public class EnfermeiroDao {
 
     public static void editarEnfermeiro(Enfermeiro enfermeiro, Banco db) throws SQLException {
         String query = String.format(
-                "UPDATE Enfermeiro SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', data_admissao = '%tF', horario_trabalho_inicio = '%tT', horario_trabalho_final = '%tT', coren = '%s' WHERE coren = '%s';",
+                "UPDATE Enfermeiro SET id_enfermaria = %d, nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', data_admissao = '%tF', horario_trabalho_inicio = '%tT', horario_trabalho_final = '%tT', coren = '%s' WHERE coren = '%s';",
+                Integer.parseInt(enfermeiro.getCodEnfermaria()),
                 enfermeiro.getNome(), enfermeiro.getCpf(), enfermeiro.getTelefone(), enfermeiro.getDataNasc(),
                 enfermeiro.isSexo(), enfermeiro.getSalario(), enfermeiro.getDataDeAdmissao(),
                 enfermeiro.getHorarioDeTrabalhoInicio(), enfermeiro.getHorarioDeTrabalhoFinal(),
@@ -72,6 +74,44 @@ public class EnfermeiroDao {
             String querry = "DELETE FROM Enfermeiro WHERE coren = '" + enfermeiro.getCoren() + "';";
             db.queryInsup(querry);
         }
+    }
+
+    public static ArrayList<Enfermeiro> listarEnfermeirosSemEnfermaria(Banco db) throws SQLException {
+        String query = "SELECT * FROM Enfermeiro WHERE id_enfermaria IS NULL;";
+        ResultSet rs = db.queryBusca(query);
+        ArrayList<Enfermeiro> enfermeiros = new ArrayList<Enfermeiro>();
+
+        while (rs.next()) {
+            Enfermeiro enfermeiro = new Enfermeiro();
+            enfermeiro.setNome(rs.getString("nome"));
+            enfermeiro.setCpf(rs.getString("cpf"));
+            enfermeiro.setTelefone(rs.getString("telefone"));
+            enfermeiro.setSexo(rs.getBoolean("sexo"));
+
+            String dataNascStr = rs.getString("data_nascimento");
+            Date dataNasc = Date.valueOf(dataNascStr);
+            enfermeiro.setDataNasc(dataNasc);
+
+            enfermeiro.setSalario(rs.getDouble("salario"));
+
+            String dataAdmissaoStr = rs.getString("data_admissao");
+            Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
+            enfermeiro.setDataDeAdmissao(dataAdmissao);
+
+            String horarioInicioStr = rs.getString("horario_trabalho_inicio");
+            Time horarioInicio = Time.valueOf(horarioInicioStr);
+            enfermeiro.setHorarioDeTrabalhoInicio(horarioInicio);
+
+            String horarioFinalStr = rs.getString("horario_trabalho_final");
+            Time horarioFinal = Time.valueOf(horarioFinalStr);
+            enfermeiro.setHorarioDeTrabalhoFinal(horarioFinal);
+
+            enfermeiro.setCoren(rs.getString("coren"));
+            enfermeiro.setCodEnfermaria(rs.getString("id_enfermaria"));
+            enfermeiros.add(enfermeiro);
+
+        }
+        return enfermeiros;
     }
 
     public static ArrayList<Enfermeiro> listarEnfermeiros(Banco db) throws SQLException {
@@ -105,8 +145,8 @@ public class EnfermeiroDao {
             enfermeiro.setHorarioDeTrabalhoFinal(horarioFinal);
 
             enfermeiro.setCoren(rs.getString("coren"));
+            enfermeiro.setCodEnfermaria(rs.getString("id_enfermaria"));
             enfermeiros.add(enfermeiro);
-
         }
         return enfermeiros;
     }

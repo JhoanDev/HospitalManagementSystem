@@ -125,20 +125,7 @@ public class EnfermeiroView {
                     break;
                 case 4:
                     enfermeiros = EnfermeiroDao.listarEnfermeiros(db);
-                    if (enfermeiros.isEmpty()) {
-                        System.out.println("Nenhum enfermeiro cadastrado.");
-                        break;
-                    }
-                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Coren\n",
-                            FuncUtils.spacesGenerator(26),
-                            FuncUtils.spacesGenerator(9),
-                            FuncUtils.spacesGenerator(3),
-                            FuncUtils.spacesGenerator(12));
-                    for (Enfermeiro e : enfermeiros) {
-                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", e.getNome(), e.getSexo(),
-                                e.getSalario(), e.getCoren());
-                    }
-                    System.out.println();
+                    listNurses(enfermeiros);
                     break;
                 case 5:
                     coren = FuncUtils.readCoren();
@@ -157,6 +144,23 @@ public class EnfermeiroView {
                     break;
             }
         }
+    }
+
+    public static void listNurses(ArrayList<Enfermeiro> enfermeiros) {
+        if (enfermeiros.isEmpty()) {
+            System.out.println("Nenhum enfermeiro cadastrado.");
+            return;
+        }
+        System.out.printf("|Nome%s|Sexo%s|Salário%s|Coren\n",
+                FuncUtils.spacesGenerator(26),
+                FuncUtils.spacesGenerator(9),
+                FuncUtils.spacesGenerator(3),
+                FuncUtils.spacesGenerator(12));
+        for (Enfermeiro e : enfermeiros) {
+            System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", e.getNome(), e.getSexo(),
+                    e.getSalario(), e.getCoren());
+        }
+        System.out.println();
     }
 
     public static void displayMenu() {

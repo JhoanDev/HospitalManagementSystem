@@ -5,6 +5,7 @@ import java.sql.Date;
 
 public class Enfermeiro extends Funcionario {
     private String coren;
+    private String codEnfermaria;
 
     public Enfermeiro(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
             double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal,
@@ -14,8 +15,26 @@ public class Enfermeiro extends Funcionario {
         this.coren = coren;
     }
 
+    public Enfermeiro(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
+            double salario, Date dataDeAdmissao, Time horarioDeTrabalhoInicio, Time horarioDeTrabalhoFinal,
+            String coren, String codEnfermaria) {
+        super(nome, cpf, telefone, dataNasc, sexo, salario, dataDeAdmissao, horarioDeTrabalhoInicio,
+                horarioDeTrabalhoFinal);
+        this.coren = coren;
+        this.codEnfermaria = codEnfermaria;
+    }
+
+
     public Enfermeiro() {
         super();
+    }
+
+    public String getCodEnfermaria() {
+        return codEnfermaria;
+    }
+
+    public void setCodEnfermaria(String codEnfermaria) {
+        this.codEnfermaria = codEnfermaria;
     }
 
     public String getCoren() {

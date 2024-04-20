@@ -29,6 +29,20 @@ public class EnfermariaDao {
         return null;
     }
 
+    public static Enfermaria ultimaEnfermariaCadastrada(Banco db) throws SQLException {
+        String query = "SELECT * FROM Enfermaria ORDER BY id_enfermaria DESC LIMIT 1;";
+        ResultSet rs = db.queryBusca(query);
+        if (rs.next() && rs != null) {
+            String cod = rs.getString("id_enfermaria");
+            int qnt_leitos = rs.getInt("qnt_leitos");
+            int leitos_disponiveis = rs.getInt("leitos_disponiveis");
+            Enfermaria enfermaria = new Enfermaria(cod, qnt_leitos, leitos_disponiveis);
+            return enfermaria;
+        }
+        System.out.println("Enfermaria não encontrada.");
+        return null;
+    }
+
     public static void editaEnfermaria(Enfermaria enfermaria, Banco db) {
         String query = String.format(
                 "UPDATE Enfermaria SET qnt_leitos = '%d', leitos_disponiveis = '%d' WHERE id_enfermaria = '%s';",
@@ -58,4 +72,24 @@ public class EnfermariaDao {
         }
         return enfermarias;
     }
+
+
+    public static ArrayList<Enfermaria> listarEnfermariasDisponiveis(Banco db) throws SQLException {
+        String query = "SELECT * FROM Enfermaria WHERE leitos_disponiveis > 0;";
+        ResultSet rs = db.queryBusca(query);
+        ArrayList<Enfermaria> enfermarias = new ArrayList<Enfermaria>();
+        while (rs.next()) {
+            Enfermaria enfermaria = new Enfermaria();
+            String codEnfermaria = rs.getString("id_enfermaria");
+            int qnt_leitos = rs.getInt("qnt_leitos");
+            int leitos_disponiveis = rs.getInt("leitos_disponiveis");
+            enfermaria.setCodEnfermaria(codEnfermaria);
+            enfermaria.setQtdeLeitos(qnt_leitos);
+            enfermaria.setLeitosDisponiveis(leitos_disponiveis);
+            enfermarias.add(enfermaria);
+        }
+        return enfermarias;
+    }
+
+
 }
