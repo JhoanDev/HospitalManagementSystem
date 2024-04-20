@@ -141,6 +141,7 @@ public class MedicoView {
                     System.out.print("Insira o horário que deseja verificar, ");
                     Time horario = FuncUtils.readTime();
                     medicos = MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horario, db);
+                    System.out.println("\nMédicos disponíveis no horário: ");
                     listDoctors(medicos);
                     break;
                 case 7:
@@ -161,9 +162,9 @@ public class MedicoView {
         System.out.printf("|Nome%s|Sexo%s|Salário%s|CRM%s|Especialidade%s|Plantão\n",
                 FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
                 FuncUtils.spacesGenerator(3),
-                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(10));
         for (Medico m : medicos) {
-            System.out.printf("|%-30s|%-13s|%-10.2f|%-15s|%-21s|%s\n", m.getNome(), m.getSexo(),
+            System.out.printf("|%-30s|%-13s|%-10.2f|%-15s|%-23s|%s\n", m.getNome(), m.getSexo(),
                     m.getSalario(), m.getCrm(),
                     m.getEspecialidade(), m.getPlantao());
         }

@@ -35,7 +35,7 @@ public class PacienteView {
                     PacienteDao.cadastrarPaciente(new Paciente(nome, cpf, telefone, data, sexo, false, planoSaude), db);
                     break;
                 case 2:
-                    System.out.println("Digite o código do paciente: ");
+                    System.out.print("Digite o código do paciente: ");
                     cod = FuncUtils.readCod();
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     System.out.println(paciente);
@@ -87,7 +87,7 @@ public class PacienteView {
                     }
                     break;
                 case 3:
-                    System.out.println("Digite o codigo do paciente que deseja excluir: ");
+                    System.out.print("Digite o codigo do paciente que deseja excluir: ");
                     cod = FuncUtils.readCod();
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     if (paciente != null) {
@@ -97,7 +97,7 @@ public class PacienteView {
                     }
                     break;
                 case 4:
-                    System.out.println("Digite o código do paciente que deseja buscar: ");
+                    System.out.print("Digite o código do paciente que deseja buscar: ");
                     cod = FuncUtils.readCod();
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     if (paciente != null) {

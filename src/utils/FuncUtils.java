@@ -48,8 +48,11 @@ public class FuncUtils {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
                 // Unix-like OS (Linux/Unix)
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                try {
+                    new ProcessBuilder("clear").inheritIO().start().waitFor();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else if (os.contains("mac")) {
                 // Mac OS
                 new ProcessBuilder("clear").inheritIO().start().waitFor();

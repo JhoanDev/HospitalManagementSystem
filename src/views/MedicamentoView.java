@@ -35,7 +35,7 @@ public class MedicamentoView {
                     }
                     break;
                 case 3:
-                    System.out.print("Digite o codigo do medicamento que deseja buscar: ");
+                    System.out.print("Digite o codigo do medicamento que deseja editar: ");
                     codMed = FuncUtils.readCod();
                     medicamento = MedicamentoDao.buscaMedicamento(codMed, db);
                     if (medicamento != null) {
@@ -48,7 +48,7 @@ public class MedicamentoView {
                     }
                     break;
                 case 4:
-                    System.out.print("Digite o codigo do medicamento que deseja buscar: ");
+                    System.out.print("Digite o codigo do medicamento que deseja excluir: ");
                     codMed = FuncUtils.readCod();
                     medicamento = MedicamentoDao.buscaMedicamento(codMed, db);
                     if (medicamento != null) {

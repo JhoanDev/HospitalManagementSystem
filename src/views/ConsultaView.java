@@ -151,6 +151,7 @@ public class ConsultaView {
                         System.out.printf("|%-7s|%-11s|%-9s|%-30s|%-30s\n", c.getCodConsulta(), c.getDataConsulta(),
                                 c.getHorarioConsulta(), medico.getNome(), paciente.getNome());
                     }
+                    System.out.println();
                     break;
                 case 4:
                     System.out.print("Insira o código da consulta: ");
