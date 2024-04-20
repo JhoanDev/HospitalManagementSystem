@@ -16,8 +16,9 @@ public abstract class Pessoa {
         this.dataNasc = dataNasc;
         this.sexo = sexo;
     }
-    public Pessoa(){
-        
+
+    public Pessoa() {
+
     }
 
     public String getNome() {

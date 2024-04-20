@@ -8,12 +8,12 @@ import src.data.Banco;
 import src.models.Enfermaria;
 import src.utils.FuncUtils;
 
-public class MenuEnfermaria {
+public class EnfermariaView {
     public static void wardMenu(Banco db) throws SQLException {
         int option = 0, leitos = 0, leitosDisponiveis = 0;
         String codEnfermaria;
         Enfermaria enfermaria;
-        ArrayList <Enfermaria> enfermarias;
+        ArrayList<Enfermaria> enfermarias;
         while (option != 6) {
             displayMenu();
             option = FuncUtils.readInt();
@@ -68,7 +68,7 @@ public class MenuEnfermaria {
                     System.out.printf("|Cod%s|Leitos Totais|Leitos disponiveís\n", FuncUtils.spacesGenerator(4));
                     for (Enfermaria e : enfermarias) {
                         System.out.printf("|%-7s|%-13d|%-18d\n", e.getCodEnfermaria(), e.getQtdeLeitos(),
-                        e.getLeitosDisponiveis());
+                                e.getLeitosDisponiveis());
                     }
                     System.out.println();
                     break;
@@ -83,6 +83,7 @@ public class MenuEnfermaria {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU ENFERMARIA -----------");
         System.out.println("[1] - Cadastrar enfermaria");
         System.out.println("[2] - Buscar enfermaria");
         System.out.println("[3] - Editar enfermaria");

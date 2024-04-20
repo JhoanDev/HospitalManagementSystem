@@ -7,19 +7,18 @@ public class Paciente extends Pessoa {
     private boolean internado;
     private boolean planoDeSaude;
 
-    public Paciente(){
+    public Paciente() {
         super("", "", "", new Date(System.currentTimeMillis()), true);
         this.internado = false;
         this.planoDeSaude = false;
     }
-    
+
     public Paciente(String nome, String cpf, String telefone, Date dataNasc, boolean sexo,
             boolean internado, boolean planoDeSaude) {
         super(nome, cpf, telefone, dataNasc, sexo);
         this.internado = internado;
         this.planoDeSaude = planoDeSaude;
     }
-    
 
     public String getCodPaciente() {
         return codPaciente;
@@ -74,4 +73,3 @@ public class Paciente extends Pessoa {
         return s;
     }
 }
-

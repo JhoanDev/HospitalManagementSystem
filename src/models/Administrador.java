@@ -16,8 +16,8 @@ public class Administrador extends Funcionario {
         this.senha = senha;
     }
 
-    public Administrador(){
-        
+    public Administrador() {
+
     }
 
     public String getLogin() {
@@ -40,9 +40,11 @@ public class Administrador extends Funcionario {
     public String toString() {
         String s = "";
         s += "Administrador: " + getNome() + "\n";
+        s += "Login: " + getLogin() + "\n";
         s += "CPF: " + getCpf() + "\n";
         s += "Telefone: " + getTelefone() + "\n";
         s += "Salário: " + getSalario() + "\n";
+        s += "Data de nascimento: " + getDataNasc() + "\n";
         s += "Data de admissão: " + getDataDeAdmissao() + "\n";
         s += "Horário de trabalho: " + getHorarioDeTrabalhoInicio() + " às " + getHorarioDeTrabalhoFinal() + "\n";
         return s;

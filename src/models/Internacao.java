@@ -60,8 +60,12 @@ public class Internacao {
 
     @Override
     public String toString() {
-        return "Internacao [codInternacao=" + codInternacao + ", dataAlta=" + dataAlta + ", dataInternacao="
-                + dataInternacao + ", enfermariaInternacao=" + enfermariaInternacao.getCodEnfermaria() + ", pacienteInternado="
-                + pacienteInternado.getNome() + "]\n";
+        String s = "";
+        s += "Código da internação: " + getCodInternacao() + "\n";
+        s += "Data de internação: " + getDataInternacao() + "\n";
+        s += "Data de alta: " + getDataAlta() + "\n";
+        s += "Paciente internado: " + getPacienteInternado().getNome() + "\n";
+        s += "Enfermaria da internação: " + getEnfermariaInternacao().getCodEnfermaria() + "\n";
+        return s;
     }
 }
