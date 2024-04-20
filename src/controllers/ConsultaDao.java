@@ -1,5 +1,12 @@
 package src.controllers;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import src.data.Banco;
 import src.models.Consulta;
 
@@ -11,5 +18,69 @@ public class ConsultaDao {
         db.queryInsup(query);
     }
     
+    public static Consulta buscaConsulta(String codConsulta, Banco db) throws SQLException {
+        String query = "SELECT * FROM Consulta WHERE id_consulta = '" + codConsulta + "';";
+        ResultSet rs = db.queryBusca(query);
+        if (rs.next()) {
+            Consulta consulta = new Consulta();
+            consulta.setCodConsulta(rs.getString("id_consulta"));
+
+            String dataConsultaStr = rs.getString("data_consulta");
+            Date dataConsulta = Date.valueOf(dataConsultaStr);
+            consulta.setDataConsulta(dataConsulta);
+
+            String horarioConsultaStr = rs.getString("hora_consulta");
+            Time horarioConsulta = Time.valueOf(horarioConsultaStr);
+            consulta.setHorarioConsulta(horarioConsulta);
+
+            consulta.setDiagnostico(rs.getString("diagnostico"));
+            consulta.setPrecisaInternar(rs.getBoolean("precisa_internar"));
+            consulta.setEncaminhamento(rs.getString("encaminhamento"));
+            consulta.setIdPaciente(rs.getString("id_paciente"));
+            consulta.setIdMedico(rs.getString("id_medico"));
+            
+            // Obter os sintomas da consulta
+            String sintomasStr = rs.getString("sintomas");
+            ArrayList<String> sintomas = new ArrayList<>(Arrays.asList(sintomasStr.split(",")));
+            consulta.setSintomas(sintomas);
+            return consulta;
+        }
+        return null;
+    }
     
+    public static void excluirConsulta(Consulta consulta, Banco db) throws SQLException {
+        String query = String.format("DELETE FROM Consulta WHERE id_Consulta = '%s';", consulta.getCodConsulta());
+        db.queryInsup(query);
+    }
+    
+    public static ArrayList<Consulta> listarConsultas(Banco db) throws SQLException {
+        String query = "SELECT * FROM Consulta;";
+        ResultSet rs = db.queryBusca(query);
+        ArrayList<Consulta> consultas = new ArrayList<Consulta>();
+        while (rs.next()) {
+            Consulta consulta = new Consulta();
+            consulta.setCodConsulta(rs.getString("id_consulta"));
+
+            String dataConsultaStr = rs.getString("data_consulta");
+            Date dataConsulta = Date.valueOf(dataConsultaStr);
+            consulta.setDataConsulta(dataConsulta);
+
+            String horarioConsultaStr = rs.getString("hora_consulta");
+            Time horarioConsulta = Time.valueOf(horarioConsultaStr);
+            consulta.setHorarioConsulta(horarioConsulta);
+            
+            consulta.setDiagnostico(rs.getString("diagnostico"));
+            consulta.setPrecisaInternar(rs.getBoolean("precisa_internar"));
+            consulta.setEncaminhamento(rs.getString("encaminhamento"));
+            consulta.setIdPaciente(rs.getString("id_paciente"));
+            consulta.setIdMedico(rs.getString("id_medico"));
+            
+            // Obter os sintomas da consulta
+            String sintomasStr = rs.getString("sintomas");
+            ArrayList<String> sintomas = new ArrayList<>(Arrays.asList(sintomasStr.split(",")));
+            consulta.setSintomas(sintomas);
+            consultas.add(consulta);
+        }
+        return consultas;
+    }
 }

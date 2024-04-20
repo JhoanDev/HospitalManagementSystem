@@ -27,6 +27,7 @@ public class MenuPaciente {
                     nome = FuncUtils.readOnlyLettersAndSpaces();
                     cpf = FuncUtils.readCPF();
                     telefone = FuncUtils.readPhoneNumber();
+                    System.out.print("Digite a data de nascimento, ");
                     data = FuncUtils.readDate();
                     sexo = FuncUtils.readSex();
                     planoSaude = FuncUtils.readHealthPlan();

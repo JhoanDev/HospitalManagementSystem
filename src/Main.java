@@ -3,6 +3,8 @@ package src;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+
+import src.controllers.ConsultaDao;
 import src.data.Banco;
 import src.utils.FuncUtils;
 import src.views.TelaInicial;

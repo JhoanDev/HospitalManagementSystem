@@ -27,6 +27,8 @@ public class MenuConsulta {
         ArrayList<Consulta> consultas;
         ArrayList<Medico> medicos;
         ArrayList<Paciente> pacientes;
+        Medico medico;
+        Paciente paciente;
         while (opcao != 6) {
             displayMenu();
             opcao = FuncUtils.readInt();
@@ -77,20 +79,47 @@ public class MenuConsulta {
                     ConsultaDao.cadastrarConsulta(new Consulta(dataConsulta, horarioConsulta, diagnostico, sintomas, precisaInternar, encaminhamento, crmMedico, idPaciente), db);
                     break;
                 case 2:
-                    System.out.println("Editar Consulta");
+                    System.out.print("Insira o código da consulta: ");
+                    codConsulta = FuncUtils.readCod();
+                    consulta = ConsultaDao.buscaConsulta(codConsulta, db);
+                    if (consulta == null) {
+                        System.out.println("Consulta não encontrada.");
+                        break;
+                    }
+                    System.out.println(consulta);
+                    System.out.println("Deseja realmente excluir a consulta? [1] - Sim [2] - Não");
+                    opcao2 = FuncUtils.readInt();
+                    if (opcao2 == 1) {
+                        ConsultaDao.excluirConsulta(consulta, db);
+                        System.out.println("Consulta excluída com sucesso.");
+                    }
                     break;
                 case 3:
-                    System.out.println("Excluir Consulta");
+                    consultas = ConsultaDao.listarConsultas(db);
+                    if (consultas.isEmpty()) {
+                        System.out.println("Não há consultas cadastradas.");
+                        break;
+                    }
+                    System.out.printf("|Cod%s|Data%s|Hora%s|Medico%s|Paciente\n", FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(7), FuncUtils.spacesGenerator(5), FuncUtils.spacesGenerator(24));
+                    for (Consulta c : consultas) {
+                        medico = MedicoDao.buscaMedico(c.getIdMedico(), db);
+                        paciente = PacienteDao.buscaPaciente(c.getIdPaciente(), db);
+                        System.out.printf("|%-7s|%-11s|%-9s|%-30s|%-30s\n", c.getCodConsulta(), c.getDataConsulta(), c.getHorarioConsulta(), medico.getNome(), paciente.getNome());
+                    }
                     break;
                 case 4:
-                    System.out.println("Listar Consultas");
+                    System.out.print("Insira o código da consulta: ");
+                    codConsulta = FuncUtils.readCod();
+                    consulta = ConsultaDao.buscaConsulta(codConsulta, db);
+                    if (consulta == null) {
+                        System.out.println("Consulta não encontrada.");
+                        break;
+                    }
+                    System.out.println(consulta);
                     break;
                 case 5:
-                    System.out.println("Buscar Consulta");
-                    break;
-                case 6:
                     System.out.println("Saindo...");
-                    break;
+                    return;
                 default:
                     System.out.println("Opção inválida. Por favor, digite uma opção válida.");
                     break;
@@ -100,11 +129,10 @@ public class MenuConsulta {
 
     public static void displayMenu(){
         System.out.println("[1] - Cadastrar Consulta");
-        System.out.println("[2] - Editar Consulta");
-        System.out.println("[3] - Excluir Consulta");
-        System.out.println("[4] - Listar Consultas");
-        System.out.println("[5] - Buscar Consulta");
-        System.out.println("[6] - Sair");
+        System.out.println("[2] - Excluir Consulta");
+        System.out.println("[3] - Listar Consultas");
+        System.out.println("[4] - Buscar Consulta");
+        System.out.println("[5] - Sair");
         System.out.print("Digite sua opcao: ");
     }
 }
