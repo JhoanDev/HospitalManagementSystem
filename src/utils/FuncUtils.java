@@ -368,7 +368,48 @@ public class FuncUtils {
         return sintomas;
     }
 
+    public static String readPosology() {
+        System.out.println("Digite a posologia do medicamento\n");
+
+        System.out.print("Digite a frequência (por exemplo, '8 horas'): ");
+        String frequencia = input.nextLine();
+
+        System.out.print("Digite a duração (por exemplo, '7 dias'): ");
+        String duracao = input.nextLine();
+
+        String posologia = String.format("Frequência: %s, Duração: %s", frequencia, duracao);
+        return posologia;
+    }
+
+    public static String readDosage() {
+        System.out.println("Digite a dosagem do medicamento\n");
+
+        System.out.print("Digite a quantidade (por exemplo, '1 comprimido'): ");
+        String quantidade = input.nextLine();
+
+        System.out.print("Digite a dose (por exemplo, '500 mg'): ");
+        String dose = input.nextLine();
+        String dosagem = String.format("Quantidade: %s, Dose: %s", quantidade, dose);
+
+        return dosagem;
+    }
+
     public static String spacesGenerator(int n) {
         return " ".repeat(n);
+    }
+
+    public static boolean readYesOrNo(String string) {
+        while (true) {
+            System.out.print(string);
+            String resposta = input.nextLine().trim().toUpperCase();
+
+            if (resposta.equals("S")) {
+                return true;
+            } else if (resposta.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Resposta inválida. Por favor, digite S para sim ou N para não.");
+            }
+        }
     }
 }

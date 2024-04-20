@@ -12,35 +12,33 @@ public class Consulta {
     private Time horarioConsulta;
     private String diagnostico;
     private ArrayList<String> sintomas;
+    private ArrayList<Prescricao> prescricoes;
     private boolean precisaInternar;
-    private String encaminhamento;
 
     public Consulta(String codConsulta, Date dataConsulta, Time horarioConsulta, String diagnostico,
-            ArrayList<String> sintomas, boolean precisaInternar, String encaminhamento, String idMedico, String idPaciente) {
+            ArrayList<String> sintomas, boolean precisaInternar, String idMedico, String idPaciente) {
         this.codConsulta = codConsulta;
         this.dataConsulta = dataConsulta;
         this.horarioConsulta = horarioConsulta;
         this.diagnostico = diagnostico;
         this.sintomas = sintomas;
         this.precisaInternar = precisaInternar;
-        this.encaminhamento = encaminhamento;
         this.idMedico = idMedico;
         this.idPaciente = idPaciente;
     }
 
-    public Consulta (Date dataConsulta, Time horarioConsulta, String diagnostico,
-            ArrayList<String> sintomas, boolean precisaInternar, String encaminhamento, String idMedico, String idPaciente) {
+    public Consulta(Date dataConsulta, Time horarioConsulta, String diagnostico,
+            ArrayList<String> sintomas, boolean precisaInternar, String idMedico, String idPaciente) {
         this.dataConsulta = dataConsulta;
         this.horarioConsulta = horarioConsulta;
         this.diagnostico = diagnostico;
         this.sintomas = sintomas;
         this.precisaInternar = precisaInternar;
-        this.encaminhamento = encaminhamento;
         this.idMedico = idMedico;
         this.idPaciente = idPaciente;
     }
 
-    public Consulta(){
+    public Consulta() {
 
     }
 
@@ -114,12 +112,12 @@ public class Consulta {
         this.precisaInternar = precisaInternar;
     }
 
-    public String getEncaminhamento() {
-        return encaminhamento;
+    public ArrayList<Prescricao> getPrescricoes() {
+        return prescricoes;
     }
 
-    public void setEncaminhamento(String encaminhamento) {
-        this.encaminhamento = encaminhamento;
+    public void setPrescricoes(ArrayList<Prescricao> prescricoes) {
+        this.prescricoes = prescricoes;
     }
 
     @Override
@@ -130,11 +128,10 @@ public class Consulta {
         s += "Horário da consulta: " + horarioConsulta + "\n";
         s += "Diagnóstico: " + diagnostico + "\n";
         s += "Sintomas: ";
-        for (String sintoma : sintomas) 
+        for (String sintoma : sintomas)
             s += sintoma + ", ";
         s += "\n";
         s += "Precisa internar: " + getPrecisaInternar() + "\n";
-        s += "Encaminhamento: " + encaminhamento + "\n";
         return s;
     }
 

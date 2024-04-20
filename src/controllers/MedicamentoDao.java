@@ -14,8 +14,8 @@ public class MedicamentoDao {
         db.queryInsup(query);
     }
 
-    public static Medicamento buscaMedicamento(String nome, Banco db) throws SQLException {
-        String query = String.format("SELECT * FROM Medicamento WHERE nome = '%s';", nome);
+    public static Medicamento buscaMedicamento(String id, Banco db) throws SQLException {
+        String query = String.format("SELECT * FROM Medicamento WHERE id_medicamento = '%s';", id);
         ResultSet rs = db.queryBusca(query);
         if (rs.next() && rs != null) {
             String nomeMed = rs.getString("nome");

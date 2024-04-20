@@ -6,29 +6,36 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import src.controllers.ConsultaDao;
+import src.controllers.MedicamentoDao;
 import src.controllers.MedicoDao;
 import src.controllers.PacienteDao;
+import src.controllers.PrescricaoDao;
 import src.data.Banco;
 import src.models.Consulta;
+import src.models.Medicamento;
 import src.models.Medico;
 import src.models.Paciente;
+import src.models.Prescricao;
 import src.utils.FuncUtils;
 
 public class ConsultaView {
-    public static void appointmentMenu(Banco db) throws SQLException{
+    public static void appointmentMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         Date dataConsulta;
         Time horarioConsulta;
-        String diagnostico, codConsulta, crmMedico, idPaciente;
+        String diagnostico, codConsulta, crmMedico, idPaciente, dosagem, posologia;
         ArrayList<String> sintomas;
         boolean precisaInternar;
-        String encaminhamento;
+        Prescricao prescricao;
         Consulta consulta;
         ArrayList<Consulta> consultas;
         ArrayList<Medico> medicos;
         ArrayList<Paciente> pacientes;
+        ArrayList<Medicamento> medicamentos;
+        ArrayList<Prescricao> prescricoes;
         Medico medico;
         Paciente paciente;
+
         while (opcao != 6) {
             displayMenu();
             opcao = FuncUtils.readInt();
@@ -43,8 +50,6 @@ public class ConsultaView {
                     diagnostico = FuncUtils.readOnlyLettersAndSpaces();
                     sintomas = FuncUtils.readSymptoms();
                     precisaInternar = FuncUtils.readNeedToHospitalize();
-                    System.out.print("Encaminhamento: ");
-                    encaminhamento = FuncUtils.readOnlyLettersAndSpaces();
 
                     System.out.println();
                     pacientes = PacienteDao.listarPacientes(db);
@@ -56,7 +61,7 @@ public class ConsultaView {
                     PacienteView.listPatients(pacientes);
                     System.out.print("Insira o código do paciente da consulta: ");
                     idPaciente = FuncUtils.readCod();
-                    if (PacienteDao.buscaPaciente(idPaciente, db) == null){
+                    if (PacienteDao.buscaPaciente(idPaciente, db) == null) {
                         System.out.println("Código não está nos pacientes cadastrados.");
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
@@ -67,16 +72,39 @@ public class ConsultaView {
                         System.out.println("Não há médicos disponíveis para no horário da consulta.");
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
-                    } 
+                    }
                     MedicoView.listDoctors(medicos);
                     System.out.print("Insira o crm do médico da consulta: ");
                     crmMedico = FuncUtils.readCrm();
-                    if (MedicoDao.buscaMedico(crmMedico, db) == null){
+                    if (MedicoDao.buscaMedico(crmMedico, db) == null) {
                         System.out.println("CRM não está nos médicos disponíveis.");
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
                     }
-                    ConsultaDao.cadastrarConsulta(new Consulta(dataConsulta, horarioConsulta, diagnostico, sintomas, precisaInternar, encaminhamento, crmMedico, idPaciente), db);
+                    medicamentos = MedicamentoDao.listarMedicamentos(db);
+                    ConsultaDao.cadastrarConsulta(new Consulta(dataConsulta, horarioConsulta, diagnostico, sintomas,
+                            precisaInternar, crmMedico, idPaciente), db);
+                    consulta = ConsultaDao.buscaConsulta(dataConsulta, horarioConsulta, db);
+                    if (FuncUtils.readYesOrNo("Deseja prescrever medicamentos? [S/N]: ")) {
+                        if (medicamentos.isEmpty()) {
+                            System.out.println("Não há medicamentos cadastrados.");
+                            break;
+                        }
+                        MedicamentoView.listMedicines(medicamentos);
+                        do {
+                            System.out.print("Insira o código do medicamento: ");
+                            String codMedicamento = FuncUtils.readCod();
+                            Medicamento medicamento = MedicamentoDao.buscaMedicamento(codMedicamento, db);
+                            if (medicamento == null) {
+                                System.out.println("Medicamento não encontrado.");
+                                continue;
+                            }
+                            dosagem = FuncUtils.readDosage();
+                            posologia = FuncUtils.readPosology();
+                            prescricao = new Prescricao(medicamento, consulta.getCodConsulta(), dosagem, posologia);
+                            PrescricaoDao.cadastrarPrescricao(prescricao, db);
+                        } while (FuncUtils.readYesOrNo("Deseja prescrever mais medicamentos? [S/N]: "));
+                    }
                     break;
                 case 2:
                     System.out.print("Insira o código da consulta: ");
@@ -100,11 +128,13 @@ public class ConsultaView {
                         System.out.println("Não há consultas cadastradas.");
                         break;
                     }
-                    System.out.printf("|Cod%s|Data%s|Hora%s|Medico%s|Paciente\n", FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(7), FuncUtils.spacesGenerator(5), FuncUtils.spacesGenerator(24));
+                    System.out.printf("|Cod%s|Data%s|Hora%s|Medico%s|Paciente\n", FuncUtils.spacesGenerator(4),
+                            FuncUtils.spacesGenerator(7), FuncUtils.spacesGenerator(5), FuncUtils.spacesGenerator(24));
                     for (Consulta c : consultas) {
                         medico = MedicoDao.buscaMedico(c.getIdMedico(), db);
                         paciente = PacienteDao.buscaPaciente(c.getIdPaciente(), db);
-                        System.out.printf("|%-7s|%-11s|%-9s|%-30s|%-30s\n", c.getCodConsulta(), c.getDataConsulta(), c.getHorarioConsulta(), medico.getNome(), paciente.getNome());
+                        System.out.printf("|%-7s|%-11s|%-9s|%-30s|%-30s\n", c.getCodConsulta(), c.getDataConsulta(),
+                                c.getHorarioConsulta(), medico.getNome(), paciente.getNome());
                     }
                     break;
                 case 4:
@@ -118,6 +148,27 @@ public class ConsultaView {
                     System.out.println(consulta);
                     break;
                 case 5:
+                    System.out.print("Insira o código da consulta: ");
+                    codConsulta = FuncUtils.readCod();
+                    consulta = ConsultaDao.buscaConsulta(codConsulta, db);
+                    if (consulta == null) {
+                        System.out.println("Consulta não encontrada.");
+                        break;
+                    }
+                    prescricoes = consulta.getPrescricoes();
+                    if (prescricoes.isEmpty()) {
+                        System.out.println("Não há prescrições para essa consulta.");
+                        break;
+                    }
+                    System.out.printf("|Cod%s|Medicamento%s|Dosagem%s|Posologia\n", FuncUtils.spacesGenerator(4),
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(7));
+                    for (Prescricao p : prescricoes) {
+                        System.out.printf("|%-7s|%-30s|%-10s|%-10s\n", p.getCodPrescricao(),
+                                p.getMedicamento().getNome(),
+                                p.getDosagem(), p.getPosologia());
+                    }
+                    return;
+                case 6:
                     System.out.println("Saindo...");
                     return;
                 default:
@@ -127,12 +178,13 @@ public class ConsultaView {
         }
     }
 
-    public static void displayMenu(){
+    public static void displayMenu() {
         System.out.println("[1] - Cadastrar Consulta");
         System.out.println("[2] - Excluir Consulta");
         System.out.println("[3] - Listar Consultas");
         System.out.println("[4] - Buscar Consulta");
-        System.out.println("[5] - Sair");
+        System.out.println("[5] - Ver prescricoes de uma consulta");
+        System.out.println("[6] - Sair");
         System.out.print("Digite sua opcao: ");
     }
 }
