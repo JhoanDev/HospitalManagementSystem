@@ -36,8 +36,9 @@ public class InternacaoView {
             FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
-                    System.out.print("Insira a data da consulta, ");
+                    System.out.print("Insira a data da consulta: ");
                     dataInternacao = FuncUtils.readDate();
+
 
                     System.out.println();
                     pacientes = PacienteDao.listarPacientes(db);
@@ -87,6 +88,7 @@ public class InternacaoView {
                     paciente.setInternado(true);
                     PacienteDao.editarPaciente(paciente, db);
                     
+
                     
                     break;
                 /*case 2:
