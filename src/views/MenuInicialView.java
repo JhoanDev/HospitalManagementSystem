@@ -52,6 +52,8 @@ public class MenuInicialView {
                     initialMenu(db);
                     break;
                 case 7:
+                    InternacaoView.hospitalizationMenu(db);
+                    initialMenu(db);
                     break;
                 case 8:
                     ConsultaView.appointmentMenu(db);
