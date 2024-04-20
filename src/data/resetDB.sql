@@ -2,18 +2,18 @@ DROP TABLE IF EXISTS Administrador;
 
 CREATE TABLE
   Administrador (
-    id_adm integer primary key autoincrement not null,
-    cpf text not null,
-    telefone text not null,
-    data_nascimento date not null,
-    sexo bool not null,
-    salario double not null,
-    "horario_trabalho_inicio" time not null,
-    "horario_trabalho_final" time not null,
-    login text not null,
-    senha text not null,
-    nome varchar not null,
-    "data_admissao" DATE NOT NULL
+    id_adm INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    cpf TEXT NOT NULL UNIQUE,
+    telefone TEXT NOT NULL,
+    data_nascimento DATE NOT NULL,
+    sexo BOOL NOT NULL,
+    salario DOUBLE NOT NULL,
+    horario_trabalho_inicio TIME NOT NULL,
+    horario_trabalho_final TIME NOT NULL,
+    login TEXT NOT NULL,
+    senha TEXT NOT NULL,
+    nome VARCHAR NOT NULL,
+    data_admissao DATE NOT NULL DEFAULT CURRENT_DATE
   );
 
 DROP TABLE IF EXISTS Consulta;
@@ -25,9 +25,9 @@ CREATE TABLE
     hora_consulta TIME NOT NULL,
     sintomas TEXT,
     precisa_internar BOOL NOT NULL,
-		diagnostico text,
-    id_paciente integer NOT NULL,
-    id_medico text NOT NULL,
+		diagnostico TEXT,
+    id_paciente INTEGER NOT NULL,
+    id_medico TEXT NOT NULL,
     FOREIGN KEY (id_paciente) REFERENCES Paciente (id_paciente),
     FOREIGN KEY (id_medico) REFERENCES Medico (crm)
   );
@@ -37,30 +37,26 @@ DROP TABLE IF EXISTS Enfermaria;
 CREATE TABLE Enfermaria (
     id_enfermaria INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     qnt_leitos INTEGER NOT NULL,
-    leitos_disponiveis INTEGER NOT NULL,
-    id_enfermeiro INTEGER, 
-    id_enfermeiro2 INTEGER,
-    id_enfermeiro3 INTEGER, 
-    FOREIGN KEY (id_enfermeiro) REFERENCES Enfermeiro (id_enfermeiro),
-    FOREIGN KEY (id_enfermeiro2) REFERENCES Enfermeiro (id_enfermeiro),
-    FOREIGN KEY (id_enfermeiro3) REFERENCES Enfermeiro (id_enfermeiro)
+    leitos_disponiveis INTEGER NOT NULL
 );
 
 DROP TABLE IF EXISTS Enfermeiro;
 
 CREATE TABLE
   Enfermeiro (
-    id_enfermeiro integer primary key autoincrement not null,
-    cpf text not null,
-    telefone text not null,
-    data_nascimento date not null,
-    sexo bool not null,
-    salario double not null,
-    "horario_trabalho_inicio" time not null,
-    "horario_trabalho_final" time not null,
-    coren text not null UNIQUE,
-    nome varchar not null,
-    "data_admissao" date not null
+    id_enfermeiro INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+		id_enfermaria INTEGER,
+    cpf TEXT NOT NULL UNIQUE,
+    telefone TEXT NOT NULL,
+    data_nascimento TEXT NOT NULL,
+    sexo BOOL NOT NULL,
+    salario DOUBLE NOT NULL,
+    horario_trabalho_inicio TIME NOT NULL,
+    horario_trabalho_final TIME NOT NULL,
+    coren text NOT NULL UNIQUE,
+    nome varchar NOT NULL,
+    data_admissao DATE NOT NULL DEFAULT CURRENT_DATE,
+		FOREIGN KEY (id_enfermaria) REFERENCES Enfermaria (id_enfermaria)
   );
 
 DROP TABLE IF EXISTS Internacao;
@@ -68,10 +64,10 @@ DROP TABLE IF EXISTS Internacao;
 CREATE TABLE
   Internacao (
     id_internacao INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    data_internacao DATE NOT NULL,
-    dat_alta DATE,
-    id_paciente INTEGER,
-    id_enfermaria INTEGER,
+    data_internacao DATE NOT NULL DEFAULT CURRENT_DATE,
+    data_alta DATE,
+    id_paciente INTEGER NOT NULL,
+    id_enfermaria INTEGER NOT NULL,
     FOREIGN KEY (id_paciente) REFERENCES Paciente (id_paciente),
     FOREIGN KEY (id_enfermaria) REFERENCES Enfermaria (id_enfermaria)
   );

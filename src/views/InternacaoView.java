@@ -47,7 +47,7 @@ public class InternacaoView {
                         break;
                     }
                     PacienteView.listPatients(pacientes);
-
+                    
                     System.out.print("Insira o código do paciente da consulta: ");
                     idPaciente = FuncUtils.readCod();
                     if (PacienteDao.buscaPaciente(idPaciente, db) == null || PacienteDao.buscaPaciente(idPaciente, db).isInternado() == true ) {
@@ -142,7 +142,7 @@ public class InternacaoView {
     }
 
     public static void displayMenu() {
-        System.out.println("----------- MENU Internação -----------");
+        System.out.println("----------- MENU INTERNAÇÃO -----------");
         System.out.println("[1] - Cadastrar Internação");
         System.out.println("[2] - Excluir Consulta");
         System.out.println("[3] - Listar Internação");
