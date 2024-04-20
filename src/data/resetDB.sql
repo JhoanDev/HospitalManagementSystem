@@ -22,14 +22,14 @@ CREATE TABLE
   Consulta (
     id_consulta INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     data_consulta DATE NOT NULL,
-    hora_consulta TIME,
+    hora_consulta TIME NOT NULL,
     sintomas TEXT,
-    precisa_internar BOOL,
-    encaminhamento text,
-    id_paciente integer,
-    id_medico integer,
+    precisa_internar BOOL NOT NULL,
+		diagnostico text,
+    id_paciente integer NOT NULL,
+    id_medico text NOT NULL,
     FOREIGN KEY (id_paciente) REFERENCES Paciente (id_paciente),
-    FOREIGN KEY (id_medico) REFERENCES Medico (id_medico)
+    FOREIGN KEY (id_medico) REFERENCES Medico (crm)
   );
 
 DROP TABLE IF EXISTS Enfermaria;
@@ -58,7 +58,7 @@ CREATE TABLE
     salario double not null,
     "horario_trabalho_inicio" time not null,
     "horario_trabalho_final" time not null,
-    coren text not null,
+    coren text not null UNIQUE,
     nome varchar not null,
     "data_admissao" date not null
   );
@@ -76,15 +76,6 @@ CREATE TABLE
     FOREIGN KEY (id_enfermaria) REFERENCES Enfermaria (id_enfermaria)
   );
 
-DROP TABLE IF EXISTS Med_presc;
-
-CREATE TABLE
-  Med_presc (
-    id_prescricao integer,
-    id_medicamento integer,
-    FOREIGN KEY (id_prescricao) REFERENCES Prescricao (id_prescricao),
-    FOREIGN KEY (id_medicamento) REFERENCES Medicamento (id_medicamento)
-  );
 
 DROP TABLE IF EXISTS Medicamento;
 
@@ -107,7 +98,7 @@ CREATE TABLE Medico (
   data_admissao DATE NOT NULL DEFAULT CURRENT_DATE,
   horario_trabalho_inicio TIME NOT NULL,
   horario_trabalho_final TIME NOT NULL,  
-  crm TEXT NOT NULL,
+  crm TEXT NOT NULL UNIQUE,
   especialidade TEXT NOT NULL,
   plantao BOOL NOT NULL
 );
@@ -130,7 +121,10 @@ DROP TABLE IF EXISTS Prescricao;
 CREATE TABLE
   Prescricao (
     id_prescricao INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    medicacao TEXT,
+		id_consulta INTEGER NOT NULL,
+    id_medicamento INTEGER NOT NULL,
     dosagem TEXT,
-    posologia TEXT
-  )
+    posologia TEXT,
+		FOREIGN KEY (id_consulta) REFERENCES Consulta (id_consulta),
+		FOREIGN KEY (id_medicamento) REFERENCES Medicamento (id_medicamento)
+  );
