@@ -1,8 +1,6 @@
 package src;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;

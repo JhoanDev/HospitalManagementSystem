@@ -8,7 +8,7 @@ import src.data.Banco;
 import src.models.Medicamento;
 import src.utils.FuncUtils;
 
-public class MenuMedicamento {
+public class MedicamentoView {
     public static void medicamentMenu(Banco db) throws SQLException {
         int opcao = 0;
         String nome;

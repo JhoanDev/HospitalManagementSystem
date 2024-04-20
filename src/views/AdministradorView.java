@@ -12,7 +12,7 @@ import src.data.Banco;
 import src.models.Administrador;
 import src.utils.FuncUtils;
 
-public class MenuAdministrador {
+public class AdministradorView {
     public static void adminMenu(Banco db) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         int opcao = 0, opcao2 = 0;
         String nome, cpf, telefone, login, senha;

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import src.data.Banco;
 import src.utils.FuncUtils;
 
-public class MenuInicial {
+public class MenuInicialView {
     public static void initialMenu(Banco db)
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         FuncUtils.clearScreen();
@@ -27,33 +27,33 @@ public class MenuInicial {
             FuncUtils.clearScreen();
             switch (opcao) {
                 case 1:
-                    MenuAdministrador.adminMenu(db);
+                    AdministradorView.adminMenu(db);
                     initialMenu(db);
                     break;
                 case 2:
-                    MenuPaciente.patientMenu(db);
+                    PacienteView.patientMenu(db);
                     initialMenu(db);
                     break;
                 case 3:
-                    MenuMedico.doctorMenu(db);
+                    MedicoView.doctorMenu(db);
                     initialMenu(db);
                     break;
                 case 4:
-                    MenuEnfermeiro.nurseMenu(db);
+                    EnfermeiroView.nurseMenu(db);
                     initialMenu(db);
                     break;
                 case 5:
-                    MenuMedicamento.medicamentMenu(db);
+                    MedicamentoView.medicamentMenu(db);
                     initialMenu(db);
                     break;
                 case 6:
-                    MenuEnfermaria.wardMenu(db);
+                    EnfermariaView.wardMenu(db);
                     initialMenu(db);
                     break;
                 case 7:
                     break;
                 case 8:
-                    MenuConsulta.appointmentMenu(db);
+                    ConsultaView.appointmentMenu(db);
                     initialMenu(db);
                     break;
                 case 9:

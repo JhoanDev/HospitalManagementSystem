@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import src.data.Banco;
 import src.utils.FuncUtils;
 
-public class TelaInicial {
+public class TelaInicialView {
     public static void homeScreen(Banco db)
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         FuncUtils.clearScreen();
@@ -19,7 +19,7 @@ public class TelaInicial {
                 opcao = FuncUtils.readInt();
                 FuncUtils.clearScreen();
                 if (opcao == 1) {
-                    TelaLogin.loginScreen(db);
+                    TelaLoginView.loginScreen(db);
                     break;
                 } else if (opcao == 2) {
                     System.out.println("Saindo...");

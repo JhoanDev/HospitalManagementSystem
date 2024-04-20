@@ -14,7 +14,7 @@ import src.models.Medico;
 import src.models.Paciente;
 import src.utils.FuncUtils;
 
-public class MenuConsulta {
+public class ConsultaView {
     public static void appointmentMenu(Banco db) throws SQLException{
         int opcao = 0, opcao2 = 0;
         Date dataConsulta;
@@ -53,7 +53,7 @@ public class MenuConsulta {
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
                     }
-                    MenuPaciente.listPatients(pacientes);
+                    PacienteView.listPatients(pacientes);
                     System.out.print("Insira o código do paciente da consulta: ");
                     idPaciente = FuncUtils.readCod();
                     if (PacienteDao.buscaPaciente(idPaciente, db) == null){
@@ -68,7 +68,7 @@ public class MenuConsulta {
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
                     } 
-                    MenuMedico.listDoctors(medicos);
+                    MedicoView.listDoctors(medicos);
                     System.out.print("Insira o crm do médico da consulta: ");
                     crmMedico = FuncUtils.readCrm();
                     if (MedicoDao.buscaMedico(crmMedico, db) == null){

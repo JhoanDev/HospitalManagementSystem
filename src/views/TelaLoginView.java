@@ -8,7 +8,7 @@ import src.data.Banco;
 import src.models.Administrador;
 import src.utils.FuncUtils;
 
-public class TelaLogin {
+public class TelaLoginView {
 
     public static void loginScreen(Banco db)
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -29,7 +29,7 @@ public class TelaLogin {
             }
             else if (login.equals(administrador.getLogin()) && senha.equals(administrador.getSenha()))// tem erro na senha então por enquanto deixei assim
             {
-                MenuInicial.initialMenu(db);
+                MenuInicialView.initialMenu(db);
                 return;
             } else {
                 FuncUtils.clearScreen();

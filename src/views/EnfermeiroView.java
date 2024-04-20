@@ -10,7 +10,7 @@ import src.data.Banco;
 import src.models.Enfermeiro;
 import src.utils.FuncUtils;
 
-public class MenuEnfermeiro {
+public class EnfermeiroView {
     public static void nurseMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         String nome, cpf, telefone, coren;

@@ -10,7 +10,7 @@ import src.data.Banco;
 import src.models.Medico;
 import src.utils.FuncUtils;
 
-public class MenuMedico {
+public class MedicoView {
 
     public static void doctorMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;

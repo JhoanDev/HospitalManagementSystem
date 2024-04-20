@@ -8,7 +8,7 @@ import src.data.Banco;
 import src.models.Enfermaria;
 import src.utils.FuncUtils;
 
-public class MenuEnfermaria {
+public class EnfermariaView {
     public static void wardMenu(Banco db) throws SQLException {
         int option = 0, leitos = 0, leitosDisponiveis = 0;
         String codEnfermaria;
