@@ -56,8 +56,14 @@ public class Medico extends Funcionario {
     public String toString() {
         String s = "";
         s += "Médico: " + getNome() + "\n";
-        s += "CRM: " + crm + "\n";
-        s += "Especialidade: " + especialidade + "\n";
+        s += "CPF: " + getCpf() + "\n";
+        s += "Telefone: " + getTelefone() + "\n";
+        s += "Salário: " + getSalario() + "\n";
+        s += "Data de nascimento: " + getDataNasc() + "\n";
+        s += "Data de admissão: " + getDataDeAdmissao() + "\n";
+        s += "Horário de trabalho: " + getHorarioDeTrabalhoInicio() + " às " + getHorarioDeTrabalhoFinal() + "\n";
+        s += "CRM: " + getCrm() + "\n";
+        s += "Especialidade: " + getEspecialidade() + "\n";
         s += "Plantão: " + getPlantao() + "\n";
         return s;
     }

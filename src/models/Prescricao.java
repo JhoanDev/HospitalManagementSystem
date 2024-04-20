@@ -68,7 +68,12 @@ public class Prescricao {
 
     @Override
     public String toString() {
-        return "Prescricao [codPrescricao=" + codPrescricao + ", dosagem=" + dosagem + ", medicamento=" + medicamento
-                + ", posologia=" + posologia + "]\n";
+        String s = "";
+        s += "Código da prescrição: " + getCodPrescricao() + "\n";
+        s += "Código da consulta: " + getCodConsulta() + "\n";
+        s += "Medicamento: " + getMedicamento().getNome() + "\n";
+        s += "Dosagem: " + getDosagem() + "\n";
+        s += "Posologia: " + getPosologia() + "\n";
+        return s;
     }
 }
