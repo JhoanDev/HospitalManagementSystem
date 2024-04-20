@@ -81,7 +81,14 @@ public class EnfermariaView {
             }
         }
     }
-
+    
+    public static void listWards(ArrayList<Enfermaria> enfermarias){
+        System.out.printf("|Cod%s|Leitos Totais|Leitos disponiveís\n", FuncUtils.spacesGenerator(4));
+        for (Enfermaria e : enfermarias) {
+            System.out.printf("|%-7s|%-13d|%-18d\n", e.getCodEnfermaria(), e.getQtdeLeitos(),
+                    e.getLeitosDisponiveis());
+        }
+    }
     public static void displayMenu() {
         System.out.println("----------- MENU ENFERMARIA -----------");
         System.out.println("[1] - Cadastrar enfermaria");

@@ -58,4 +58,24 @@ public class EnfermariaDao {
         }
         return enfermarias;
     }
+
+
+    public static ArrayList<Enfermaria> listarEnfermariasDisponiveis(Banco db) throws SQLException {
+        String query = "SELECT * FROM Enfermaria WHERE leitos_disponiveis > 0;";
+        ResultSet rs = db.queryBusca(query);
+        ArrayList<Enfermaria> enfermarias = new ArrayList<Enfermaria>();
+        while (rs.next()) {
+            Enfermaria enfermaria = new Enfermaria();
+            String codEnfermaria = rs.getString("id_enfermaria");
+            int qnt_leitos = rs.getInt("qnt_leitos");
+            int leitos_disponiveis = rs.getInt("leitos_disponiveis");
+            enfermaria.setCodEnfermaria(codEnfermaria);
+            enfermaria.setQtdeLeitos(qnt_leitos);
+            enfermaria.setLeitosDisponiveis(leitos_disponiveis);
+            enfermarias.add(enfermaria);
+        }
+        return enfermarias;
+    }
+
+
 }
