@@ -19,7 +19,7 @@ public class TelaLoginView {
             System.out.print("Digite sua senha: ");
             String senha = FuncUtils.readPassword();
             FuncUtils.clearScreen();
-            //encriptando para fazer a comparação
+            // encriptando para fazer a comparação
             senha = FuncUtils.encryptMD5(senha);
 
             Administrador administrador = AdministradorDao.buscaAdministrador(login, db);
@@ -27,9 +27,7 @@ public class TelaLoginView {
                 FuncUtils.clearScreen();
                 System.out.println("Login ou senha inválidos. Tente novamente.");
                 loginScreen(db);
-            }
-            else if (login.equals(administrador.getLogin()) && senha.equals(administrador.getSenha()))// tem erro na senha então por enquanto deixei assim
-            {
+            } else if (login.equals(administrador.getLogin()) && senha.equals(administrador.getSenha())) {
                 MenuInicialView.initialMenu(db);
                 return;
             } else {

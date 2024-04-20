@@ -52,7 +52,8 @@ public class ConsultaDao {
         return null;
     }
 
-    public static Consulta buscaConsulta(Date dataConsulta, Time horarioConsulta, String codMedico, Banco db) throws SQLException {
+    public static Consulta buscaConsulta(Date dataConsulta, Time horarioConsulta, String codMedico, Banco db)
+            throws SQLException {
         String query = "SELECT * FROM Consulta WHERE data_consulta = '" + dataConsulta + "' AND hora_consulta = '"
                 + horarioConsulta + "' AND id_medico = '" + codMedico + "';";
         ResultSet rs = db.queryBusca(query);
@@ -76,7 +77,7 @@ public class ConsultaDao {
         }
         return null;
     }
-    
+
     public static Consulta buscaConsulta(Date dataConsulta, Time horarioConsulta, Banco db) throws SQLException {
         String query = "SELECT * FROM Consulta WHERE data_consulta = '" + dataConsulta + "' AND hora_consulta = '"
                 + horarioConsulta + "'";

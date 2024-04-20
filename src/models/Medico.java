@@ -43,7 +43,7 @@ public class Medico extends Funcionario {
     }
 
     public String getPlantao() {
-        if (plantao) 
+        if (plantao)
             return "Sim";
         return "Não";
     }

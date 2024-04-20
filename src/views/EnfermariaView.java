@@ -13,7 +13,7 @@ public class EnfermariaView {
         int option = 0, leitos = 0, leitosDisponiveis = 0;
         String codEnfermaria;
         Enfermaria enfermaria;
-        ArrayList <Enfermaria> enfermarias;
+        ArrayList<Enfermaria> enfermarias;
         while (option != 6) {
             displayMenu();
             option = FuncUtils.readInt();
@@ -68,7 +68,7 @@ public class EnfermariaView {
                     System.out.printf("|Cod%s|Leitos Totais|Leitos disponiveís\n", FuncUtils.spacesGenerator(4));
                     for (Enfermaria e : enfermarias) {
                         System.out.printf("|%-7s|%-13d|%-18d\n", e.getCodEnfermaria(), e.getQtdeLeitos(),
-                        e.getLeitosDisponiveis());
+                                e.getLeitosDisponiveis());
                     }
                     System.out.println();
                     break;

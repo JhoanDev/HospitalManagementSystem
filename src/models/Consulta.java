@@ -135,13 +135,14 @@ public class Consulta {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.prescricoes.size(); i++) {
             sb.append("Cod: ").append(String.format("%-4s", prescricoes.get(i).getCodPrescricao())).append("|");
-            sb.append("Medicamento: ").append(String.format("%-20s", prescricoes.get(i).getMedicamento().getNome())).append("|");
+            sb.append("Medicamento: ").append(String.format("%-20s", prescricoes.get(i).getMedicamento().getNome()))
+                    .append("|");
             sb.append(String.format("%-40s", prescricoes.get(i).getDosagem())).append("|");
             sb.append(String.format("%-40s", prescricoes.get(i).getPosologia())).append("\n");
         }
         return sb.toString();
     }
-    
+
     @Override
     public String toString() {
         String s = "";

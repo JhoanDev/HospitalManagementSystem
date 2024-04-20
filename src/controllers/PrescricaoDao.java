@@ -77,7 +77,8 @@ public class PrescricaoDao {
         }
         for (int i = 0; i < codPrescricao.size(); i++) {
             Medicamento medicamento = MedicamentoDao.buscaMedicamento(codMedicamento.get(i), db);
-            prescricao = new Prescricao(codPrescricao.get(i), codConsulta, medicamento, dosagem.get(i), posologia.get(i));
+            prescricao = new Prescricao(codPrescricao.get(i), codConsulta, medicamento, dosagem.get(i),
+                    posologia.get(i));
             prescricoes.add(prescricao);
         }
         return prescricoes;

@@ -14,7 +14,7 @@ public class Enfermeiro extends Funcionario {
         this.coren = coren;
     }
 
-    public Enfermeiro(){
+    public Enfermeiro() {
         super();
     }
 

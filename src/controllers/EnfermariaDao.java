@@ -10,7 +10,8 @@ import src.models.Enfermaria;
 public class EnfermariaDao {
 
     public static void cadastrarEnfermaria(Enfermaria enfermaria, Banco db) {
-        String query = String.format("INSERT INTO Enfermaria (qnt_leitos, leitos_disponiveis) VALUES ('%d', '%d');", enfermaria.getLeitosDisponiveis(), enfermaria.getLeitosDisponiveis());
+        String query = String.format("INSERT INTO Enfermaria (qnt_leitos, leitos_disponiveis) VALUES ('%d', '%d');",
+                enfermaria.getLeitosDisponiveis(), enfermaria.getLeitosDisponiveis());
         db.queryInsup(query);
     }
 
@@ -29,16 +30,17 @@ public class EnfermariaDao {
     }
 
     public static void editaEnfermaria(Enfermaria enfermaria, Banco db) {
-        String query = String.format("UPDATE Enfermaria SET qnt_leitos = '%d', leitos_disponiveis = '%d' WHERE id_enfermaria = '%s';",
+        String query = String.format(
+                "UPDATE Enfermaria SET qnt_leitos = '%d', leitos_disponiveis = '%d' WHERE id_enfermaria = '%s';",
                 enfermaria.getQtdeLeitos(), enfermaria.getLeitosDisponiveis(), enfermaria.getCodEnfermaria());
         db.queryInsup(query);
     }
-    
+
     public static void excluirEnfermaria(Enfermaria enfermaria, Banco db) throws SQLException {
-        String query = String.format("DELETE FROM Enfermaria WHERE id_enfermaria = '%s';", enfermaria.getCodEnfermaria());
+        String query = String.format("DELETE FROM Enfermaria WHERE id_enfermaria = '%s';",
+                enfermaria.getCodEnfermaria());
         db.queryInsup(query);
     }
-    
 
     public static ArrayList<Enfermaria> listarEnfermarias(Banco db) throws SQLException {
         String query = "SELECT * FROM Enfermaria;";
@@ -55,5 +57,5 @@ public class EnfermariaDao {
             enfermarias.add(enfermaria);
         }
         return enfermarias;
-    } 
+    }
 }

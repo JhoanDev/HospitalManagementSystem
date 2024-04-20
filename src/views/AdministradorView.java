@@ -143,11 +143,12 @@ public class AdministradorView {
                         break;
                     }
                     System.out.printf("|Nome%s|Sexo%s|Salário%s|Login%s\n",
-                    FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
-                    FuncUtils.spacesGenerator(3),
-                    FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
                     for (Administrador a : administradores) {
-                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", a.getNome(), a.getSexo(), a.getSalario(), a.getLogin());
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", a.getNome(), a.getSexo(), a.getSalario(),
+                                a.getLogin());
                     }
                     System.out.println();
                     break;
