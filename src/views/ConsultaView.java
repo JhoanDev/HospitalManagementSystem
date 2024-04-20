@@ -161,13 +161,14 @@ public class ConsultaView {
                         break;
                     }
                     System.out.printf("|Cod%s|Medicamento%s|Dosagem%s|Posologia\n", FuncUtils.spacesGenerator(4),
-                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(7));
+                            FuncUtils.spacesGenerator(19), FuncUtils.spacesGenerator(40));
                     for (Prescricao p : prescricoes) {
-                        System.out.printf("|%-7s|%-30s|%-10s|%-10s\n", p.getCodPrescricao(),
+                        System.out.printf("|%-7s|%-30s|%-47s|%-10s\n", p.getCodPrescricao(),
                                 p.getMedicamento().getNome(),
                                 p.getDosagem(), p.getPosologia());
                     }
-                    return;
+                    System.out.println();
+                    break;
                 case 6:
                     System.out.println("Saindo...");
                     return;
@@ -179,6 +180,7 @@ public class ConsultaView {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU CONSULTA -----------");
         System.out.println("[1] - Cadastrar Consulta");
         System.out.println("[2] - Excluir Consulta");
         System.out.println("[3] - Listar Consultas");

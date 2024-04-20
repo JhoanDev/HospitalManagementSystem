@@ -72,6 +72,7 @@ public class MedicamentoView {
     }
 
     public static void exibirMenu() {
+        System.out.println("----------- MENU MEDICAMENTO -----------");
         System.out.println("[1] - Cadastrar medicamento");
         System.out.println("[2] - Buscar medicamento");
         System.out.println("[3] - Editar medicamento");

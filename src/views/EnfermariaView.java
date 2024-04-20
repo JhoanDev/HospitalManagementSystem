@@ -83,6 +83,7 @@ public class EnfermariaView {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU ENFERMARIA -----------");
         System.out.println("[1] - Cadastrar enfermaria");
         System.out.println("[2] - Buscar enfermaria");
         System.out.println("[3] - Editar enfermaria");

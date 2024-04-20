@@ -160,6 +160,7 @@ public class EnfermeiroView {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU ENFERMEIRO -----------");
         System.out.println("[1] - Cadastrar enfermeiro");
         System.out.println("[2] - Editar enfermeiro");
         System.out.println("[3] - Excluir enfermeiro");

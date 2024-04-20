@@ -11,7 +11,8 @@ public class TelaInicialView {
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         FuncUtils.clearScreen();
         while (true) {
-            System.out.println("\n[1] - Logar");
+            System.out.println("----------- TELA INICIAL -----------");
+            System.out.println("[1] - Logar");
             System.out.println("[2] - Sair");
             System.out.print("Digite sua opcao: ");
             int opcao = 0;

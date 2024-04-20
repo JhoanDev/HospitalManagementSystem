@@ -11,6 +11,7 @@ public class MenuInicialView {
     public static void initialMenu(Banco db)
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         FuncUtils.clearScreen();
+        System.out.println("----------- MENU PRINCIPAL -----------");
         System.out.println("[1] - Menu Administrador");
         System.out.println("[2] - Menu Paciente");
         System.out.println("[3] - Menu Médico");

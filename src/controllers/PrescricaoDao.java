@@ -64,14 +64,20 @@ public class PrescricaoDao {
         String query = "SELECT * FROM Prescricao WHERE id_consulta = '" + codConsulta + "';";
         ResultSet rs = db.queryBusca(query);
         ArrayList<Prescricao> prescricoes = new ArrayList<Prescricao>();
+        ArrayList<String> codPrescricao = new ArrayList<String>();
+        ArrayList<String> codMedicamento = new ArrayList<String>();
+        ArrayList<String> dosagem = new ArrayList<String>();
+        ArrayList<String> posologia = new ArrayList<String>();
         Prescricao prescricao;
         while (rs.next()) {
-            String codPrescricao = rs.getString("id_prescricao");
-            String codMedicamento = rs.getString("id_medicamento");
-            Medicamento medicamento = MedicamentoDao.buscaMedicamento(codMedicamento, db);
-            String dosagem = rs.getString("dosagem");
-            String posologia = rs.getString("posologia");
-            prescricao = new Prescricao(codPrescricao, codConsulta, medicamento, dosagem, posologia);
+            codPrescricao.add(rs.getString("id_prescricao"));
+            codMedicamento.add(rs.getString("id_medicamento"));
+            dosagem.add(rs.getString("dosagem"));
+            posologia.add(rs.getString("posologia"));
+        }
+        for (int i = 0; i < codPrescricao.size(); i++) {
+            Medicamento medicamento = MedicamentoDao.buscaMedicamento(codMedicamento.get(i), db);
+            prescricao = new Prescricao(codPrescricao.get(i), codConsulta, medicamento, dosagem.get(i), posologia.get(i));
             prescricoes.add(prescricao);
         }
         return prescricoes;

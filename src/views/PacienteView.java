@@ -145,6 +145,7 @@ public class PacienteView {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU PACIENTE -----------");
         System.out.println("[1] Cadastrar Paciente");
         System.out.println("[2] Editar Paciente");
         System.out.println("[3] Excluir Paciente");

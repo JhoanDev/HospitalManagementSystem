@@ -171,6 +171,7 @@ public class MedicoView {
     }
 
     public static void exibirMenu() {
+        System.out.println("----------- MENU MEDICO -----------");
         System.out.println("[1] - Cadastrar Médico");
         System.out.println("[2] - Editar Médico");
         System.out.println("[3] - Excluir Médico");

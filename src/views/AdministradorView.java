@@ -171,6 +171,7 @@ public class AdministradorView {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU ADM -----------");
         System.out.println("[1] - Cadastrar administrador");
         System.out.println("[2] - Editar administrador");
         System.out.println("[3] - Excluir administrador");
