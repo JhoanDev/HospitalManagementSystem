@@ -54,7 +54,11 @@ public class MenuConsulta {
                     MenuPaciente.listPatients(pacientes);
                     System.out.print("Insira o código do paciente da consulta: ");
                     idPaciente = FuncUtils.readCod();
-
+                    if (PacienteDao.buscaPaciente(idPaciente, db) == null){
+                        System.out.println("Código não está nos pacientes cadastrados.");
+                        System.out.println("Cadastro de consulta cancelado.");
+                        break;
+                    }
                     System.out.println();
                     medicos = MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horarioConsulta, db);
                     if (medicos.isEmpty()) {
@@ -64,8 +68,12 @@ public class MenuConsulta {
                     } 
                     MenuMedico.listDoctors(medicos);
                     System.out.print("Insira o crm do médico da consulta: ");
-                    crmMedico = FuncUtils.readCod();
-
+                    crmMedico = FuncUtils.readCrm();
+                    if (MedicoDao.buscaMedico(crmMedico, db) == null){
+                        System.out.println("CRM não está nos médicos disponíveis.");
+                        System.out.println("Cadastro de consulta cancelado.");
+                        break;
+                    }
                     ConsultaDao.cadastrarConsulta(new Consulta(dataConsulta, horarioConsulta, diagnostico, sintomas, precisaInternar, encaminhamento, crmMedico, idPaciente), db);
                     break;
                 case 2:

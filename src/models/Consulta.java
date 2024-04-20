@@ -24,6 +24,8 @@ public class Consulta {
         this.sintomas = sintomas;
         this.precisaInternar = precisaInternar;
         this.encaminhamento = encaminhamento;
+        this.idMedico = idMedico;
+        this.idPaciente = idPaciente;
     }
 
     public Consulta (Date dataConsulta, Time horarioConsulta, String diagnostico,
@@ -34,6 +36,8 @@ public class Consulta {
         this.sintomas = sintomas;
         this.precisaInternar = precisaInternar;
         this.encaminhamento = encaminhamento;
+        this.idMedico = idMedico;
+        this.idPaciente = idPaciente;
     }
 
     public Consulta(){
@@ -46,6 +50,22 @@ public class Consulta {
 
     public void setCodConsulta(String codConsulta) {
         this.codConsulta = codConsulta;
+    }
+
+    public String getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(String idMedico) {
+        this.idMedico = idMedico;
+    }
+
+    public String getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(String idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public Date getDataConsulta() {
