@@ -78,6 +78,7 @@ public class AdministradorView {
                         System.out.println("[8] - Horário de trabalho (início)");
                         System.out.println("[9] - Horário de trabalho (final)");
                         System.out.println("[10] - Cancelar");
+                        System.out.print("Digite sua opção: ");
                         opcao2 = FuncUtils.readInt();
                         switch (opcao2) {
                             case 1:

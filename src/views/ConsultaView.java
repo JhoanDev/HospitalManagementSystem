@@ -46,6 +46,7 @@ public class ConsultaView {
                     dataConsulta = FuncUtils.readDate();
                     System.out.print("Insira o horário da consulta, ");
                     horarioConsulta = FuncUtils.readTime();
+
                     System.out.print("Insira o diagnóstico: ");
                     diagnostico = FuncUtils.readOnlyLettersAndSpaces();
                     sintomas = FuncUtils.readSymptoms();
@@ -59,6 +60,7 @@ public class ConsultaView {
                         break;
                     }
                     PacienteView.listPatients(pacientes);
+
                     System.out.print("Insira o código do paciente da consulta: ");
                     idPaciente = FuncUtils.readCod();
                     if (PacienteDao.buscaPaciente(idPaciente, db) == null) {
@@ -67,6 +69,7 @@ public class ConsultaView {
                         break;
                     }
                     System.out.println();
+
                     medicos = MedicoDao.verificarMedicosDisponiveisEmAlgumHorario(horarioConsulta, db);
                     if (medicos.isEmpty()) {
                         System.out.println("Não há médicos disponíveis para no horário da consulta.");
@@ -74,6 +77,7 @@ public class ConsultaView {
                         break;
                     }
                     MedicoView.listDoctors(medicos);
+
                     System.out.print("Insira o crm do médico da consulta: ");
                     crmMedico = FuncUtils.readCrm();
                     if (MedicoDao.buscaMedico(crmMedico, db) == null) {
@@ -81,10 +85,20 @@ public class ConsultaView {
                         System.out.println("Cadastro de consulta cancelado.");
                         break;
                     }
+                    System.out.println();
+
+                    consulta = ConsultaDao.buscaConsulta(dataConsulta, horarioConsulta, crmMedico, db);
+                    if (consulta != null) {
+                        System.out.println("Já existe uma consulta com este médico nesta data e horário.");
+                        System.out.println("Cadastro de consulta cancelado.");
+                        break;
+                    }
+
                     medicamentos = MedicamentoDao.listarMedicamentos(db);
                     ConsultaDao.cadastrarConsulta(new Consulta(dataConsulta, horarioConsulta, diagnostico, sintomas,
                             precisaInternar, crmMedico, idPaciente), db);
-                    consulta = ConsultaDao.buscaConsulta(dataConsulta, horarioConsulta, db);
+                    consulta = ConsultaDao.buscaConsulta(dataConsulta, horarioConsulta, crmMedico, db);
+
                     if (FuncUtils.readYesOrNo("Deseja prescrever medicamentos? [S/N]: ")) {
                         if (medicamentos.isEmpty()) {
                             System.out.println("Não há medicamentos cadastrados.");
@@ -105,6 +119,7 @@ public class ConsultaView {
                             PrescricaoDao.cadastrarPrescricao(prescricao, db);
                         } while (FuncUtils.readYesOrNo("Deseja prescrever mais medicamentos? [S/N]: "));
                     }
+
                     break;
                 case 2:
                     System.out.print("Insira o código da consulta: ");

@@ -52,6 +52,31 @@ public class ConsultaDao {
         return null;
     }
 
+    public static Consulta buscaConsulta(Date dataConsulta, Time horarioConsulta, String codMedico, Banco db) throws SQLException {
+        String query = "SELECT * FROM Consulta WHERE data_consulta = '" + dataConsulta + "' AND hora_consulta = '"
+                + horarioConsulta + "' AND id_medico = '" + codMedico + "';";
+        ResultSet rs = db.queryBusca(query);
+
+        if (rs.next()) {
+            Consulta consulta = new Consulta();
+            consulta.setCodConsulta(rs.getString("id_consulta"));
+            consulta.setDataConsulta(dataConsulta);
+            consulta.setHorarioConsulta(horarioConsulta);
+            consulta.setDiagnostico(rs.getString("diagnostico"));
+            consulta.setPrecisaInternar(rs.getBoolean("precisa_internar"));
+            consulta.setIdPaciente(rs.getString("id_paciente"));
+            consulta.setIdMedico(rs.getString("id_medico"));
+
+            // Obter os sintomas da consulta
+            String sintomasStr = rs.getString("sintomas");
+            ArrayList<String> sintomas = new ArrayList<>(Arrays.asList(sintomasStr.split(",")));
+            consulta.setSintomas(sintomas);
+            consulta.setPrescricoes(PrescricaoDao.listarPrescricoes(consulta.getCodConsulta(), db));
+            return consulta;
+        }
+        return null;
+    }
+    
     public static Consulta buscaConsulta(Date dataConsulta, Time horarioConsulta, Banco db) throws SQLException {
         String query = "SELECT * FROM Consulta WHERE data_consulta = '" + dataConsulta + "' AND hora_consulta = '"
                 + horarioConsulta + "'";
