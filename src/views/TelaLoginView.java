@@ -14,7 +14,7 @@ public class TelaLoginView {
             throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         while (true) {
             System.out.println("----------- TELA DE LOGIN -----------");
-            System.out.print("\nDigite seu login: ");
+            System.out.print("Digite seu login: ");
             String login = FuncUtils.readLogin();
             System.out.print("Digite sua senha: ");
             String senha = FuncUtils.readPassword();

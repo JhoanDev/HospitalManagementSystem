@@ -98,6 +98,17 @@ public class Consulta {
         this.sintomas = sintomas;
     }
 
+    public String getSintomasStr() {
+        String s = "";
+        for (int i = 0; i < this.sintomas.size(); i++) {
+            s += sintomas.get(i);
+            if (i != sintomas.size() - 1) {
+                s += ", ";
+            }
+        }
+        return s;
+    }
+
     public boolean isPrecisaInternar() {
         return precisaInternar;
     }
@@ -120,18 +131,30 @@ public class Consulta {
         this.prescricoes = prescricoes;
     }
 
+    public String getPrescricoesStr() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.prescricoes.size(); i++) {
+            sb.append("Cod: ").append(String.format("%-4s", prescricoes.get(i).getCodPrescricao())).append("|");
+            sb.append("Medicamento: ").append(String.format("%-20s", prescricoes.get(i).getMedicamento().getNome())).append("|");
+            sb.append(String.format("%-40s", prescricoes.get(i).getDosagem())).append("|");
+            sb.append(String.format("%-40s", prescricoes.get(i).getPosologia())).append("\n");
+        }
+        return sb.toString();
+    }
+    
     @Override
     public String toString() {
         String s = "";
-        s += "Código da consulta: " + codConsulta + "\n";
-        s += "Data da consulta: " + dataConsulta + "\n";
-        s += "Horário da consulta: " + horarioConsulta + "\n";
-        s += "Diagnóstico: " + diagnostico + "\n";
-        s += "Sintomas: ";
-        for (String sintoma : sintomas)
-            s += sintoma + ", ";
-        s += "\n";
-        s += "Precisa internar: " + getPrecisaInternar() + "\n";
+        s += "Código da consulta: " + getCodConsulta() + "\n";
+        s += "Data da consulta: " + getDataConsulta() + "\n";
+        s += "Horário da consulta: " + getHorarioConsulta() + "\n";
+        s += "Diagnóstico: " + getDiagnostico() + "\n";
+        s += "Precisou internar: " + getPrecisaInternar() + "\n";
+        s += "Sintomas: " + getSintomasStr() + "\n";
+        s += "CRM do Médico: " + getIdMedico() + "\n";
+        s += "Id do Paciente: " + getIdPaciente() + "\n";
+        s += "Prescrições: \n";
+        s += getPrescricoesStr();
         return s;
     }
 
