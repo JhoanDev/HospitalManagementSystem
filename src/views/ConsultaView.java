@@ -19,6 +19,10 @@ import src.models.Prescricao;
 import src.utils.FuncUtils;
 
 public class ConsultaView {
+    public static void main(String[] args) throws SQLException {
+        Banco db = new Banco(); 
+        appointmentMenu(db);
+    }
     public static void appointmentMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         Date dataConsulta;
@@ -96,9 +100,11 @@ public class ConsultaView {
                     }
 
                     if (precisaInternar) {
-                        if(!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db)))
+                        System.out.println(!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db)));
+                        if(!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db))){
                             System.out.println("Cadastro de consulta cancelado, pois não foi possível realizar a internação.");
                             break;
+                        }
                     }
 
                     medicamentos = MedicamentoDao.listarMedicamentos(db);

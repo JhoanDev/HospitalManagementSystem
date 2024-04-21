@@ -67,7 +67,7 @@ public class Internacao {
         String s = "";
         s += "Código da internação: " + getCodInternacao() + "\n";
         s += "Data de internação: " + getDataInternacao() + "\n";
-        s += "Data de alta: " + getDataAlta() + "\n";
+        s += "Data de alta: " + getDataAlta()==null ? "Internado(a)" : getDataAlta() + "\n";
         s += "Paciente internado: " + getIdPaciente()+ "\n";
         s += "Enfermaria da internação: " + getIdEnfermaria() + "\n";
         return s;

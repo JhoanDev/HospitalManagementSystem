@@ -13,9 +13,10 @@ public class InternacaoDao {
     
     public static void cadastrarInternacao(Internacao internacao, Banco db) {
         String query = String.format(
-                "INSERT INTO Internacao (data_internacao, data_alta, id_paciente, id_enfermaria) VALUES ('%tF,'%s','%s');",
+                "INSERT INTO Internacao (data_internacao, id_paciente, id_enfermaria) VALUES ('%tF','%s','%s');",
                 internacao.getDataInternacao(),Integer.parseInt(internacao.getIdPaciente()),
                 Integer.parseInt(internacao.getIdEnfermaria()));
+        System.out.println(query);        
         db.queryInsup(query);
     }
 
@@ -30,10 +31,15 @@ public class InternacaoDao {
             Date dataInternacao = Date.valueOf(dataInternacaoStr);
             internacao.setDataInternacao(dataInternacao);
 
-            internacao.setIdPaciente(rs.getString("id_paciente"));
-            internacao.setIdEnfermaria(rs.getString("id_enfemaria"));
+            if ( rs.getString("data_alta") != null) {
+                String dataAltaStr = rs.getString("data_alta");
+                Date dataAlta = Date.valueOf(dataAltaStr);
+                internacao.setDataAlta(dataAlta);
+            }  
 
-     
+            internacao.setIdPaciente(rs.getString("id_paciente"));
+            internacao.setIdEnfermaria(rs.getString("id_enfermaria"));
+            return internacao;
         }
         return null;
     }
@@ -62,6 +68,14 @@ public class InternacaoDao {
             Date dataInternacao = Date.valueOf(dataInternacaoStr);
             internacao.setDataInternacao(dataInternacao);
 
+           
+            if ( rs.getString("data_alta") != null) {
+                String dataAltaStr = rs.getString("data_alta");
+                Date dataAlta = Date.valueOf(dataAltaStr);
+                internacao.setDataAlta(dataAlta);
+            }
+            
+
             internacao.setIdPaciente(rs.getString("id_paciente"));
             internacao.setIdEnfermaria(rs.getString("id_enfermaria"));
 
@@ -72,8 +86,9 @@ public class InternacaoDao {
     }
 
     public static ArrayList<Internacao> listarInternacoesAtivas(Banco db) throws SQLException {
-        String query = "SELECT * FROM Internacao WHERE data_alta != null;";
+        String query = "SELECT * FROM Internacao WHERE data_alta IS NULL;";
         ResultSet rs = db.queryBusca(query);
+        System.out.println(rs.getString("id_internacao"));
         ArrayList<Internacao> internacoes = new ArrayList<Internacao>();
         while (rs.next()) {
             Internacao internacao = new Internacao();
@@ -83,9 +98,14 @@ public class InternacaoDao {
             Date dataInternacao = Date.valueOf(dataInternacaoStr);
             internacao.setDataInternacao(dataInternacao);
 
+            if ( rs.getString("data_alta") != null) {
+                String dataAltaStr = rs.getString("data_alta");
+                Date dataAlta = Date.valueOf(dataAltaStr);
+                internacao.setDataAlta(dataAlta);
+            }
+
             internacao.setIdPaciente(rs.getString("id_paciente"));
             internacao.setIdEnfermaria(rs.getString("id_enfermaria"));
-
 
             internacoes.add(internacao);
         }
