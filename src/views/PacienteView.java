@@ -9,7 +9,7 @@ import src.models.Paciente;
 import src.data.Banco;
 import src.utils.FuncUtils;
 
-public class MenuPaciente {
+public class PacienteView {
     public static void patientMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         String nome, cpf, telefone, cod;
@@ -27,6 +27,7 @@ public class MenuPaciente {
                     nome = FuncUtils.readOnlyLettersAndSpaces();
                     cpf = FuncUtils.readCPF();
                     telefone = FuncUtils.readPhoneNumber();
+                    System.out.print("Digite a data de nascimento, ");
                     data = FuncUtils.readDate();
                     sexo = FuncUtils.readSex();
                     planoSaude = FuncUtils.readHealthPlan();
@@ -34,7 +35,7 @@ public class MenuPaciente {
                     PacienteDao.cadastrarPaciente(new Paciente(nome, cpf, telefone, data, sexo, false, planoSaude), db);
                     break;
                 case 2:
-                    System.out.println("Digite o código do paciente: ");
+                    System.out.print("Digite o código do paciente: ");
                     cod = FuncUtils.readCod();
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     System.out.println(paciente);
@@ -86,7 +87,7 @@ public class MenuPaciente {
                     }
                     break;
                 case 3:
-                    System.out.println("Digite o codigo do paciente que deseja excluir: ");
+                    System.out.print("Digite o codigo do paciente que deseja excluir: ");
                     cod = FuncUtils.readCod();
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     if (paciente != null) {
@@ -96,7 +97,7 @@ public class MenuPaciente {
                     }
                     break;
                 case 4:
-                    System.out.println("Digite o código do paciente que deseja buscar: ");
+                    System.out.print("Digite o código do paciente que deseja buscar: ");
                     cod = FuncUtils.readCod();
                     paciente = PacienteDao.buscaPaciente(cod, db);
                     if (paciente != null) {
@@ -107,28 +108,7 @@ public class MenuPaciente {
                     break;
                 case 5:
                     pacientes = PacienteDao.listarPacientes(db);
-                    if (pacientes.isEmpty()) {
-                        System.out.println("Nenhum paciente cadastrado.");
-                        break;
-                    }
-                    System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
-                            FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26),
-                            FuncUtils.spacesGenerator(9),
-                            FuncUtils.spacesGenerator(4),
-                            FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8),
-                            FuncUtils.spacesGenerator(1));
-                    for (Paciente p : pacientes) {
-                        System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n",
-                                p.getCodPaciente(),
-                                p.getNome(),
-                                p.getCpf(),
-                                p.getTelefone(),
-                                p.getDataNasc(),
-                                p.getSexo(),
-                                p.getInternado(),
-                                p.getPlanoDeSaude());
-                    }
-                    System.out.println();
+                    listPatients(pacientes);
                     break;
                 case 6:
                     System.out.println("Saindo...");
@@ -139,7 +119,33 @@ public class MenuPaciente {
         }
     }
 
+    public static void listPatients(ArrayList<Paciente> pacientes) {
+        if (pacientes.isEmpty()) {
+            System.out.println("Nenhum paciente cadastrado.");
+            return;
+        }
+        System.out.printf("|Cod%s|Nome%s|CPF%s|Telefone%s|Nascimento%s|Sexo%s|Internado%s|Plano de Saúde\n",
+                FuncUtils.spacesGenerator(4), FuncUtils.spacesGenerator(26),
+                FuncUtils.spacesGenerator(9),
+                FuncUtils.spacesGenerator(4),
+                FuncUtils.spacesGenerator(2), FuncUtils.spacesGenerator(8),
+                FuncUtils.spacesGenerator(1));
+        for (Paciente p : pacientes) {
+            System.out.printf("|%-7s|%-30s|%-12s|%-12s|%-12s|%-12s|%-10s|%s\n",
+                    p.getCodPaciente(),
+                    p.getNome(),
+                    p.getCpf(),
+                    p.getTelefone(),
+                    p.getDataNasc(),
+                    p.getSexo(),
+                    p.getInternado(),
+                    p.getPlanoDeSaude());
+        }
+        System.out.println();
+    }
+
     public static void displayMenu() {
+        System.out.println("----------- MENU PACIENTE -----------");
         System.out.println("[1] Cadastrar Paciente");
         System.out.println("[2] Editar Paciente");
         System.out.println("[3] Excluir Paciente");

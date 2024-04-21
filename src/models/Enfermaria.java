@@ -51,9 +51,11 @@ public class Enfermaria {
 
     @Override
     public String toString() {
-        return "Enfermaria [codEnfermaria=" + codEnfermaria + ", leitosDisponiveis=" + leitosDisponiveis
-                + ", qtdeLeitos="
-                + qtdeLeitos + "]\n";
+        String s = "";
+        s += "Código da enfermaria: " + getCodEnfermaria() + "\n";
+        s += "Quantidade de leitos: " + getQtdeLeitos() + "\n";
+        s += "Leitos disponíveis: " + getLeitosDisponiveis() + "\n";
+        return s;
     }
 
 }

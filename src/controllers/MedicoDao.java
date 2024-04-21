@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import src.data.Banco;
 import src.models.Medico;
+
 public class MedicoDao {
 
     public static void cadastrarMedico(Medico medico, Banco db) {
@@ -35,7 +36,7 @@ public class MedicoDao {
             medico.setDataNasc(dataNasc);
 
             medico.setSalario(rs.getDouble("salario"));
-            
+
             String dataAdmissaoStr = rs.getString("data_admissao");
             Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
             medico.setDataDeAdmissao(dataAdmissao);
@@ -54,7 +55,7 @@ public class MedicoDao {
         } else {
             return null;
         }
-        
+
         return medico;
     }
 
@@ -75,7 +76,7 @@ public class MedicoDao {
         }
     }
 
-     public static ArrayList<Medico> listarMedicos(Banco db) throws SQLException {
+    public static ArrayList<Medico> listarMedicos(Banco db) throws SQLException {
         String query = "SELECT * FROM Medico;";
         ResultSet rs = db.queryBusca(query);
         ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -111,16 +112,17 @@ public class MedicoDao {
             medicos.add(medico);
         }
         return medicos;
-    } 
-    
-    public static ArrayList<Medico> verificarMedicosDisponiveisEmAlgumHorario(Time horario, Banco db) throws SQLException {
+    }
+
+    public static ArrayList<Medico> verificarMedicosDisponiveisEmAlgumHorario(Time horario, Banco db)
+            throws SQLException {
         String query = "SELECT * FROM Medico";
         ResultSet rs = db.queryBusca(query);
-        ArrayList <Medico> medicos = new ArrayList<Medico>();
+        ArrayList<Medico> medicos = new ArrayList<Medico>();
         while (rs.next()) {
             Time horarioDeTrabalhoInicio = Time.valueOf(rs.getString("horario_trabalho_inicio"));
             Time horarioDeTrabalhoFinal = Time.valueOf(rs.getString("horario_trabalho_final"));
-            
+
             // Verifica se o horário fornecido está dentro do horário de trabalho do médico
             if (horarioDeTrabalhoInicio.before(horario) && horarioDeTrabalhoFinal.after(horario)) {
                 Medico medico = new Medico();
@@ -133,23 +135,23 @@ public class MedicoDao {
                 medico.setSalario(rs.getDouble("salario"));
                 medico.setPlantao(rs.getBoolean("plantao"));
                 medico.setSexo(rs.getBoolean("sexo"));
-    
+
                 String dataNascStr = rs.getString("data_nascimento");
                 Date dataNasc = Date.valueOf(dataNascStr);
                 medico.setDataNasc(dataNasc);
-    
+
                 String dataAdmissaoStr = rs.getString("data_admissao");
                 Date dataAdmissao = Date.valueOf(dataAdmissaoStr);
                 medico.setDataDeAdmissao(dataAdmissao);
-    
+
                 String horarioInicioStr = rs.getString("horario_trabalho_inicio");
                 Time horarioInicio = Time.valueOf(horarioInicioStr);
                 medico.setHorarioDeTrabalhoInicio(horarioInicio);
-    
+
                 String horarioFinalStr = rs.getString("horario_trabalho_final");
                 Time horarioFinal = Time.valueOf(horarioFinalStr);
                 medico.setHorarioDeTrabalhoFinal(horarioFinal);
-    
+
                 medicos.add(medico);
             }
         }

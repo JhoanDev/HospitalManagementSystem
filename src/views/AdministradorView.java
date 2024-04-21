@@ -12,7 +12,7 @@ import src.data.Banco;
 import src.models.Administrador;
 import src.utils.FuncUtils;
 
-public class MenuAdministrador {
+public class AdministradorView {
     public static void adminMenu(Banco db) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         int opcao = 0, opcao2 = 0;
         String nome, cpf, telefone, login, senha;
@@ -78,6 +78,7 @@ public class MenuAdministrador {
                         System.out.println("[8] - Horário de trabalho (início)");
                         System.out.println("[9] - Horário de trabalho (final)");
                         System.out.println("[10] - Cancelar");
+                        System.out.print("Digite sua opção: ");
                         opcao2 = FuncUtils.readInt();
                         switch (opcao2) {
                             case 1:
@@ -126,7 +127,7 @@ public class MenuAdministrador {
                     }
                     break;
                 case 3:
-                    System.out.println("Digite o login do adm: ");
+                    System.out.print("Digite o login do adm: ");
                     login = FuncUtils.readLogin();
                     administrador = AdministradorDao.buscaAdministrador(login, db);
                     if (administrador == null) {
@@ -141,17 +142,18 @@ public class MenuAdministrador {
                         System.out.println("Nenhum administrador cadastrado.");
                         break;
                     }
-                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Login%s|\n",
-                    FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
-                    FuncUtils.spacesGenerator(3),
-                    FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
+                    System.out.printf("|Nome%s|Sexo%s|Salário%s|Login%s\n",
+                            FuncUtils.spacesGenerator(26), FuncUtils.spacesGenerator(9),
+                            FuncUtils.spacesGenerator(3),
+                            FuncUtils.spacesGenerator(12), FuncUtils.spacesGenerator(8));
                     for (Administrador a : administradores) {
-                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", a.getNome(), a.getSexo(), a.getSalario(), a.getLogin());
+                        System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", a.getNome(), a.getSexo(), a.getSalario(),
+                                a.getLogin());
                     }
                     System.out.println();
                     break;
                 case 5:
-                    System.out.println("Digite o login do adm: ");
+                    System.out.print("Digite o login do adm: ");
                     login = FuncUtils.readLogin();
                     administrador = AdministradorDao.buscaAdministrador(login, db);
                     if (administrador != null) {
@@ -171,6 +173,7 @@ public class MenuAdministrador {
     }
 
     public static void displayMenu() {
+        System.out.println("----------- MENU ADM -----------");
         System.out.println("[1] - Cadastrar administrador");
         System.out.println("[2] - Editar administrador");
         System.out.println("[3] - Excluir administrador");

@@ -34,6 +34,9 @@ public class Medicamento {
 
     @Override
     public String toString() {
-        return "Medicamento [codMedicamento=" + codMedicamento + ", nome=" + nome + "]\n";
+        String s = "";
+        s += "Código do medicamento: " + getCodMedicamento() + "\n";
+        s += "Nome do medicamento: " + getNome() + "\n";
+        return s;
     }
 }

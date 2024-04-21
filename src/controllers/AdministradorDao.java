@@ -19,7 +19,6 @@ public class AdministradorDao {
 
         String senha = administrador.getSenha();
         senha = FuncUtils.encryptMD5(senha);
-        System.out.println(senha);
         String query = String.format(
                 "INSERT INTO Administrador (nome, cpf, telefone, data_nascimento, sexo, salario, data_admissao, horario_trabalho_inicio, horario_trabalho_final,login,senha )VALUES ('%s', '%s', '%s', '%tF', %b, '%.2f', '%tF', '%tT', '%tT', '%s', '%s');",
                 administrador.getNome(), administrador.getCpf(), administrador.getTelefone(),
