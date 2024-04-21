@@ -1,7 +1,11 @@
 package src.models;
 
 import java.util.Date;
-
+/*
+ * Classe para representar uma internação
+ * Internação é feita por um médico a um paciente, e pode ser atraves de uma consulta
+ * Internação contém um código, data de internação, data de alta, id do paciente e id da enfermaria
+ */
 public class Internacao {
     private String codInternacao;
     private Date dataInternacao;

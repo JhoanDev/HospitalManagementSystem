@@ -7,9 +7,20 @@ import java.util.ArrayList;
 import src.data.Banco;
 import src.models.Medicamento;
 import src.models.Prescricao;
+/*
+ * Classe para manipular os dados de uma prescrição
+ * PrescricaoDao contém métodos para cadastrar, buscar, editar e excluir uma prescrição
+ */
 
 public class PrescricaoDao {
     public static void cadastrarPrescricao(Prescricao prescricao, Banco db) {
+
+            /*
+            * Método para cadastrar uma prescrição 
+            * Recebe um objeto prescrição e um objeto
+            * de banco de dados Insere os dados da prescrição no banco de dados
+            */
+
         String query = String.format(
                 "INSERT INTO Prescricao (id_consulta, id_medicamento, dosagem, posologia)VALUES ('%d', '%d', '%s', '%s');",
                 Integer.parseInt(prescricao.getCodConsulta()),
@@ -19,6 +30,13 @@ public class PrescricaoDao {
     }
 
     public static Prescricao buscaPrescricao(String codPrescricao, Banco db) throws SQLException {
+            
+            /*
+            * Método para buscar uma prescrição 
+            * Recebe um código de prescrição e um objeto de banco de dados
+            * Retorna um objeto prescrição com os dados da prescrição encontrada
+            */
+
         String query = "SELECT * FROM Prescricao WHERE id_prescricao = '" + codPrescricao + "';";
         ResultSet rs = db.queryBusca(query);
         Prescricao prescricao = new Prescricao();
@@ -38,11 +56,25 @@ public class PrescricaoDao {
     }
 
     public static void excluirPrescricao(Prescricao prescricao, Banco db) {
+            
+            /*
+            * Método para excluir uma prescrição 
+            * Recebe um objeto prescrição e um objeto de banco de dados
+            * Exclui os dados da prescrição no banco de dados
+            */
+
         String query = "DELETE FROM Prescricao WHERE id_prescricao = '" + prescricao.getCodPrescricao() + "';";
         db.queryInsup(query);
     }
 
     public static ArrayList<Prescricao> listarPrescricoes(Banco db) throws SQLException {
+                
+                /*
+                * Método para listar as prescrições 
+                * Recebe um objeto de banco de dados
+                * Retorna um ArrayList com as prescrições encontradas
+                */
+                
         String query = "SELECT * FROM Prescricao;";
         ResultSet rs = db.queryBusca(query);
         ArrayList<Prescricao> prescricoes = new ArrayList<Prescricao>();
@@ -61,6 +93,13 @@ public class PrescricaoDao {
     }
 
     public static ArrayList<Prescricao> listarPrescricoes(String codConsulta, Banco db) throws SQLException {
+
+            /*
+            * Método para listar as prescrições de uma consulta 
+            * Recebe um código de consulta e um objeto de banco de dados
+            * Retorna um ArrayList com as prescrições encontradas
+            */
+
         String query = "SELECT * FROM Prescricao WHERE id_consulta = '" + codConsulta + "';";
         ResultSet rs = db.queryBusca(query);
         ArrayList<Prescricao> prescricoes = new ArrayList<Prescricao>();

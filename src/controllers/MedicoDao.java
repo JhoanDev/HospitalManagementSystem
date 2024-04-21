@@ -9,9 +9,20 @@ import java.util.ArrayList;
 import src.data.Banco;
 import src.models.Medico;
 
+/*
+ * Classe para manipular os dados de um médico
+ * MedicoDao contém métodos para cadastrar, buscar, editar e excluir um médico
+ */
+
 public class MedicoDao {
 
     public static void cadastrarMedico(Medico medico, Banco db) {
+
+            /*
+            * Método para cadastrar um médico Recebe um objeto médico e um objeto de banco
+            * de dados Insere os dados do médico no banco de dados
+            */
+
         String query = String.format(
                 "INSERT INTO Medico (nome, cpf, telefone, data_nascimento, sexo, salario, data_admissao, horario_trabalho_inicio, horario_trabalho_final, crm, especialidade, plantao) VALUES ('%s', '%s', '%s', '%tF', %b, '%.2f', '%tF', '%tT', '%tT', '%s', '%s', %b);",
                 medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getDataNasc(),
@@ -22,6 +33,12 @@ public class MedicoDao {
     }
 
     public static Medico buscaMedico(String crm, Banco db) throws SQLException {
+
+            /*
+            * Método para buscar um médico Recebe um crm e um objeto de banco de dados
+            * Retorna um objeto médico com os dados do médico encontrado
+            */
+
         String query = "SELECT * FROM Medico WHERE crm = '" + crm + "';";
         ResultSet rs = db.queryBusca(query);
         Medico medico = new Medico();
@@ -60,6 +77,12 @@ public class MedicoDao {
     }
 
     public static void editarMedico(Medico medico, Banco db) throws SQLException {
+            
+                /*
+                * Método para editar um médico Recebe um objeto médico e um objeto de banco de
+                * dados Atualiza os dados do médico no banco de dados
+                */
+
         String query = String.format(
                 "UPDATE Medico SET nome = '%s', cpf = '%s', telefone = '%s', data_nascimento = '%tF', sexo = %b, salario = '%.2f', data_admissao = '%tF', horario_trabalho_inicio = '%tT', horario_trabalho_final = '%tT', crm = '%s', especialidade = '%s', plantao = %b WHERE crm = '%s';",
                 medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getDataNasc(),
@@ -70,6 +93,12 @@ public class MedicoDao {
     }
 
     public static void excluirMedico(Medico medico, Banco db) throws SQLException {
+                
+            /*
+            * Método para excluir um médico Recebe um objeto médico e um objeto de banco de
+            * dados Remove os dados do médico do banco de dados
+            */
+
         if (medico != null) {
             String querry = "DELETE FROM Medico WHERE crm = '" + medico.getCrm() + "';";
             db.queryInsup(querry);
@@ -77,6 +106,12 @@ public class MedicoDao {
     }
 
     public static ArrayList<Medico> listarMedicos(Banco db) throws SQLException {
+                
+            /*
+            * Método para listar os médicos Recebe um objeto de banco de dados Retorna um
+            * ArrayList com os médicos encontrados
+            */
+            
         String query = "SELECT * FROM Medico;";
         ResultSet rs = db.queryBusca(query);
         ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -116,6 +151,12 @@ public class MedicoDao {
 
     public static ArrayList<Medico> verificarMedicosDisponiveisEmAlgumHorario(Time horario, Banco db)
             throws SQLException {
+                
+                /*
+                 * Método para verificar os médicos disponíveis em um horário
+                 * Recebe um horário e um objeto de banco de dados
+                */
+                 
         String query = "SELECT * FROM Medico";
         ResultSet rs = db.queryBusca(query);
         ArrayList<Medico> medicos = new ArrayList<Medico>();

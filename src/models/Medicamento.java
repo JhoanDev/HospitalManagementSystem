@@ -1,5 +1,9 @@
 package src.models;
-
+/*
+ * Classe para representar um medicamento
+ * Medicamento é um remédio que pode ser prescrito em uma consulta
+ * Medicamento contém um código e um nome
+ */
 public class Medicamento {
     private String codMedicamento;
     private String nome;

@@ -2,7 +2,11 @@ package src.models;
 
 import java.sql.Time;
 import java.sql.Date;
-
+/*
+    *Classe para reprensentar um administrador
+    *Administrador é um tipo de funcionário
+    *Administrador contém um login e senha e os atributos de funcionário
+ */
 public class Administrador extends Funcionario {
     private String login;
     private String senha;
