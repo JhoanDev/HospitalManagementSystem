@@ -24,7 +24,6 @@ public class Enfermeiro extends Funcionario {
         this.codEnfermaria = codEnfermaria;
     }
 
-
     public Enfermeiro() {
         super();
     }
@@ -56,6 +55,11 @@ public class Enfermeiro extends Funcionario {
         s += "Data de admissão: " + getDataDeAdmissao() + "\n";
         s += "Horário de trabalho: " + getHorarioDeTrabalhoInicio() + " às " + getHorarioDeTrabalhoFinal() + "\n";
         s += "COREN: " + coren + "\n";
+        if (codEnfermaria != null) {
+            s += "Código da enfermaria em que trabalha: " + codEnfermaria + "\n";
+        } else {
+            s += "Código da enfermaria em que trabalha: Sem enfermaria\n";
+        }
         return s;
     }
 }

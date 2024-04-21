@@ -8,15 +8,13 @@ import java.util.ArrayList;
 import src.data.Banco;
 import src.models.Internacao;
 
-
 public class InternacaoDao {
-    
+
     public static void cadastrarInternacao(Internacao internacao, Banco db) {
         String query = String.format(
                 "INSERT INTO Internacao (data_internacao, id_paciente, id_enfermaria) VALUES ('%tF','%s','%s');",
-                internacao.getDataInternacao(),Integer.parseInt(internacao.getIdPaciente()),
+                internacao.getDataInternacao(), Integer.parseInt(internacao.getIdPaciente()),
                 Integer.parseInt(internacao.getIdEnfermaria()));
-        System.out.println(query);        
         db.queryInsup(query);
     }
 
@@ -31,11 +29,11 @@ public class InternacaoDao {
             Date dataInternacao = Date.valueOf(dataInternacaoStr);
             internacao.setDataInternacao(dataInternacao);
 
-            if ( rs.getString("data_alta") != null) {
+            if (rs.getString("data_alta") != null) {
                 String dataAltaStr = rs.getString("data_alta");
                 Date dataAlta = Date.valueOf(dataAltaStr);
                 internacao.setDataAlta(dataAlta);
-            }  
+            }
 
             internacao.setIdPaciente(rs.getString("id_paciente"));
             internacao.setIdEnfermaria(rs.getString("id_enfermaria"));
@@ -47,12 +45,14 @@ public class InternacaoDao {
     public static void editarInternacao(Internacao internacao, Banco db) throws SQLException {
         String query = String.format(
                 "UPDATE Internacao SET data_internacao = '%tF', data_alta = '%tF', id_paciente = '%s', id_enfermaria = '%s' WHERE id_internacao = '%s';",
-                internacao.getDataInternacao(), internacao.getDataAlta(), internacao.getIdPaciente(), internacao.getIdEnfermaria(), internacao.getCodInternacao());
+                internacao.getDataInternacao(), internacao.getDataAlta(), internacao.getIdPaciente(),
+                internacao.getIdEnfermaria(), internacao.getCodInternacao());
         db.queryInsup(query);
     }
 
     public static void excluirInternacao(Internacao internacao, Banco db) throws SQLException {
-        String query = String.format("DELETE FROM Internacao WHERE id_Internacao = '%s';", internacao.getCodInternacao());
+        String query = String.format("DELETE FROM Internacao WHERE id_Internacao = '%s';",
+                internacao.getCodInternacao());
         db.queryInsup(query);
     }
 
@@ -68,17 +68,14 @@ public class InternacaoDao {
             Date dataInternacao = Date.valueOf(dataInternacaoStr);
             internacao.setDataInternacao(dataInternacao);
 
-           
-            if ( rs.getString("data_alta") != null) {
+            if (rs.getString("data_alta") != null) {
                 String dataAltaStr = rs.getString("data_alta");
                 Date dataAlta = Date.valueOf(dataAltaStr);
                 internacao.setDataAlta(dataAlta);
             }
-            
 
             internacao.setIdPaciente(rs.getString("id_paciente"));
             internacao.setIdEnfermaria(rs.getString("id_enfermaria"));
-
 
             internacoes.add(internacao);
         }
@@ -88,7 +85,6 @@ public class InternacaoDao {
     public static ArrayList<Internacao> listarInternacoesAtivas(Banco db) throws SQLException {
         String query = "SELECT * FROM Internacao WHERE data_alta IS NULL;";
         ResultSet rs = db.queryBusca(query);
-        System.out.println(rs.getString("id_internacao"));
         ArrayList<Internacao> internacoes = new ArrayList<Internacao>();
         while (rs.next()) {
             Internacao internacao = new Internacao();
@@ -98,7 +94,7 @@ public class InternacaoDao {
             Date dataInternacao = Date.valueOf(dataInternacaoStr);
             internacao.setDataInternacao(dataInternacao);
 
-            if ( rs.getString("data_alta") != null) {
+            if (rs.getString("data_alta") != null) {
                 String dataAltaStr = rs.getString("data_alta");
                 Date dataAlta = Date.valueOf(dataAltaStr);
                 internacao.setDataAlta(dataAlta);

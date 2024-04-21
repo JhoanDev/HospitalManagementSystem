@@ -10,7 +10,7 @@ public class Internacao {
     private String idEnfermaria;
 
     public Internacao(String codInternacao, Date dataInternacao, Date dataAlta, String idPaciente,
-        String idEnfermaria) {
+            String idEnfermaria) {
         this.codInternacao = codInternacao;
         this.dataInternacao = dataInternacao;
         this.dataAlta = dataAlta;
@@ -19,7 +19,7 @@ public class Internacao {
     }
 
     public Internacao() {
-   
+
     }
 
     public String getCodInternacao() {
@@ -67,8 +67,8 @@ public class Internacao {
         String s = "";
         s += "Código da internação: " + getCodInternacao() + "\n";
         s += "Data de internação: " + getDataInternacao() + "\n";
-        s += "Data de alta: " + getDataAlta()==null ? "Internado(a)" : getDataAlta() + "\n";
-        s += "Paciente internado: " + getIdPaciente()+ "\n";
+        s += "Data de alta: " + (getDataAlta() == null ? "Internado(a)" : getDataAlta()) + "\n";
+        s += "Paciente internado: " + getIdPaciente() + "\n";
         s += "Enfermaria da internação: " + getIdEnfermaria() + "\n";
         return s;
     }

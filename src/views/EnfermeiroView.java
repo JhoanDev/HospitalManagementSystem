@@ -151,14 +151,15 @@ public class EnfermeiroView {
             System.out.println("Nenhum enfermeiro cadastrado.");
             return;
         }
-        System.out.printf("|Nome%s|Sexo%s|Salário%s|Coren\n",
+        System.out.printf("|Nome%s|Sexo%s|Salário%s|Coren%s|Enfermaria\n",
                 FuncUtils.spacesGenerator(26),
                 FuncUtils.spacesGenerator(9),
                 FuncUtils.spacesGenerator(3),
-                FuncUtils.spacesGenerator(12));
+                FuncUtils.spacesGenerator(17));
         for (Enfermeiro e : enfermeiros) {
-            System.out.printf("|%-30s|%-13s|%-10.2f|%s\n", e.getNome(), e.getSexo(),
-                    e.getSalario(), e.getCoren());
+            System.out.printf("|%-30s|%-13s|%-10.2f|%-22s|%s\n", e.getNome(), e.getSexo(),
+                    e.getSalario(), e.getCoren(),
+                    (e.getCodEnfermaria() == null ? "Sem enfermaria" : "Cod: " + e.getCodEnfermaria()));
         }
         System.out.println();
     }

@@ -137,8 +137,10 @@ public class ConsultaDao {
             String sintomasStr = rs.getString("sintomas");
             ArrayList<String> sintomas = new ArrayList<>(Arrays.asList(sintomasStr.split(",")));
             consulta.setSintomas(sintomas);
-            consulta.setPrescricoes(PrescricaoDao.listarPrescricoes(consulta.getCodConsulta(), db));
             consultas.add(consulta);
+        }
+        for (Consulta consulta : consultas) {
+            consulta.setPrescricoes(PrescricaoDao.listarPrescricoes(consulta.getCodConsulta(), db));
         }
         return consultas;
     }

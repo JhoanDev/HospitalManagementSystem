@@ -20,9 +20,10 @@ import src.utils.FuncUtils;
 
 public class ConsultaView {
     public static void main(String[] args) throws SQLException {
-        Banco db = new Banco(); 
+        Banco db = new Banco();
         appointmentMenu(db);
     }
+
     public static void appointmentMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         Date dataConsulta;
@@ -56,7 +57,6 @@ public class ConsultaView {
                     sintomas = FuncUtils.readSymptoms();
                     precisaInternar = FuncUtils.readNeedToHospitalize();
 
-
                     System.out.println();
                     pacientes = PacienteDao.listarPacientes(db);
                     if (pacientes.isEmpty()) {
@@ -83,7 +83,7 @@ public class ConsultaView {
                     }
                     MedicoView.listDoctors(medicos);
 
-                    System.out.print("Insira o crm do médico da consulta: ");
+                    System.out.print("Insira o crm do médico da consulta, ");
                     crmMedico = FuncUtils.readCrm();
                     if (MedicoDao.buscaMedico(crmMedico, db) == null) {
                         System.out.println("CRM não está nos médicos disponíveis.");
@@ -100,9 +100,9 @@ public class ConsultaView {
                     }
 
                     if (precisaInternar) {
-                        System.out.println(!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db)));
-                        if(!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db))){
-                            System.out.println("Cadastro de consulta cancelado, pois não foi possível realizar a internação.");
+                        if (!(InternacaoView.appointmentHospitalization(dataConsulta, idPaciente, db))) {
+                            System.out.println(
+                                    "Cadastro de consulta cancelado, pois não foi possível realizar a internação.");
                             break;
                         }
                     }

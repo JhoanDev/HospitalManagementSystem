@@ -19,6 +19,7 @@ public class InternacaoView {
         Banco db = new Banco();
         hospitalizationMenu(db);
     }
+
     public static void hospitalizationMenu(Banco db) throws SQLException {
         int opcao = 0, opcao2 = 0;
         Date dataInternacao;
@@ -105,16 +106,16 @@ public class InternacaoView {
                     if (opcao2 == 1) {
                         InternacaoDao.excluirInternacao(internacao, db);
 
-                        if (internacao.getDataAlta() == null){
+                        if (internacao.getDataAlta() == null) {
                             enfermaria = EnfermariaDao.buscaEnfermaria(internacao.getIdEnfermaria(), db);
                             enfermaria.setLeitosDisponiveis(enfermaria.getLeitosDisponiveis() + 1);
                             EnfermariaDao.editaEnfermaria(enfermaria, db);
                         }
-                        
+
                         paciente = PacienteDao.buscaPaciente(internacao.getIdPaciente(), db);
                         paciente.setInternado(false);
                         PacienteDao.editarPaciente(paciente, db);
-                        
+
                         System.out.println("Internação excluída com sucesso.");
                     }
                     break;
@@ -143,14 +144,14 @@ public class InternacaoView {
                         break;
                     }
                     listHospitalizations(internacoes, db);
-                    System.out.println("Digite qual internação deseja dar alta: ");
+                    System.out.print("Digite qual internação deseja dar alta: ");
                     codInternacao = FuncUtils.readCod();
                     internacao = InternacaoDao.buscaInternacao(codInternacao, db);
                     if (internacao == null) {
                         System.out.println("Internação não encontrada.");
                         break;
                     }
-                    System.out.println("Digit3e a data da alta: ");
+                    System.out.print("Digite a data da alta, ");
                     dataAlta = FuncUtils.readDate();
                     internacao.setDataAlta(dataAlta);
                     InternacaoDao.editarInternacao(internacao, db);
@@ -177,9 +178,9 @@ public class InternacaoView {
     public static boolean appointmentHospitalization(Date dataInternação, String idPaciente, Banco db)
             throws SQLException {
         ArrayList<Enfermaria> enfermarias;
-        
+
         String codEnfemaria;
-        
+
         Internacao internacao = new Internacao();
         internacao.setDataInternacao(dataInternação);
         internacao.setIdPaciente(idPaciente);
@@ -217,22 +218,23 @@ public class InternacaoView {
     public static void listHospitalizations(ArrayList<Internacao> internacoes, Banco db) throws SQLException {
         Enfermaria enfermaria;
         Paciente paciente;
-        System.out.printf("|Cod%s|Data da Internação|Data da alta|Paciente%s|Cod Enfermaria\n",
+        System.out.printf("|Cod%s|Data da Internação|Data da alta |Paciente%s|Cod Enfermaria\n",
                 FuncUtils.spacesGenerator(4),
-                FuncUtils.spacesGenerator(23));
+                FuncUtils.spacesGenerator(22));
         for (Internacao i : internacoes) {
             enfermaria = EnfermariaDao.buscaEnfermaria(i.getIdEnfermaria(), db);
             paciente = PacienteDao.buscaPaciente(i.getIdPaciente(), db);
-            System.out.printf("|%-7s|%-18s|%-12s|%-30s|%-30s\n", i.getCodInternacao(), i.getDataInternacao(),
-           i.getDataAlta()==null ? "Internado(a)" : i.getDataAlta(),
+            System.out.printf("|%-7s|%-18s|%-13s|%-30s|%-30s\n", i.getCodInternacao(), i.getDataInternacao(),
+                    i.getDataAlta() == null ? "Internado(a)" : i.getDataAlta(),
                     paciente.getNome(), enfermaria.getCodEnfermaria());
         }
         System.out.println();
     }
+
     public static void displayMenu() {
         System.out.println("----------- MENU INTERNAÇÃO -----------");
         System.out.println("[1] - Cadastrar Internação");
-        System.out.println("[2] - Excluir Consulta");
+        System.out.println("[2] - Excluir Internação");
         System.out.println("[3] - Listar Internações");
         System.out.println("[4] - Buscar Internação");
         System.out.println("[5] - Dar Alta em algum paciente");

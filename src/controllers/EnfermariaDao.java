@@ -73,7 +73,6 @@ public class EnfermariaDao {
         return enfermarias;
     }
 
-
     public static ArrayList<Enfermaria> listarEnfermariasDisponiveis(Banco db) throws SQLException {
         String query = "SELECT * FROM Enfermaria WHERE leitos_disponiveis > 0;";
         ResultSet rs = db.queryBusca(query);
@@ -90,6 +89,5 @@ public class EnfermariaDao {
         }
         return enfermarias;
     }
-
 
 }
