@@ -1,5 +1,9 @@
 package src.models;
-
+/*
+ * Classe para representar uma enfermaria
+ * Enfermaria contem os pacientes internados
+ * Enfermaria contém um código, quantidade de leitos e leitos disponíveis
+ */
 public class Enfermaria {
     private String codEnfermaria;
     private int qtdeLeitos;

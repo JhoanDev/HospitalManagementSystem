@@ -2,7 +2,11 @@ package src.models;
 
 import java.sql.Time;
 import java.sql.Date;
-
+/*
+ * Classe para representar um médico
+ * Médico é um funcionário que possui um CRM e uma especialidade
+ * Médico contem crm, especialidade e se está em plantão
+ */
 public class Medico extends Funcionario {
     private String crm;
     private String especialidade;

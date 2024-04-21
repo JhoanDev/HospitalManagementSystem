@@ -3,7 +3,11 @@ package src.models;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
-
+/*
+ * Classe para representar uma consulta
+ * Consulta é feita por um médico a um paciente, pode gerar prescrições e internações
+ * Consulta contém um código, data, horário, diagnóstico, sintomas, prescrições, se precisa internar, id do médico e id do paciente
+ */
 public class Consulta {
     private String codConsulta;
     private String idMedico;

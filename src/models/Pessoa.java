@@ -1,7 +1,10 @@
 package src.models;
 
 import java.sql.Date;
-
+/* 
+ * Classe para representar uma pessoa
+ * Pessoa é uma classe abstrata que contém nome, cpf, telefone, data de nascimento e sexo
+ */
 public abstract class Pessoa {
     private String nome;
     private String cpf;

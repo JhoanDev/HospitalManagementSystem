@@ -1,7 +1,11 @@
 package src.models;
 
 import java.sql.Date;
-
+/*
+ * Classe para representar um paciente
+ * Paciente é uma pessoa que pode ser internada e ter plano de saúde
+ * Paciente contém um código, se está internado e se tem plano de saúde
+ */
 public class Paciente extends Pessoa {
     private String codPaciente;
     private boolean internado;

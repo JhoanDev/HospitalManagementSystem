@@ -2,7 +2,12 @@ package src.models;
 
 import java.sql.Time;
 import java.sql.Date;
-
+/*
+ * Classe para representar um enfermeiro
+ * Enfermeiro é um tipo de funcionário
+ * Enfermeiro contém um COREN e os atributos de funcionário
+ * Enfermeiro é responsável por uma enfermaria
+ */
 public class Enfermeiro extends Funcionario {
     private String coren;
     private String codEnfermaria;

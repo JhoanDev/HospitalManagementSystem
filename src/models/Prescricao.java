@@ -1,5 +1,9 @@
 package src.models;
-
+/*
+ * Classe para representar uma prescrição
+ * Prescrição é feita por um médico a um paciente atraves de uma consulta
+ * Prescrição contém um código, código da consulta, medicamento, dosagem e posologia
+ */
 public class Prescricao {
     private String codPrescricao;
     private String codConsulta;
