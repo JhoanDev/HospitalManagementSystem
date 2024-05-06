@@ -18,7 +18,7 @@ O Sistema de Gerenciamento Hospitalar é um projeto desenvolvido para facilitar 
 ## Funcionalidades
 
 - Cadastro de administradores, pacientes, médicos, enfermeiros, enfermarias e medicamentos
-- Agendamento de consultas
+- Cadastro de consultas realizadas
 - Internações
 - Gerenciamento de leitos
 - Prescrição de medicamentos
