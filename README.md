@@ -64,13 +64,6 @@ Siga as etapas abaixo para instalar e executar o Sistema de Gerenciamento Hospit
 
 4. **Execute o arquivo `Main.java`**: Após ajustar as dependências e configurar o projeto em sua IDE, execute o arquivo `Main.java` para iniciar o sistema.
 
-## Equipe de Desenvolvimento
-
-- Jhoan Fernandes de Oliveira 
-- João Augusto Câmara Neto 
-- Luis Felipe Lima Tomaz 
-- Murilo Lacerda de Souza Fontes 
-
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
